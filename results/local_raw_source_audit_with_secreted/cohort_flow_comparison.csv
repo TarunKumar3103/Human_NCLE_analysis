@@ -1,0 +1,49 @@
+Analysis,Step,Metric,Actual,Reference,Pass
+Primary: NED vs ED,pLDDT >=70 and selected degradation categories,Total,1043,1043,True
+Primary: NED vs ED,pLDDT >=70 and selected degradation categories,ED,843,843,True
+Primary: NED vs ED,pLDDT >=70 and selected degradation categories,NED,200,200,True
+Primary: NED vs ED,pLDDT >=70 and selected degradation categories,UN,0,0,True
+Primary: NED vs ED,Usable binary NCLE status,Total,1034,1034,True
+Primary: NED vs ED,Usable binary NCLE status,ED,837,837,True
+Primary: NED vs ED,Usable binary NCLE status,NED,197,197,True
+Primary: NED vs ED,Usable binary NCLE status,UN,0,0,True
+Primary: NED vs ED,Exclude knotted proteins,Total,1023,1023,True
+Primary: NED vs ED,Exclude knotted proteins,ED,828,828,True
+Primary: NED vs ED,Exclude knotted proteins,NED,195,195,True
+Primary: NED vs ED,Exclude knotted proteins,UN,0,0,True
+Primary: NED vs ED,Require FASTA sequence,Total,1022,1022,True
+Primary: NED vs ED,Require FASTA sequence,ED,828,828,True
+Primary: NED vs ED,Require FASTA sequence,NED,194,194,True
+Primary: NED vs ED,Require FASTA sequence,UN,0,0,True
+Primary: NED vs ED,Exclude membrane proteins,Total,725,725,True
+Primary: NED vs ED,Exclude membrane proteins,ED,584,584,True
+Primary: NED vs ED,Exclude membrane proteins,NED,141,141,True
+Primary: NED vs ED,Exclude membrane proteins,UN,0,0,True
+Primary: NED vs ED,Exclude secreted proteins,Total,705,705,True
+Primary: NED vs ED,Exclude secreted proteins,ED,568,568,True
+Primary: NED vs ED,Exclude secreted proteins,NED,137,137,True
+Primary: NED vs ED,Exclude secreted proteins,UN,0,0,True
+Sensitivity: NED vs ED + UN,pLDDT >=70 and selected degradation categories,Total,1836,1836,True
+Sensitivity: NED vs ED + UN,pLDDT >=70 and selected degradation categories,ED,843,843,True
+Sensitivity: NED vs ED + UN,pLDDT >=70 and selected degradation categories,NED,200,200,True
+Sensitivity: NED vs ED + UN,pLDDT >=70 and selected degradation categories,UN,793,793,True
+Sensitivity: NED vs ED + UN,Usable binary NCLE status,Total,1810,1810,True
+Sensitivity: NED vs ED + UN,Usable binary NCLE status,ED,837,837,True
+Sensitivity: NED vs ED + UN,Usable binary NCLE status,NED,197,197,True
+Sensitivity: NED vs ED + UN,Usable binary NCLE status,UN,776,776,True
+Sensitivity: NED vs ED + UN,Exclude knotted proteins,Total,1793,1793,True
+Sensitivity: NED vs ED + UN,Exclude knotted proteins,ED,828,828,True
+Sensitivity: NED vs ED + UN,Exclude knotted proteins,NED,195,195,True
+Sensitivity: NED vs ED + UN,Exclude knotted proteins,UN,770,770,True
+Sensitivity: NED vs ED + UN,Require FASTA sequence,Total,1792,1792,True
+Sensitivity: NED vs ED + UN,Require FASTA sequence,ED,828,828,True
+Sensitivity: NED vs ED + UN,Require FASTA sequence,NED,194,194,True
+Sensitivity: NED vs ED + UN,Require FASTA sequence,UN,770,770,True
+Sensitivity: NED vs ED + UN,Exclude membrane proteins,Total,1230,1230,True
+Sensitivity: NED vs ED + UN,Exclude membrane proteins,ED,584,584,True
+Sensitivity: NED vs ED + UN,Exclude membrane proteins,NED,141,141,True
+Sensitivity: NED vs ED + UN,Exclude membrane proteins,UN,505,505,True
+Sensitivity: NED vs ED + UN,Exclude secreted proteins,Total,1191,1191,True
+Sensitivity: NED vs ED + UN,Exclude secreted proteins,ED,568,568,True
+Sensitivity: NED vs ED + UN,Exclude secreted proteins,NED,137,137,True
+Sensitivity: NED vs ED + UN,Exclude secreted proteins,UN,486,486,True

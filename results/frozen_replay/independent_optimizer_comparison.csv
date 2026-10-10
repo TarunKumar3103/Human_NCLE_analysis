@@ -1,0 +1,37 @@
+Analysis,Method,Term,Comparison,Metric,Actual,Reference,Absolute_difference,Pass
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,N,528.0,528.0,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,Coefficient,2.214416946970129,2.2144169469701755,4.6629367034256575e-14,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,Odds_ratio,9.156069081180132,9.15606908118056,4.2810199829546036e-13,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,CI_lower,1.2285576458391558,1.228557645839194,3.8191672047105385e-14,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,CI_upper,68.2374175141623,68.23741751416655,4.249045559845399e-12,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,P_value,0.030705946299411768,0.030705946299409495,2.2724877535296173e-15,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,N,528.0,528.0,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,Coefficient,-0.07413238557855188,-0.07413238557855148,4.0245584642661925e-16,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,Odds_ratio,0.928548759239377,0.9285487592393774,4.440892098500626e-16,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,CI_lower,0.5985415723711078,0.598541572371108,2.220446049250313e-16,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,CI_upper,1.440506120350824,1.4405061203508245,4.440892098500626e-16,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,P_value,0.7407331276085297,0.740733127608531,1.3322676295501878e-15,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,N,528.0,528.0,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,Coefficient,0.0010146832945058986,0.0010146832945058485,5.0090140368830305e-17,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,Odds_ratio,1.0010151982597608,1.0010151982597608,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,CI_lower,0.8292069972036397,0.8292069972036397,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,CI_upper,1.2084213357173899,1.2084213357173899,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,P_value,0.9915730984821846,0.991573098482185,4.440892098500626e-16,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,N,901.0,901.0,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,Coefficient,1.9072002224828635,1.907200222609184,1.2632050960803554e-10,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,Odds_ratio,6.734208095559207,6.734208096409876,8.506688686793495e-10,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,CI_lower,0.9146094280661078,0.9146094280733162,7.208456054286216e-12,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,CI_upper,49.58352416089167,49.583524173027705,1.2136034399645723e-08,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Independent optimizer versus original solver,P_value,0.061155179350237635,0.06115517934844921,1.7884235758991451e-12,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,N,901.0,901.0,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,Coefficient,-0.10341094902620948,-0.10341094902621231,2.831068712794149e-15,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,Odds_ratio,0.90175632144501,0.9017563214450074,2.55351295663786e-15,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,CI_lower,0.5972767912425608,0.5972767912425131,4.773959005888173e-14,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,CI_upper,1.3614533080623268,1.3614533080624278,1.0103029524088925e-13,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Independent optimizer versus original solver,P_value,0.6227205000506061,0.6227205000506616,5.551115123125783e-14,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,N,901.0,901.0,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,Coefficient,-0.0709252962811673,-0.0709252962811685,1.2073675392798577e-15,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,Odds_ratio,0.931531478394029,0.931531478394028,1.1102230246251565e-15,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,CI_lower,0.759682380831979,0.7596823808319532,2.5868196473766147e-14,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,CI_upper,1.1422548648405315,1.1422548648405677,3.6193270602780103e-14,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Independent optimizer versus original solver,P_value,0.4954447886835872,0.49544478868364916,6.195044477408373e-14,True

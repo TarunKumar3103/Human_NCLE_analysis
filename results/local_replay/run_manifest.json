@@ -1,0 +1,18 @@
+{
+  "run_utc": "2026-10-10T03:04:35.132137+00:00",
+  "python": "3.12.15 (main, Oct  6 2026, 23:42:14) [Clang 21.1.8 ]",
+  "reference_sha256": "4bda70ba8af366e104e30d6e897713ec44f877e245759377efca0c027ba224d0",
+  "original_analysis_sha256": "d4b955d751329ede1ba3fa5dd6dfb3a3144a3878300a30e31e48b300ca52f55a",
+  "runner_sha256": "38c5f205787de48f8b2b7bfdcdd1b5b4f9e8e7edb63f33d1e9de2142d69b5e30",
+  "numerical_comparison_passed": true,
+  "primary_n": 705,
+  "sensitivity_n": 1191,
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "openpyxl": "3.1.5"
+  },
+  "scope": "Frozen-cohort numerical replay; no online annotation refresh",
+  "confidence_interval_multiplier": 1.96
+}

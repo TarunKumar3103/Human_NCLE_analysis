@@ -1,0 +1,12 @@
+{
+  "master_n": 13690,
+  "status_counts": {
+    "ok": 12609,
+    "mobidb_no_selected_annotation": 1042,
+    "mobidb_no_selected_annotation|uniprot_missing_length": 31,
+    "uniprot_missing_length": 8
+  },
+  "fraction_available": 12609,
+  "interval_coordinate_warnings": 18,
+  "source_kind": "Processed export; raw API responses are not included"
+}

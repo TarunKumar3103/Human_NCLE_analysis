@@ -1,0 +1,348 @@
+{
+  "prepared_utc": "2026-10-09T19:54:29.575661+00:00",
+  "scope": "Human NCLE-NED analyses and associated source/disorder checks; no completed mouse/yeast or MD results.",
+  "recovery_gaps": [
+    "Approved historical secreted-positive source export is not supplied.",
+    "Original automatic UniProt text-classification implementation is not recovered.",
+    "Original modified local ED/NED notebook and exact 20-protein pilot matching code are not recovered.",
+    "Raw MobiDB API responses and any later laptop-specific IPv4 patch are not recovered."
+  ],
+  "files": [
+    {
+      "path": "README.txt",
+      "bytes": 6487,
+      "sha256": "27db69d3b0f8c0cafb8a16fce1df28fbd1ec0e9c5c58e1f8b2465c4d0cc4c5ad",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "data/complex_annotations.csv",
+      "bytes": 12257,
+      "sha256": "60d501f697d665ac10d084466173da4fb01e9ec6b9b5e95d850fc041034776d1",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "data/complex_review_decisions.csv",
+      "bytes": 150520,
+      "sha256": "81a4f873f292061934640c912d3730e9ac6f70b79c503a273575fce1a55d69e3",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "data/processed_MobiDB_master.csv",
+      "bytes": 1996151,
+      "sha256": "4734cd4fa7a2c88a699602df035aad796180effa077a7e861d289c36491ccceb",
+      "provenance": "Unchanged processed CSV uploaded as Pasted text(20260921-021255).txt, renamed; not raw API JSON."
+    },
+    {
+      "path": "data/reference_human_analysis.xlsx",
+      "bytes": 664818,
+      "sha256": "4bda70ba8af366e104e30d6e897713ec44f877e245759377efca0c027ba224d0",
+      "provenance": "Unchanged Human_NCLE_decay_statistical_analysis_reviewed_complex.xlsx, renamed for stable paths."
+    },
+    {
+      "path": "data/uniprot_evidence_snapshot.csv",
+      "bytes": 1109997,
+      "sha256": "2e19fc70b36dfc13ec8ee6366307ff2a5378bf24133a2218073f0cf5e11a15cd",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "documentation/CODE_COMPENDIUM.txt",
+      "bytes": 115565,
+      "sha256": "0670f23c0f98445bd4799ee7d86dc952d0494805d93317a6ae8825c2794413c4",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "documentation/Human_NCLE_Analysis_Code_and_Reproduction_Guide.docx",
+      "bytes": 68802,
+      "sha256": "b061184d88c33dead7deb29bbfc5a098e4ecfdf02ea3fb3d1b764dba39dcec79",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "documentation/Human_NCLE_Analysis_Code_and_Reproduction_Guide.pdf",
+      "bytes": 369723,
+      "sha256": "4d541d73185645db746470261620d80f105a019ccc9a5ea254c7104e47fbad1c",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "documentation/Independent_review_prompt.txt",
+      "bytes": 3332,
+      "sha256": "66bb52179c6acb90aab6dd1707310a3e6968941cf3e2bb441b124cec8d40fd1e",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "historical_audits/AUDIT_REPORT.md",
+      "bytes": 17433,
+      "sha256": "14e435635f8dd1a8e4ee0f4d2ff6415ab3c50c21d520c9843710cd28c6bd325e",
+      "provenance": "Recovered historical artifact; not a current cohort/model step."
+    },
+    {
+      "path": "historical_audits/audit_decay_inputs.py",
+      "bytes": 11205,
+      "sha256": "c57a65f340203b444af4bbcba30c36163e6846e8feb21627f259bbf467559742",
+      "provenance": "Recovered historical artifact; not a current cohort/model step."
+    },
+    {
+      "path": "historical_audits/check_simulation_setup.py",
+      "bytes": 3357,
+      "sha256": "49f8d6f3c10ba5d07dad0bb9570732c5caf94f77717900529f5172aca84ba850",
+      "provenance": "Recovered historical artifact; not a current cohort/model step."
+    },
+    {
+      "path": "historical_audits/get_disorder_mobidb_query.py",
+      "bytes": 8544,
+      "sha256": "784e62e0e3e8a734cdb86f5a0876cb89b25f444550c8c56a9139ab4de177c47d",
+      "provenance": "Unchanged original Quyen sample extracted from disorder_query.zip."
+    },
+    {
+      "path": "historical_audits/input_audit_README.md",
+      "bytes": 4763,
+      "sha256": "0a6033d69e4391b48f7a067118717a6b1f4da0bbd2f59878c6306e2713cd8e68",
+      "provenance": "Recovered historical artifact; not a current cohort/model step."
+    },
+    {
+      "path": "historical_audits/original_Statistical_association.ipynb",
+      "bytes": 439454,
+      "sha256": "2bc3ed26c2a4146478a8e8778f68f1ca44831e6126e0565b9edbebebe0ce8ba3",
+      "provenance": "Recovered historical artifact; not a current cohort/model step."
+    },
+    {
+      "path": "historical_audits/reproducibility_audit.py",
+      "bytes": 36469,
+      "sha256": "d7997291e255c5006c5fdadb9887cb779dbfbde95c1bad78a5d85f0382a7ba92",
+      "provenance": "Recovered historical artifact; not a current cohort/model step."
+    },
+    {
+      "path": "raw_sources/AF4_knots.dat",
+      "bytes": 73495599,
+      "sha256": "4eabf512173e2965fe41bf53f92ebcc2974be40429d5bd209692713c6ff8607c",
+      "provenance": "Unchanged dataset extracted from the supplied complete repository ZIP."
+    },
+    {
+      "path": "raw_sources/Human_AF_combined_20250614.csv",
+      "bytes": 32482165,
+      "sha256": "95c1eec8439e1aa283a4452736e8320c3beb47d53db1b619bfcae54f91c672dd",
+      "provenance": "Unchanged dataset extracted from the supplied complete repository ZIP."
+    },
+    {
+      "path": "raw_sources/Human_Avg_pLDDTs.csv",
+      "bytes": 1020288,
+      "sha256": "b25b0eed1ab5ed596cb732b1b38521ddd11f17f8436f9bde1b2480e39470aed6",
+      "provenance": "Unchanged dataset extracted from the supplied complete repository ZIP."
+    },
+    {
+      "path": "raw_sources/McShane_human_mmc4.xlsx",
+      "bytes": 1359689,
+      "sha256": "ff3cf9ba3f686adaa83c4a7948e72965864578ce40a53b897ca1ed498328375a",
+      "provenance": "Unchanged human McShane mmc4 attachment."
+    },
+    {
+      "path": "raw_sources/UP000005640_9606.fasta",
+      "bytes": 13722737,
+      "sha256": "0633529214befb5103a10fb7777ae93c27e614b77407467c20a9a7458dac1163",
+      "provenance": "Unchanged dataset extracted from the supplied complete repository ZIP."
+    },
+    {
+      "path": "raw_sources/uniprotkb_human_keywords_membrane_2025_03_19.fasta",
+      "bytes": 10877355,
+      "sha256": "4ac97fda07809f17f126ba452dd649e1503c48ee9f824be755a96066804d85d1",
+      "provenance": "Unchanged dataset extracted from the supplied complete repository ZIP."
+    },
+    {
+      "path": "requirements-live-query.txt",
+      "bytes": 177,
+      "sha256": "263a6cca3d481736992ad16fca56932a4b8d28b67c8074cefcfc8d19c89b25d3",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 57,
+      "sha256": "59f63e062811d7301d4b753d3a8848b04d03e0267888831d82df7327a74ccc8f",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/VALIDATION_SUMMARY.json",
+      "bytes": 751,
+      "sha256": "776e79afd43a6cba401dad78798e388f93ecf426ecf0283e0219895f64a72940",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/disorder_audit/disorder_audit_summary.json",
+      "bytes": 347,
+      "sha256": "da6f9f2d70b50c00805dba41187972133f9c3bc0190c17118e2b239f382e0ec7",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/disorder_audit/disorder_coverage.csv",
+      "bytes": 608,
+      "sha256": "d57c19fbfa0ccc734b8c3985d08e24adc3072e8273a9596777a308ca3fb59fb6",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/disorder_audit/interval_coordinate_warnings.csv",
+      "bytes": 877,
+      "sha256": "d66b2b9e0c79d0359ffa8fc2099298edd9ea40430f65574cca1bc42b8e3aaa99",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/disorder_audit/primary_cohort_with_disorder.csv",
+      "bytes": 195402,
+      "sha256": "3bfca042337d86f8fd95cc404befd32b4324a7b622c2c10219a79d260e6c488f",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/disorder_audit/sensitivity_cohort_with_disorder.csv",
+      "bytes": 330103,
+      "sha256": "68ba7428adedc18f227bdc4ca17837aa90bc867348f91ec3c5d346e0c2189891",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/annotation_status_counts.csv",
+      "bytes": 540,
+      "sha256": "1eb8fe94478bdfbf3608b5c4efcb980ba66ca36b558cef85c48c9f37d9086809",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/association_results.csv",
+      "bytes": 2098,
+      "sha256": "f8178361cbe27d65e75163908e1f12d878a0d3265fc09c977a23692ac4169c29",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/contingency_counts.csv",
+      "bytes": 319,
+      "sha256": "9ff0305a25967505c9e8991446d26fdf0f0468d05dd02bd84086ed9f506c7bff",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/independent_optimizer_comparison.csv",
+      "bytes": 6847,
+      "sha256": "2a1bee67eb7788b703eb67ad8928bdc9d60ff2dc540e55e330e74e3e67f1338d",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/model2_fisher_diagnostics.csv",
+      "bytes": 565,
+      "sha256": "fdec189259586d25d465e052df824c845950e71c0710af4656d95d638ba3a74c",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/primary_cohort.csv",
+      "bytes": 185533,
+      "sha256": "a6d751945c073e09e9c5f78b13809b316c8a67f1703b5ebcaa53da62d729c231",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/provisional_exclusion_results.csv",
+      "bytes": 1156,
+      "sha256": "d0ea7779795d956db1b38072798d0bd378fcd0e18b04bc592a5591afcf510609",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/reference_comparison.csv",
+      "bytes": 11134,
+      "sha256": "7b6a18517ed97aca6bf8cb6d54b284f8a97464e5bb5909f294abdbfd5c85274d",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/restricted_model1.csv",
+      "bytes": 780,
+      "sha256": "b4d83a31c8d6129b7ac534d9a0b9161922bc689337cbcebaafda03bb68b86301",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/run_manifest.json",
+      "bytes": 709,
+      "sha256": "e03bcfdd81ba004938e93266d925d56bdd6dd0ab00169ad59d188157ae57b1a0",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/frozen_replay/sensitivity_cohort.csv",
+      "bytes": 313211,
+      "sha256": "44ab48b619b30976d846de364593a5f3909f2723c06b83b7c9eba205628588b0",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/query_inputs/selected_plddt_source.csv",
+      "bytes": 675355,
+      "sha256": "7a7e2bd91d7b080630646b341409855a4b9e89546e12778e1ddeebf8ced2bbc2",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/query_inputs/uniprots_plddt_ge70.txt",
+      "bytes": 97302,
+      "sha256": "4872d4232b74b6932a9faf32aebdf5b95ef8fdef233c7096fbe828d31ceb802e",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/query_inputs/uniprots_test5.txt",
+      "bytes": 55,
+      "sha256": "1677fe1cca15664c661de7e6f757ff72fe65fe1b1f0dced81e06308ef498a491",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/raw_source_audit/cohort_flow_comparison.csv",
+      "bytes": 2837,
+      "sha256": "71c10db855b5ff4234b5a261a0fc65f2766726ca4054690389571441838bdf8e",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/raw_source_audit/pre_secreted_primary_cohort.csv",
+      "bytes": 96237,
+      "sha256": "d292ecc8c00fd7c7eedb4aba8efea2a7955f6f6652247c1af661e18870590bb7",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/raw_source_audit/pre_secreted_sensitivity_cohort.csv",
+      "bytes": 163202,
+      "sha256": "050ee4d251d69fe9d058367d226a09ec8b494b957aae8f0bbedd7893f7a6b37c",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "results/raw_source_audit/raw_source_manifest.json",
+      "bytes": 931,
+      "sha256": "7e5d26d00c86cdff363a504f0ff02d205d3e05383ec33dd675ee157295084b66",
+      "provenance": "Generated documentation, exported saved evidence, or output from the validated reproduction run."
+    },
+    {
+      "path": "scripts/audit_disorder.py",
+      "bytes": 4655,
+      "sha256": "e358345df906ff897f5a7f28946b5f912aaa127f74c65d18ce71a998e3c6a565",
+      "provenance": "New reconstruction/reproduction utility created for this package and validated on the supplied snapshots."
+    },
+    {
+      "path": "scripts/audit_raw_sources.py",
+      "bytes": 6748,
+      "sha256": "bad1f75af82e71509a8e451205b8a092538ad12ae10f844c5ba30fdec8102e02",
+      "provenance": "New reconstruction/reproduction utility created for this package and validated on the supplied snapshots."
+    },
+    {
+      "path": "scripts/export_complex_annotations.py",
+      "bytes": 3128,
+      "sha256": "b0cef3782a2039c404183c55ec694da662a80567f1baee93fd1347aad5c68c05",
+      "provenance": "New reconstruction/reproduction utility created for this package and validated on the supplied snapshots."
+    },
+    {
+      "path": "scripts/prepare_mobidb_ids.py",
+      "bytes": 1661,
+      "sha256": "ff67a5d7702d3fe0855c259327c8d99859a678554b02332f38ea951a3ca7575f",
+      "provenance": "New reconstruction/reproduction utility created for this package and validated on the supplied snapshots."
+    },
+    {
+      "path": "scripts/query_mobidb_disorder_production.py",
+      "bytes": 11077,
+      "sha256": "ead1d0f58feefdebd1e9a268a3c1bcb1685463b815774fb7c9363541c26a4cf8",
+      "provenance": "Unchanged archived distributed production script from MobiDB_disorder_query_20588.zip; a later local IPv4 patch is not confirmed."
+    },
+    {
+      "path": "scripts/reproduce_results.py",
+      "bytes": 10591,
+      "sha256": "38c5f205787de48f8b2b7bfdcdd1b5b4f9e8e7edb63f33d1e9de2142d69b5e30",
+      "provenance": "New reconstruction/reproduction utility created for this package and validated on the supplied snapshots."
+    },
+    {
+      "path": "scripts/statistical_analysis.py",
+      "bytes": 16143,
+      "sha256": "d4b955d751329ede1ba3fa5dd6dfb3a3144a3878300a30e31e48b300ca52f55a",
+      "provenance": "Recovered original analysis script, unchanged; SHA verified against the recovered file."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Analysis,Status,N,NED
+Primary: NED vs ED,Explicit_complex_or_oligomer,484,128
+Primary: NED vs ED,Explicit_monomer_only,28,1
+Primary: NED vs ED,Reviewed_complex_or_oligomer,16,0
+Primary: NED vs ED,Reviewed_unresolved,107,3
+Primary: NED vs ED,Unannotated,70,5
+Sensitivity: NED vs ED + UN,Explicit_complex_or_oligomer,833,128
+Sensitivity: NED vs ED + UN,Explicit_monomer_only,40,1
+Sensitivity: NED vs ED + UN,Reviewed_complex_or_oligomer,28,0
+Sensitivity: NED vs ED + UN,Reviewed_unresolved,177,3
+Sensitivity: NED vs ED + UN,Unannotated,113,5

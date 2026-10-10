@@ -1,0 +1,23 @@
+{
+  "mcshane_rows": 3133,
+  "degradation_counts": {
+    "ED": 1474,
+    "UN": 1363,
+    "NED": 296
+  },
+  "entanglement_rows": 51012,
+  "entanglement_proteins": 20588,
+  "historical_knotted_in_plddt_master": 123,
+  "strict_fragment_knotted_in_plddt_master": 123,
+  "broader_knot_normalization_extra_ids": [],
+  "secreted_source_supplied": true,
+  "final_cohort_source_validation": "RUN",
+  "source_sha256": {
+    "mcshane": "ff3cf9ba3f686adaa83c4a7948e72965864578ce40a53b897ca1ed498328375a",
+    "entanglement": "95c1eec8439e1aa283a4452736e8320c3beb47d53db1b619bfcae54f91c672dd",
+    "plddt": "b25b0eed1ab5ed596cb732b1b38521ddd11f17f8436f9bde1b2480e39470aed6",
+    "knots": "4eabf512173e2965fe41bf53f92ebcc2974be40429d5bd209692713c6ff8607c",
+    "proteome_fasta": "0633529214befb5103a10fb7777ae93c27e614b77407467c20a9a7458dac1163",
+    "membrane_fasta": "4ac97fda07809f17f126ba452dd649e1503c48ee9f824be755a96066804d85d1"
+  }
+}

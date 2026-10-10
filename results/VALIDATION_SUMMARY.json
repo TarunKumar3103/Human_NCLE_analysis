@@ -1,0 +1,14 @@
+{
+  "recorded_complex_decision_reconstruction": "PASS",
+  "reported_result_rows_recomputed": 12,
+  "reported_result_metric_checks_passed": 72,
+  "independent_model2_slope_rows_recomputed": 6,
+  "independent_model2_metric_checks_passed": 36,
+  "raw_presecreted_flow_metric_checks_passed": 40,
+  "approved_historical_secreted_source_replay": "NOT RUN: source export not recovered",
+  "raw_uniprot_text_classification_replay": "NOT RUN: implementation not recovered; saved labels/decisions supplied",
+  "live_mobidb_queries": "NOT RUN: processed export audited offline",
+  "word_code_exact_text_roundtrip": "PASS, eight complete files",
+  "pdf_pages": 29,
+  "pdf_visual_qa": "All pages rendered and inspected; no blank pages or clipped tables observed"
+}

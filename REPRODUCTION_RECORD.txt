@@ -1,0 +1,50 @@
+HUMAN NCLE–NED REPRODUCTION RECORD
+
+Completed checks
+- Primary cohort: 705 proteins; 568 ED and 137 NED.
+- Sensitivity cohort: 1191 proteins; 568 ED, 137 NED and 486 UN.
+- Source-based cohort IDs and checked fields: zero discrepancies.
+- All 12 association-result rows match the numerical replay
+  within rtol=1e-9 and atol=1e-9.
+- Primary disorder coverage: 592 available, 113 missing.
+- Sensitivity disorder coverage: 1029 available, 162 missing.
+- Broad disorder master: 13690 proteins, 12609 usable fractions.
+- The 18 known interval-coordinate warnings were reproduced.
+
+Recovered source
+raw_sources/uniprotkb_human_keyword_secreted_2026_09_21.fasta
+Its accompanying metadata JSON is also included.
+The earlier missing-secreted-source limitation is now resolved.
+
+Code and corresponding outputs
+scripts/export_complex_annotations.py
+  results/local_complex_annotations/
+  Recorded complex classifications, evidence and review decisions.
+
+scripts/reproduce_results.py
+  results/local_replay/
+  Main results and annotation/provisional-exclusion diagnostics.
+
+scripts/audit_raw_sources.py
+  results/local_raw_source_audit_with_secreted/
+  Cohort flow and protein-level comparisons against the reference.
+
+scripts/statistical_analysis.py
+  results/local_from_sources/
+  Source-based cohorts, contingency counts and regression results.
+
+scripts/audit_disorder.py
+  results/local_disorder_audit/
+  Disorder coverage, fraction checks and coordinate warnings.
+
+Interpretation and remaining limitations
+- No statistically detectable positive NCLE–NED association was found.
+- Complex-membership estimates are imprecise and use selected samples.
+- Complex classifications reproduce recorded decisions; the original
+  automatic text classifier has not been reconstructed.
+- Provisional complex calls still require independent evidence review.
+- Disorder coordinate compatibility remains unresolved.
+- Processed MobiDB results are included; raw API responses are not.
+- Disorder availability was not a statistical-cohort filter.
+
+This record updates the original package documentation.

@@ -1,0 +1,11 @@
+Analysis,Group,Total,Fraction_available,Fraction_missing,Missing_percent
+Primary,ED_Entangled,403,336,67,16.62531017369727
+Primary,ED_NotEntangled,165,136,29,17.575757575757574
+Primary,NED_Entangled,96,83,13,13.541666666666666
+Primary,NED_NotEntangled,41,37,4,9.75609756097561
+Sensitivity,ED_Entangled,403,336,67,16.62531017369727
+Sensitivity,ED_NotEntangled,165,136,29,17.575757575757574
+Sensitivity,NED_Entangled,96,83,13,13.541666666666666
+Sensitivity,NED_NotEntangled,41,37,4,9.75609756097561
+Sensitivity,UN_Entangled,351,315,36,10.256410256410257
+Sensitivity,UN_NotEntangled,135,122,13,9.62962962962963

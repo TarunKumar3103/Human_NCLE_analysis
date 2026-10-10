@@ -1,0 +1,2728 @@
+HUMAN NCLE-NED CODE COMPENDIUM
+Individual files are separated below; do not execute this collection as one file.
+
+===== FILE: scripts/statistical_analysis.py =====
+PROVENANCE: Recovered original; unchanged
+BEGIN FILE
+#!/usr/bin/env python3
+"""Reconstruct and analyze the human NCLE/degradation cohorts.
+
+Primary analysis: NED versus ED.
+Sensitivity analysis: NED versus ED + UN.
+
+MobiDB disorder is intentionally not used as an inclusion criterion.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mcshane", type=Path, required=True)
+    parser.add_argument("--entanglement", type=Path, required=True)
+    parser.add_argument("--plddt", type=Path, required=True)
+    parser.add_argument("--knots", type=Path, required=True)
+    parser.add_argument("--proteome-fasta", type=Path, required=True)
+    parser.add_argument("--membrane-fasta", type=Path, required=True)
+    parser.add_argument("--secreted-source", type=Path, required=True)
+    parser.add_argument("--monomer-fasta", type=Path, action="append", default=[])
+    parser.add_argument("--complex-annotation", type=Path)
+    parser.add_argument("--output-dir", type=Path, required=True)
+    return parser.parse_args()
+
+
+def normalize_id(value: object) -> str:
+    return str(value).strip()
+
+
+def merge_ccbond(series: pd.Series) -> float:
+    values: list[bool] = []
+    for item in series.dropna():
+        if isinstance(item, (bool, np.bool_)):
+            values.append(bool(item))
+        elif str(item).strip() in {"True", "1", "1.0"}:
+            values.append(True)
+        elif str(item).strip() in {"False", "0", "0.0"}:
+            values.append(False)
+    if any(values):
+        return np.nan
+    if values:
+        return 1.0
+    return 0.0
+
+
+def parse_fasta(path: Path) -> dict[str, int]:
+    lengths: dict[str, int] = {}
+    current: str | None = None
+    with path.open() as handle:
+        for raw_line in handle:
+            line = raw_line.strip()
+            if not line:
+                continue
+            if line.startswith(">"):
+                parts = line[1:].split("|")
+                current = parts[1] if len(parts) >= 3 else parts[0].split()[0]
+                current = normalize_id(current)
+                lengths.setdefault(current, 0)
+            elif current is not None:
+                lengths[current] += len(line)
+    return lengths
+
+
+def parse_id_source(path: Path) -> set[str]:
+    suffix = path.suffix.lower()
+    if suffix in {".fa", ".faa", ".fasta"}:
+        return set(parse_fasta(path))
+    if suffix == ".json":
+        payload = json.loads(path.read_text())
+        values = payload.get("secreted", payload) if isinstance(payload, dict) else payload
+        return {normalize_id(value) for value in values}
+    values: set[str] = set()
+    with path.open() as handle:
+        for raw_line in handle:
+            value = raw_line.strip().split("\t")[0].split(",")[0]
+            if value and value.lower() not in {"uniprot", "uniprot_id", "entry"}:
+                values.add(normalize_id(value))
+    return values
+
+
+def load_sources(args: argparse.Namespace) -> tuple[pd.DataFrame, dict[str, set[str]], dict[str, int]]:
+    mcshane = pd.read_excel(args.mcshane, sheet_name="FinalTable_RPE_")
+    mcshane = mcshane[["Protein IDs (Uniprot)", "Degradation profile"]].rename(
+        columns={"Protein IDs (Uniprot)": "UniProt_ID", "Degradation profile": "Degradation_profile"}
+    )
+    mcshane["UniProt_ID"] = mcshane["UniProt_ID"].map(normalize_id)
+
+    plddt = pd.read_csv(args.plddt)[["gene", "<pLDDT>", "std"]].rename(
+        columns={"gene": "UniProt_ID", "<pLDDT>": "Average_pLDDT", "std": "pLDDT_SD"}
+    )
+    plddt["UniProt_ID"] = plddt["UniProt_ID"].map(normalize_id)
+    plddt["Average_pLDDT"] = pd.to_numeric(plddt["Average_pLDDT"], errors="coerce")
+    plddt["pLDDT_SD"] = pd.to_numeric(plddt["pLDDT_SD"], errors="coerce")
+    if plddt["UniProt_ID"].duplicated().any():
+        raise ValueError("Human_Avg_pLDDTs.csv contains duplicate UniProt IDs")
+
+    entanglement = pd.read_csv(args.entanglement, sep="|", low_memory=False)[["gene", "CCBond"]]
+    entanglement["gene"] = entanglement["gene"].map(normalize_id)
+    entanglement = (
+        entanglement.groupby("gene", as_index=False)
+        .agg({"CCBond": merge_ccbond})
+        .rename(columns={"gene": "UniProt_ID", "CCBond": "NCLE"})
+    )
+
+    knots = pd.read_table(args.knots, low_memory=False)
+    knot_ids = set(
+        knots.loc[knots["Organism"].eq("Human"), "Uniprot"]
+        .astype(str)
+        .str.strip()
+        .str.split("-")
+        .str[0]
+    )
+    proteome_lengths = parse_fasta(args.proteome_fasta)
+    membrane_ids = set(parse_fasta(args.membrane_fasta))
+    secreted_ids = parse_id_source(args.secreted_source)
+
+    monomer_ids: set[str] = set()
+    for path in args.monomer_fasta:
+        monomer_ids.update(parse_fasta(path))
+
+    master = mcshane.merge(plddt, on="UniProt_ID", how="inner", validate="one_to_one")
+    master = master.loc[master["Average_pLDDT"] >= 70].copy()
+    master = master.merge(entanglement, on="UniProt_ID", how="left", validate="one_to_one")
+    master["Knotted"] = master["UniProt_ID"].isin(knot_ids).astype(int)
+    master["FASTA_available"] = master["UniProt_ID"].isin(proteome_lengths).astype(int)
+    master["Protein_length"] = master["UniProt_ID"].map(proteome_lengths)
+    master["Membrane"] = master["UniProt_ID"].isin(membrane_ids).astype(int)
+    master["Secreted"] = master["UniProt_ID"].isin(secreted_ids).astype(int)
+    master["Known_monomer_annotation"] = np.where(
+        master["UniProt_ID"].isin(monomer_ids), "Known_monomer", "Unclassified"
+    )
+    master["Entanglement_status"] = master["NCLE"].map(
+        {1.0: "Native_entangled", 0.0: "Not_entangled"}
+    ).fillna("Excluded_covalent_lasso")
+
+    id_sets = {
+        "knots": knot_ids,
+        "membrane": membrane_ids,
+        "secreted": secreted_ids,
+        "known_monomer": monomer_ids,
+    }
+    return master, id_sets, proteome_lengths
+
+
+def build_cohort(master: pd.DataFrame, profiles: list[str], name: str) -> tuple[pd.DataFrame, list[dict[str, object]]]:
+    flow: list[dict[str, object]] = []
+    data = master.loc[master["Degradation_profile"].isin(profiles)].copy()
+
+    def record(step: str) -> None:
+        counts = data["Degradation_profile"].value_counts()
+        flow.append(
+            {
+                "Analysis": name,
+                "Step": step,
+                "Total": int(len(data)),
+                "ED": int(counts.get("ED", 0)),
+                "NED": int(counts.get("NED", 0)),
+                "UN": int(counts.get("UN", 0)),
+            }
+        )
+
+    record("pLDDT >=70 and selected degradation categories")
+    data = data.loc[data["NCLE"].notna()].copy()
+    record("Usable binary NCLE status")
+    data = data.loc[data["Knotted"].eq(0)].copy()
+    record("Exclude knotted proteins")
+    data = data.loc[data["FASTA_available"].eq(1)].copy()
+    record("Require FASTA sequence")
+    data = data.loc[data["Membrane"].eq(0)].copy()
+    record("Exclude membrane proteins")
+    data = data.loc[data["Secreted"].eq(0)].copy()
+    record("Exclude secreted proteins")
+
+    data["NED_binary"] = data["Degradation_profile"].eq("NED").astype(int)
+    data["z_Protein_length"] = (
+        data["Protein_length"] - data["Protein_length"].mean()
+    ) / data["Protein_length"].std(ddof=1)
+    data["Analysis_group"] = (
+        data["Degradation_profile"]
+        + "_"
+        + data["NCLE"].map({1.0: "Entangled", 0.0: "NotEntangled"})
+    )
+    data = data.sort_values("UniProt_ID").reset_index(drop=True)
+    data.insert(0, "Index", np.arange(1, len(data) + 1))
+    return data, flow
+
+
+def crude_analysis(data: pd.DataFrame, analysis: str) -> tuple[dict[str, object], pd.DataFrame]:
+    a = int(((data["NCLE"] == 1) & (data["NED_binary"] == 1)).sum())
+    b = int(((data["NCLE"] == 1) & (data["NED_binary"] == 0)).sum())
+    c = int(((data["NCLE"] == 0) & (data["NED_binary"] == 1)).sum())
+    d = int(((data["NCLE"] == 0) & (data["NED_binary"] == 0)).sum())
+    table = np.array([[a, b], [c, d]])
+    odds_ratio, fisher_p = stats.fisher_exact(table, alternative="two-sided")
+    log_se = np.sqrt(1 / a + 1 / b + 1 / c + 1 / d)
+    lower, upper = np.exp(np.log(odds_ratio) + np.array([-1.96, 1.96]) * log_se)
+    result = {
+        "Analysis": analysis,
+        "Method": "Crude Fisher exact",
+        "Term": "NCLE",
+        "N": int(len(data)),
+        "Coefficient": float(np.log(odds_ratio)),
+        "Odds_ratio": float(odds_ratio),
+        "CI_lower": float(lower),
+        "CI_upper": float(upper),
+        "P_value": float(fisher_p),
+    }
+    counts = pd.DataFrame(
+        [
+            {"Analysis": analysis, "NCLE_status": "Entangled", "NED": a, "Non_NED": b, "Total": a + b},
+            {"Analysis": analysis, "NCLE_status": "Not_entangled", "NED": c, "Non_NED": d, "Total": c + d},
+        ]
+    )
+    counts["NED_frequency"] = counts["NED"] / counts["Total"]
+    return result, counts
+
+
+def logistic_analysis(data: pd.DataFrame, analysis: str, method: str, terms: list[str]) -> list[dict[str, object]]:
+    clean = data[["NED_binary", *terms]].dropna().copy()
+    term_names = ["Intercept", *terms]
+    x = np.column_stack([np.ones(len(clean)), clean[terms].to_numpy(dtype=float)])
+    y = clean["NED_binary"].to_numpy(dtype=float)
+    beta = np.zeros(x.shape[1], dtype=float)
+    for _ in range(100):
+        eta = np.clip(x @ beta, -35, 35)
+        probability = 1.0 / (1.0 + np.exp(-eta))
+        weights = np.clip(probability * (1.0 - probability), 1e-12, None)
+        information = x.T @ (weights[:, None] * x)
+        score = x.T @ (y - probability)
+        step = np.linalg.solve(information, score)
+        beta_next = beta + step
+        if np.max(np.abs(step)) < 1e-10:
+            beta = beta_next
+            break
+        beta = beta_next
+    else:
+        raise RuntimeError(f"Logistic regression did not converge for {analysis}: {method}")
+
+    eta = np.clip(x @ beta, -35, 35)
+    probability = 1.0 / (1.0 + np.exp(-eta))
+    weights = np.clip(probability * (1.0 - probability), 1e-12, None)
+    covariance = np.linalg.inv(x.T @ (weights[:, None] * x))
+    standard_errors = np.sqrt(np.diag(covariance))
+    coefficients = dict(zip(term_names, beta))
+    errors = dict(zip(term_names, standard_errors))
+    rows: list[dict[str, object]] = []
+    for term in terms:
+        coefficient = float(coefficients[term])
+        standard_error = float(errors[term])
+        lower_coefficient = coefficient - 1.96 * standard_error
+        upper_coefficient = coefficient + 1.96 * standard_error
+        rows.append(
+            {
+                "Analysis": analysis,
+                "Method": method,
+                "Term": term,
+                "N": int(len(clean)),
+                "Coefficient": coefficient,
+                "Odds_ratio": float(np.exp(coefficient)),
+                "CI_lower": float(np.exp(lower_coefficient)),
+                "CI_upper": float(np.exp(upper_coefficient)),
+                "P_value": float(2 * stats.norm.sf(abs(coefficient / standard_error))),
+            }
+        )
+    return rows
+
+
+def add_complex_annotation(data: pd.DataFrame, path: Path) -> pd.DataFrame:
+    annotation = pd.read_csv(path)
+    expected = {"UniProt_ID", "Complex_member"}
+    if not expected.issubset(annotation.columns):
+        raise ValueError(f"Complex annotation must contain columns: {sorted(expected)}")
+    annotation = annotation[["UniProt_ID", "Complex_member"]].copy()
+    annotation["UniProt_ID"] = annotation["UniProt_ID"].map(normalize_id)
+    annotation["Complex_member"] = pd.to_numeric(annotation["Complex_member"], errors="coerce")
+    if annotation["UniProt_ID"].duplicated().any():
+        raise ValueError("Complex annotation contains duplicate UniProt IDs")
+    if not set(annotation["Complex_member"].dropna().unique()).issubset({0, 1}):
+        raise ValueError("Complex_member must be 0, 1, or missing")
+    return data.merge(annotation, on="UniProt_ID", how="left", validate="one_to_one")
+
+
+def main() -> None:
+    args = parse_args()
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    master, id_sets, proteome_lengths = load_sources(args)
+
+    primary, flow_primary = build_cohort(master, ["ED", "NED"], "Primary: NED vs ED")
+    sensitivity, flow_sensitivity = build_cohort(
+        master, ["ED", "NED", "UN"], "Sensitivity: NED vs ED + UN"
+    )
+
+    results: list[dict[str, object]] = []
+    count_tables: list[pd.DataFrame] = []
+    for label, data in [
+        ("Primary: NED vs ED", primary),
+        ("Sensitivity: NED vs ED + UN", sensitivity),
+    ]:
+        crude, counts = crude_analysis(data, label)
+        results.append(crude)
+        count_tables.append(counts)
+        results.extend(
+            logistic_analysis(
+                data,
+                label,
+                "Model 1: NED ~ NCLE + z(length)",
+                ["NCLE", "z_Protein_length"],
+            )
+        )
+
+    complex_status = "Not run: accurate binary complex-membership annotation was not supplied."
+    if args.complex_annotation:
+        complex_status = "Run using the supplied Complex_member annotation."
+        updated: list[pd.DataFrame] = []
+        for label, data in [
+            ("Primary: NED vs ED", primary),
+            ("Sensitivity: NED vs ED + UN", sensitivity),
+        ]:
+            annotated = add_complex_annotation(data, args.complex_annotation)
+            results.extend(
+                logistic_analysis(
+                    annotated,
+                    label,
+                    "Model 2: NED ~ NCLE + complex + z(length)",
+                    ["NCLE", "Complex_member", "z_Protein_length"],
+                )
+            )
+            updated.append(annotated)
+        primary, sensitivity = updated
+
+    results_df = pd.DataFrame(results)
+    counts_df = pd.concat(count_tables, ignore_index=True)
+    flow_df = pd.DataFrame(flow_primary + flow_sensitivity)
+
+    ordered_columns = [
+        "Index",
+        "UniProt_ID",
+        "Degradation_profile",
+        "NED_binary",
+        "NCLE",
+        "Entanglement_status",
+        "Average_pLDDT",
+        "pLDDT_SD",
+        "Protein_length",
+        "z_Protein_length",
+        "Knotted",
+        "FASTA_available",
+        "Membrane",
+        "Secreted",
+        "Known_monomer_annotation",
+        "Analysis_group",
+    ]
+    if "Complex_member" in primary.columns:
+        ordered_columns.append("Complex_member")
+    primary[ordered_columns].to_csv(args.output_dir / "primary_cohort.csv", index=False)
+    sensitivity[ordered_columns].to_csv(args.output_dir / "sensitivity_cohort.csv", index=False)
+    results_df.to_csv(args.output_dir / "association_results.csv", index=False)
+    counts_df.to_csv(args.output_dir / "contingency_counts.csv", index=False)
+    flow_df.to_csv(args.output_dir / "cohort_flow.csv", index=False)
+
+    metadata = {
+        "primary_n": int(len(primary)),
+        "sensitivity_n": int(len(sensitivity)),
+        "primary_group_counts": primary["Analysis_group"].value_counts().sort_index().to_dict(),
+        "sensitivity_profile_ncle_counts": {
+            f"{profile}|NCLE={int(ncle)}": int(count)
+            for (profile, ncle), count in sensitivity.groupby(
+                ["Degradation_profile", "NCLE"]
+            ).size().items()
+        },
+        "secreted_source_ids": len(id_sets["secreted"]),
+        "known_monomer_ids": len(id_sets["known_monomer"]),
+        "complex_model_status": complex_status,
+        "notes": [
+            "MobiDB disorder was not used to select either statistical cohort.",
+            "NCLE=1 denotes native non-covalent entanglement; NCLE=0 denotes no detected entanglement.",
+            "Proteins with covalent lasso records are excluded from binary NCLE analyses.",
+            "Known_monomer_annotation=Unclassified must not be interpreted as complex membership.",
+        ],
+    }
+    (args.output_dir / "analysis_metadata.json").write_text(json.dumps(metadata, indent=2, default=str))
+
+    print(json.dumps(metadata, indent=2, default=str))
+    print("\nAssociation results:")
+    print(results_df.to_string(index=False))
+
+
+if __name__ == "__main__":
+    main()
+
+END FILE: scripts/statistical_analysis.py
+
+===== FILE: scripts/reproduce_results.py =====
+PROVENANCE: New, validated reproduction runner
+BEGIN FILE
+#!/usr/bin/env python3
+"""Recompute human results from frozen protein rows, not stored ORs.
+
+This is a new reproduction runner. statistical_analysis.py is the recovered
+original analysis code. This runner never refreshes online annotations.
+"""
+import argparse
+import hashlib
+import importlib.metadata
+import json
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+from scipy.optimize import minimize
+from scipy.special import expit
+from scipy.stats import fisher_exact, norm
+
+from statistical_analysis import crude_analysis, logistic_analysis
+
+ROOT = Path(__file__).resolve().parents[1]
+LABELS = {
+    "Primary": "Primary: NED vs ED",
+    "Sensitivity": "Sensitivity: NED vs ED + UN",
+}
+M1 = "Model 1: NED ~ NCLE + z(length)"
+M2 = "Model 2: NED ~ NCLE + complex + z(length)"
+METRICS = ["N", "Coefficient", "Odds_ratio", "CI_lower", "CI_upper", "P_value"]
+
+
+def sha256(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def validate_cohort(data, primary):
+    if data["UniProt_ID"].isna().any() or data["UniProt_ID"].duplicated().any():
+        raise ValueError("Missing or repeated UniProt ID")
+    allowed = {"ED", "NED"} if primary else {"ED", "NED", "UN"}
+    if not set(data["Degradation_profile"]).issubset(allowed):
+        raise ValueError("Unexpected degradation category")
+    for col in ["NCLE", "NED_binary"]:
+        if data[col].isna().any() or not set(data[col]).issubset({0, 1}):
+            raise ValueError(f"{col} must be complete and binary")
+    expected_y = data["Degradation_profile"].eq("NED").astype(int)
+    if not data["NED_binary"].eq(expected_y).all():
+        raise ValueError("Outcome does not agree with degradation profile")
+    length = pd.to_numeric(data["Protein_length"], errors="raise")
+    if length.isna().any() or not length.gt(0).all() or length.std(ddof=1) <= 0:
+        raise ValueError("Invalid protein lengths")
+    if not data["Average_pLDDT"].ge(70).all():
+        raise ValueError("A protein fails the inclusive pLDDT criterion")
+    for col in ["Knotted", "Membrane", "Secreted"]:
+        if not data[col].eq(0).all():
+            raise ValueError(f"Excluded {col} protein in cohort")
+    if not data["FASTA_available"].eq(1).all():
+        raise ValueError("A FASTA sequence is missing")
+    if not set(data["Complex_member"].dropna()).issubset({0, 1}):
+        raise ValueError("Invalid complex-membership value")
+    z = (length - length.mean()) / length.std(ddof=1)
+    if not np.allclose(z, data["z_Protein_length"], atol=1e-12, rtol=1e-12):
+        raise ValueError("Stored standardized lengths are inconsistent")
+    # Standardize once within each full cohort, before Model 2 exclusions.
+    data = data.copy()
+    data["z_Protein_length"] = z
+    return data
+
+
+def independent_fit(data, label):
+    """Independent MLE fit using a different optimizer and analytic Hessian."""
+    terms = ["NCLE", "Complex_member", "z_Protein_length"]
+    clean = data.dropna(subset=["NED_binary", *terms])
+    x = np.column_stack([np.ones(len(clean)), clean[terms].to_numpy(float)])
+    y = clean["NED_binary"].to_numpy(float)
+    if np.linalg.matrix_rank(x) != x.shape[1]:
+        raise ValueError("Model 2 design matrix is not full rank")
+
+    def objective(beta):
+        eta = x @ beta
+        return np.logaddexp(0, eta).sum() - y @ eta
+
+    def gradient(beta):
+        return x.T @ (expit(x @ beta) - y)
+
+    def hessian(beta):
+        p = expit(x @ beta)
+        return x.T @ ((p * (1 - p))[:, None] * x)
+
+    fit = minimize(objective, np.zeros(x.shape[1]), jac=gradient,
+                   hess=hessian, method="trust-exact",
+                   options={"gtol": 1e-9, "maxiter": 500})
+    if np.max(np.abs(gradient(fit.x))) >= 1e-6:
+        raise RuntimeError(f"Independent fit did not converge: {fit.message}")
+    se = np.sqrt(np.diag(np.linalg.inv(hessian(fit.x))))
+    rows = []
+    for i, term in enumerate(terms, 1):
+        b = fit.x[i]
+        rows.append(dict(Analysis=label, Method=M2, Term=term, N=len(clean),
+                         Coefficient=b, Odds_ratio=np.exp(b),
+                         CI_lower=np.exp(b - 1.96 * se[i]),
+                         CI_upper=np.exp(b + 1.96 * se[i]),
+                         P_value=2 * norm.sf(abs(b / se[i]))))
+    return rows
+
+
+def compare_results(actual, reference, description):
+    keys = ["Analysis", "Method", "Term"]
+    if actual.duplicated(keys).any() or reference.duplicated(keys).any():
+        raise ValueError("Repeated result key")
+    joined = actual.merge(reference, on=keys, how="outer",
+                          suffixes=("_actual", "_reference"),
+                          indicator=True, validate="one_to_one")
+    rows = []
+    for _, row in joined.iterrows():
+        for metric in METRICS:
+            a, b = row[f"{metric}_actual"], row[f"{metric}_reference"]
+            match = row["_merge"] == "both" and np.isfinite(a) and np.isfinite(b)
+            match = match and (a == b if metric == "N" else
+                               np.isclose(a, b, atol=1e-8, rtol=1e-8))
+            rows.append({**{k: row[k] for k in keys}, "Comparison": description,
+                         "Metric": metric, "Actual": a, "Reference": b,
+                         "Absolute_difference": abs(a - b), "Pass": bool(match)})
+    return pd.DataFrame(rows)
+
+
+def binary_diagnostic(data, exposed, comparison, label):
+    y = data["NED_binary"].eq(1)
+    a, b = int((exposed & y).sum()), int((exposed & ~y).sum())
+    c, d = int((~exposed & y).sum()), int((~exposed & ~y).sum())
+    odds, p = fisher_exact([[a, b], [c, d]], alternative="two-sided")
+    return dict(Analysis=label, Comparison=comparison, Exposed_NED=a,
+                Exposed_non_NED=b, Reference_NED=c, Reference_non_NED=d,
+                Odds_ratio=float(odds), P_value=float(p))
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--reference", type=Path,
+                        default=ROOT / "data/reference_human_analysis.xlsx")
+    parser.add_argument("--out", type=Path, default=ROOT / "results/frozen_replay")
+    args = parser.parse_args()
+    args.out.mkdir(parents=True, exist_ok=True)
+    cohorts = {}
+    for name in LABELS:
+        d = pd.read_excel(args.reference, sheet_name=f"{name} Cohort")
+        cohorts[name] = validate_cohort(d, name == "Primary")
+    primary_ids = set(cohorts["Primary"]["UniProt_ID"])
+    sensitivity_edned = cohorts["Sensitivity"].query("Degradation_profile != 'UN'")
+    if primary_ids != set(sensitivity_edned["UniProt_ID"]):
+        raise ValueError("Primary and sensitivity ED/NED memberships differ")
+
+    results, counts, restricted, exclusions, diagnostics = [], [], [], [], []
+    independent, status_counts = [], []
+    for name, data in cohorts.items():
+        label = LABELS[name]
+        crude, table = crude_analysis(data, label)
+        results.append(crude)
+        counts.append(table)
+        results.extend(logistic_analysis(data, label, M1, ["NCLE", "z_Protein_length"]))
+        results.extend(logistic_analysis(data, label, M2,
+                                        ["NCLE", "Complex_member", "z_Protein_length"]))
+        complete = data.dropna(subset=["Complex_member"])
+        restricted.extend(logistic_analysis(complete, label,
+                          "Restricted Model 1: NED ~ NCLE + z(length)",
+                          ["NCLE", "z_Protein_length"]))
+        provisional = data["Manual_review_decision"].eq("Complex_or_oligomer")
+        exclusions.extend(logistic_analysis(data.loc[~provisional], label,
+                          "Model 2 excluding provisional positive calls",
+                          ["NCLE", "Complex_member", "z_Protein_length"]))
+        diagnostics.append(binary_diagnostic(complete, complete["Complex_member"].eq(1),
+                           "Complex member versus explicit monomer", label))
+        diagnostics.append(binary_diagnostic(data, data["Complex_member"].notna(),
+                           "Usable versus missing complex annotation", label))
+        for status, group in data.groupby("Oligomer_status", dropna=False):
+            status_counts.append(dict(Analysis=label, Status=status, N=len(group),
+                                      NED=int(group["NED_binary"].sum())))
+        independent.extend(independent_fit(data, label))
+        data.to_csv(args.out / f"{name.lower()}_cohort.csv", index=False)
+
+    actual = pd.DataFrame(results)
+    expected = pd.read_excel(args.reference, sheet_name="Association Results")
+    comparison = compare_results(actual, expected, "Reported workbook results")
+    independent_comparison = compare_results(pd.DataFrame(independent),
+                              actual.loc[actual["Method"].eq(M2)],
+                              "Independent optimizer versus original solver")
+    outputs = {
+        "association_results.csv": actual,
+        "contingency_counts.csv": pd.concat(counts, ignore_index=True),
+        "restricted_model1.csv": pd.DataFrame(restricted),
+        "provisional_exclusion_results.csv": pd.DataFrame(exclusions),
+        "model2_fisher_diagnostics.csv": pd.DataFrame(diagnostics),
+        "annotation_status_counts.csv": pd.DataFrame(status_counts),
+        "reference_comparison.csv": comparison,
+        "independent_optimizer_comparison.csv": independent_comparison,
+    }
+    for name, data in outputs.items():
+        data.to_csv(args.out / name, index=False)
+    passed = comparison["Pass"].all() and independent_comparison["Pass"].all()
+    manifest = {
+        "run_utc": datetime.now(timezone.utc).isoformat(), "python": sys.version,
+        "reference_sha256": sha256(args.reference),
+        "original_analysis_sha256": sha256(Path(__file__).with_name("statistical_analysis.py")),
+        "runner_sha256": sha256(__file__), "numerical_comparison_passed": bool(passed),
+        "primary_n": len(cohorts["Primary"]),
+        "sensitivity_n": len(cohorts["Sensitivity"]),
+        "versions": {p: importlib.metadata.version(p)
+                     for p in ["numpy", "pandas", "scipy", "openpyxl"]},
+        "scope": "Frozen-cohort numerical replay; no online annotation refresh",
+        "confidence_interval_multiplier": 1.96,
+    }
+    (args.out / "run_manifest.json").write_text(json.dumps(manifest, indent=2))
+    print(actual.loc[actual["Term"].eq("NCLE")].to_string(index=False))
+    print(f"\nNumerical reproduction: {'PASS' if passed else 'FAIL'}")
+    print(f"Results: {args.out.resolve()}")
+    if not passed:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()
+
+END FILE: scripts/reproduce_results.py
+
+===== FILE: scripts/export_complex_annotations.py =====
+PROVENANCE: New, validated reconstruction utility
+BEGIN FILE
+#!/usr/bin/env python3
+"""Export evidence and replay recorded review decisions from the final workbook.
+
+This does not recreate the unavailable original text-classification code or
+independently validate its biological decisions. It reconstructs final calls
+from frozen automated calls plus the recorded first-pass review decisions.
+"""
+import argparse
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--reference", type=Path,
+                        default=ROOT / "data/reference_human_analysis.xlsx")
+    parser.add_argument("--out", type=Path, default=ROOT / "data")
+    args = parser.parse_args()
+    args.out.mkdir(parents=True, exist_ok=True)
+    evidence = pd.read_excel(args.reference, sheet_name="UniProt Evidence")
+    decisions = pd.read_excel(args.reference, sheet_name="Manual Review")
+    if evidence["UniProt_ID"].isna().any() or evidence["UniProt_ID"].duplicated().any():
+        raise ValueError("Evidence requires one row per protein")
+    if decisions["UniProt_ID"].isna().any() or decisions["UniProt_ID"].duplicated().any():
+        raise ValueError("Review decisions contain missing or repeated IDs")
+    ambiguous_ids = set(evidence.loc[evidence["Automated_Oligomer_status"].eq("Ambiguous"),
+                                     "UniProt_ID"])
+    if set(decisions["UniProt_ID"]) != ambiguous_ids:
+        raise ValueError("Review worksheet does not cover exactly the ambiguous records")
+    decision_map = decisions.set_index("UniProt_ID")["Manual_review_decision"]
+    if not set(decision_map.dropna()).issubset({"Complex_or_oligomer", "Unresolved"}):
+        raise ValueError("Unexpected recorded review decision")
+    recorded = evidence["UniProt_ID"].map(decision_map)
+    if not recorded.fillna("").eq(evidence["Manual_review_decision"].fillna("")).all():
+        raise ValueError("Evidence and review worksheets disagree")
+    calls = evidence["Automated_Complex_member"].copy()
+    # A workflow-completion flag never supplies a biological classification.
+    positive = recorded.eq("Complex_or_oligomer")
+    unresolved = recorded.eq("Unresolved")
+    calls.loc[positive] = 1
+    calls.loc[unresolved] = np.nan
+    if not np.allclose(calls, evidence["Complex_member"], equal_nan=True):
+        raise ValueError("Recorded review decisions do not reconstruct final calls")
+    annotation = pd.DataFrame({"UniProt_ID": evidence["UniProt_ID"],
+                               "Complex_member": calls})
+    annotation.to_csv(args.out / "complex_annotations.csv", index=False)
+    evidence.to_csv(args.out / "uniprot_evidence_snapshot.csv", index=False)
+    decisions.to_csv(args.out / "complex_review_decisions.csv", index=False)
+    print(f"Evidence proteins: {len(evidence)}")
+    print(f"Initially ambiguous: {len(decisions)}")
+    print(f"Provisional positive calls: {int(positive.sum())}")
+    print(f"Reviewed unresolved: {int(unresolved.sum())}")
+    print("Recorded-decision reconstruction: PASS")
+
+
+if __name__ == "__main__":
+    main()
+
+END FILE: scripts/export_complex_annotations.py
+
+===== FILE: scripts/audit_raw_sources.py =====
+PROVENANCE: New, validated source audit
+BEGIN FILE
+#!/usr/bin/env python3
+"""Replay raw cohort filters and compare them with the final reference.
+
+Without --secreted-source, validation stops before secreted exclusion. The
+final eligible IDs are never used to manufacture a secreted annotation list.
+"""
+import argparse
+import hashlib
+import json
+import re
+import tempfile
+from pathlib import Path
+from types import SimpleNamespace
+
+import numpy as np
+import pandas as pd
+
+from statistical_analysis import load_sources, build_cohort
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--sources", type=Path, default=ROOT / "raw_sources")
+    parser.add_argument("--reference", type=Path,
+                        default=ROOT / "data/reference_human_analysis.xlsx")
+    parser.add_argument("--secreted-source", type=Path)
+    parser.add_argument("--out", type=Path, default=ROOT / "results/raw_source_audit")
+    args = parser.parse_args()
+    args.out.mkdir(parents=True, exist_ok=True)
+    sources = {
+        "mcshane": args.sources / "McShane_human_mmc4.xlsx",
+        "entanglement": args.sources / "Human_AF_combined_20250614.csv",
+        "plddt": args.sources / "Human_Avg_pLDDTs.csv",
+        "knots": args.sources / "AF4_knots.dat",
+        "proteome_fasta": args.sources / "UP000005640_9606.fasta",
+        "membrane_fasta": args.sources / "uniprotkb_human_keywords_membrane_2025_03_19.fasta",
+    }
+    missing = [str(p) for p in sources.values() if not p.is_file()]
+    if missing:
+        raise FileNotFoundError("Missing raw source files: " + ", ".join(missing))
+    for key in ["proteome_fasta", "membrane_fasta"]:
+        ids = []
+        with sources[key].open() as handle:
+            for line in handle:
+                if line.startswith(">"):
+                    pieces = line[1:].strip().split("|")
+                    ids.append(pieces[1] if len(pieces) >= 3 else pieces[0].split()[0])
+        if len(ids) != len(set(ids)):
+            raise ValueError(f"Duplicate accessions in {key}; do not concatenate sequences")
+    full = pd.read_excel(sources["mcshane"], sheet_name="FinalTable_RPE_")
+    if full["Protein IDs (Uniprot)"].isna().any() or full["Protein IDs (Uniprot)"].duplicated().any():
+        raise ValueError("McShane identifiers are missing or duplicated")
+    ent = pd.read_csv(sources["entanglement"], sep="|", usecols=["gene", "CCBond"])
+    tokens = set(ent["CCBond"].dropna().astype(str).str.strip())
+    if tokens - {"True", "False", "1", "0", "1.0", "0.0"}:
+        raise ValueError(f"Unknown CCBond tokens: {tokens}")
+    with tempfile.TemporaryDirectory() as tmp:
+        empty = Path(tmp) / "empty_for_presecreted_validation.json"
+        empty.write_text("[]")
+        ns = SimpleNamespace(**sources, secreted_source=args.secreted_source or empty,
+                             monomer_fasta=[])
+        master, sets, lengths = load_sources(ns)
+    layout = pd.read_excel(args.reference, sheet_name="Cohort Flow", header=None)
+    comparisons, membership = [], []
+    for name, profiles in [("Primary", ["ED", "NED"]),
+                           ("Sensitivity", ["ED", "NED", "UN"])]:
+        label = "Primary: NED vs ED" if name == "Primary" else "Sensitivity: NED vs ED + UN"
+        data, flow = build_cohort(master, profiles, label)
+        if args.secreted_source is None:
+            flow = flow[:-1]
+            data["Secreted"] = np.nan
+        for entry in flow:
+            ref = layout.loc[layout[0].eq(label) & layout[1].eq(entry["Step"])]
+            if len(ref) != 1:
+                raise ValueError("Reference flow step is missing or repeated")
+            for i, metric in enumerate(["Total", "ED", "NED", "UN"], 2):
+                expected = int(ref.iloc[0, i])
+                comparisons.append(dict(Analysis=label, Step=entry["Step"], Metric=metric,
+                                        Actual=entry[metric], Reference=expected,
+                                        Pass=entry[metric] == expected))
+        prefix = "rebuilt" if args.secreted_source else "pre_secreted"
+        data.to_csv(args.out / f"{prefix}_{name.lower()}_cohort.csv", index=False)
+        if args.secreted_source:
+            ref = pd.read_excel(args.reference, sheet_name=f"{name} Cohort")
+            joined = data.merge(ref, on="UniProt_ID", how="outer", indicator=True,
+                                suffixes=("_rebuilt", "_reference"), validate="one_to_one")
+            for _, row in joined.iterrows():
+                same = row["_merge"] == "both"
+                for field in ["NCLE", "NED_binary", "Protein_length", "Average_pLDDT"]:
+                    same = same and np.isclose(row[field + "_rebuilt"], row[field + "_reference"],
+                                               atol=1e-10, rtol=1e-10)
+                membership.append(dict(Analysis=label, UniProt_ID=row["UniProt_ID"],
+                                       Membership=row["_merge"], Pass=bool(same)))
+    result = pd.DataFrame(comparisons)
+    result.to_csv(args.out / "cohort_flow_comparison.csv", index=False)
+    if membership:
+        pd.DataFrame(membership).to_csv(args.out / "final_membership_comparison.csv", index=False)
+    # Preserve the historical normalization, and expose its broader scope.
+    knot = pd.read_table(sources["knots"])
+    human = knot.loc[knot["Organism"].eq("Human"), "Uniprot"].astype(str).str.strip()
+    broad = set(human.str.split("-").str[0])
+    strict = {re.sub(r"-F\d+$", "", x) for x in human}
+    qc_ids = set(pd.read_csv(sources["plddt"]).query("`<pLDDT>` >= 70")["gene"])
+    meta = dict(mcshane_rows=len(full), degradation_counts=full["Degradation profile"].value_counts().to_dict(),
+                entanglement_rows=len(ent), entanglement_proteins=ent["gene"].nunique(),
+                historical_knotted_in_plddt_master=len(qc_ids & broad),
+                strict_fragment_knotted_in_plddt_master=len(qc_ids & strict),
+                broader_knot_normalization_extra_ids=sorted((qc_ids & broad) - strict),
+                secreted_source_supplied=args.secreted_source is not None,
+                final_cohort_source_validation="RUN" if args.secreted_source else "NOT RUN",
+                source_sha256={k: hashlib.sha256(p.read_bytes()).hexdigest() for k, p in sources.items()})
+    (args.out / "raw_source_manifest.json").write_text(json.dumps(meta, indent=2))
+    print(result.to_string(index=False))
+    print("Final secreted exclusion: " + ("checked" if args.secreted_source else
+          "NOT independently replayed; supply the approved historical keyword export"))
+    if not result["Pass"].all() or (membership and not all(x["Pass"] for x in membership)):
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()
+
+END FILE: scripts/audit_raw_sources.py
+
+===== FILE: scripts/audit_disorder.py =====
+PROVENANCE: New, validated processed-data audit
+BEGIN FILE
+#!/usr/bin/env python3
+"""Audit the frozen processed MobiDB export and its statistical-cohort coverage.
+
+The export is processed output, not raw API JSON. Coordinate clipping is
+reported explicitly; it does not establish sequence-version compatibility.
+"""
+import argparse
+import json
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def intervals(value):
+    if pd.isna(value) or str(value).strip() in {"", "-"}:
+        return []
+    parsed = []
+    for token in str(value).split(";"):
+        start, end = map(int, token.strip().split("-"))
+        if start > end:
+            raise ValueError(f"Reversed interval: {token}")
+        parsed.append((start, end))
+    parsed.sort()
+    merged = []
+    for start, end in parsed:
+        if merged and start <= merged[-1][1] + 1:
+            merged[-1][1] = max(merged[-1][1], end)
+        else:
+            merged.append([start, end])
+    return merged
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--master", type=Path, default=ROOT / "data/processed_MobiDB_master.csv")
+    parser.add_argument("--reference", type=Path, default=ROOT / "data/reference_human_analysis.xlsx")
+    parser.add_argument("--out", type=Path, default=ROOT / "results/disorder_audit")
+    args = parser.parse_args()
+    args.out.mkdir(parents=True, exist_ok=True)
+    d = pd.read_csv(args.master)
+    if d["UniProt_ID"].isna().any() or d["UniProt_ID"].duplicated().any():
+        raise ValueError("Master identifiers must be present and unique")
+    fraction = pd.to_numeric(d["Fraction_IDP_IDR"], errors="raise")
+    length = pd.to_numeric(d["MobiDB_length"], errors="raise")
+    count = pd.to_numeric(d["Disorder_residues"], errors="raise")
+    available = fraction.notna()
+    if not fraction.loc[available].between(0, 1).all():
+        raise ValueError("Out-of-range fraction")
+    if not length.loc[available].gt(0).all() or not count.loc[available].ge(0).all():
+        raise ValueError("Invalid denominator or disorder count")
+    if not np.allclose(fraction.loc[available], (count / length).loc[available], atol=1e-8, rtol=0):
+        raise ValueError("Fraction disagrees with count divided by length")
+    ok = d["Disorder_query_status"].eq("ok")
+    if not ok.eq(available).all():
+        raise ValueError("Status and fraction availability disagree")
+    issues = []
+    for _, row in d.loc[available].iterrows():
+        regions = intervals(row["Disorder_regions"])
+        full = sum(end - start + 1 for start, end in regions)
+        size = int(row["MobiDB_length"])
+        clipped = sum(max(0, min(size, end) - max(1, start) + 1) for start, end in regions)
+        if clipped != int(row["Disorder_residues"]):
+            raise ValueError(f"Clipped count does not reproduce stored count: {row['UniProt_ID']}")
+        if full != clipped:
+            issues.append(dict(UniProt_ID=row["UniProt_ID"], Full_interval_count=full,
+                               Clipped_count=clipped, MobiDB_length=size,
+                               Disorder_regions=row["Disorder_regions"]))
+    pd.DataFrame(issues).to_csv(args.out / "interval_coordinate_warnings.csv", index=False)
+    rows = []
+    for name in ["Primary", "Sensitivity"]:
+        cohort = pd.read_excel(args.reference, sheet_name=f"{name} Cohort")
+        merged = cohort.merge(d[["UniProt_ID", "Fraction_IDP_IDR"]],
+                              how="left", on="UniProt_ID", validate="one_to_one")
+        merged["Fraction_available"] = merged["Fraction_IDP_IDR"].notna()
+        for group, sub in merged.groupby("Analysis_group"):
+            n, found = len(sub), int(sub["Fraction_available"].sum())
+            rows.append(dict(Analysis=name, Group=group, Total=n, Fraction_available=found,
+                             Fraction_missing=n-found, Missing_percent=100*(n-found)/n))
+        # Coverage output has no disorder cutoff and is not the statistical sample.
+        merged.to_csv(args.out / f"{name.lower()}_cohort_with_disorder.csv", index=False)
+    pd.DataFrame(rows).to_csv(args.out / "disorder_coverage.csv", index=False)
+    summary = dict(master_n=len(d), status_counts=d["Disorder_query_status"].value_counts().to_dict(),
+                   fraction_available=int(available.sum()), interval_coordinate_warnings=len(issues),
+                   source_kind="Processed export; raw API responses are not included")
+    (args.out / "disorder_audit_summary.json").write_text(json.dumps(summary, indent=2))
+    print(json.dumps(summary, indent=2))
+    print(pd.DataFrame(rows).to_string(index=False))
+
+
+if __name__ == "__main__":
+    main()
+
+END FILE: scripts/audit_disorder.py
+
+===== FILE: scripts/prepare_mobidb_ids.py =====
+PROVENANCE: New, validated input utility
+BEGIN FILE
+#!/usr/bin/env python3
+"""Export query IDs using Jiang's historical average-pLDDT file.
+
+This reconstructed utility prepares inputs; it does not query MobiDB.
+The inclusive cutoff reproduces the 13,690-protein broad query list.
+"""
+import argparse
+from pathlib import Path
+
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--plddt", type=Path,
+                        default=ROOT / "raw_sources/Human_Avg_pLDDTs.csv")
+    parser.add_argument("--out", type=Path, default=ROOT / "results/query_inputs")
+    parser.add_argument("--cutoff", type=float, default=70)
+    args = parser.parse_args()
+    data = pd.read_csv(args.plddt)
+    if data["gene"].isna().any() or data["gene"].duplicated().any():
+        raise ValueError("Missing or repeated pLDDT accession")
+    scores = pd.to_numeric(data["<pLDDT>"], errors="raise")
+    selected = data.loc[scores.ge(args.cutoff)].copy()
+    ids = selected["gene"].astype(str).str.strip()
+    if ids.eq("").any() or ids.duplicated().any():
+        raise ValueError("Invalid normalized query ID")
+    args.out.mkdir(parents=True, exist_ok=True)
+    cutoff_tag = f"{args.cutoff:g}".replace(".", "p")
+    ids.to_csv(args.out / f"uniprots_plddt_ge{cutoff_tag}.txt", index=False, header=False)
+    ids.head(5).to_csv(args.out / "uniprots_test5.txt", index=False, header=False)
+    selected.to_csv(args.out / "selected_plddt_source.csv", index=False)
+    print(f"Average pLDDT >= {args.cutoff:g}: {len(ids):,} unique proteins")
+    print(f"Query inputs: {args.out.resolve()}")
+
+
+if __name__ == "__main__":
+    main()
+
+END FILE: scripts/prepare_mobidb_ids.py
+
+===== FILE: scripts/query_mobidb_disorder_production.py =====
+PROVENANCE: Recovered archived distributed script; unchanged
+BEGIN FILE
+#!/usr/bin/env python3
+"""Query MobiDB/UniProt and calculate the per-protein disorder fraction.
+
+This production version preserves the disorder-track union used in Quyen's
+sample script, while adding retries, explicit failure statuses, incremental
+output, and resume support. Failed requests remain missing rather than being
+misclassified as zero disorder.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import os
+import sys
+import time
+from collections import Counter, OrderedDict
+from pathlib import Path
+from typing import Iterable
+from urllib.parse import quote
+
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+
+DISORDER_KEYWORDS = [
+    "curated-disorder-priority",
+    "homology-disorder-priority",
+    "derived-missing_residues-priority",
+    "prediction-disorder-priority",
+    "derived-mobile-th_90",
+]
+
+FIELDNAMES = [
+    "uniprot",
+    "disorder_regions",
+    "num_disorder_residues",
+    "length",
+    "fraction_idp_idr",
+    "query_status",
+    "annotation_tracks",
+]
+
+
+def build_session() -> requests.Session:
+    retry = Retry(
+        total=5,
+        connect=5,
+        read=5,
+        status=5,
+        backoff_factor=1.0,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=frozenset({"GET"}),
+        respect_retry_after_header=True,
+        raise_on_status=False,
+    )
+    session = requests.Session()
+    session.headers.update(
+        {
+            "User-Agent": "protein-decay-disorder-table/1.0",
+            "Accept": "application/json",
+        }
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+
+def request_json(session: requests.Session, url: str, timeout: int = 45):
+    try:
+        response = session.get(url, timeout=timeout)
+    except requests.RequestException as exc:
+        return None, f"request_failed:{type(exc).__name__}"
+
+    if response.status_code == 404:
+        return None, "not_found"
+    if not response.ok:
+        return None, f"http_{response.status_code}"
+
+    try:
+        return response.json(), None
+    except (json.JSONDecodeError, ValueError):
+        return None, "invalid_json"
+
+
+def normalize_mobidb_payload(payload):
+    if isinstance(payload, dict):
+        return payload
+    if isinstance(payload, list) and len(payload) == 1 and isinstance(payload[0], dict):
+        return payload[0]
+    return None
+
+
+def get_mobidb_regions(session: requests.Session, uniprot: str):
+    url = f"https://mobidb.org/api/download?format=json&acc={quote(uniprot)}"
+    payload, error = request_json(session, url)
+    if error:
+        return None, [], f"mobidb_{error}"
+
+    result = normalize_mobidb_payload(payload)
+    if result is None:
+        return None, [], "mobidb_unexpected_payload"
+
+    data_sets = []
+    tracks = []
+    for key in DISORDER_KEYWORDS:
+        block = result.get(key)
+        if not isinstance(block, dict):
+            continue
+        regions = block.get("regions")
+        if not isinstance(regions, list):
+            continue
+        tracks.append(key)
+        data_sets.append(regions)
+
+    if not tracks:
+        return None, [], "mobidb_no_selected_annotation"
+
+    return data_sets, tracks, None
+
+
+def get_uniprot_length(session: requests.Session, uniprot: str):
+    url = f"https://rest.uniprot.org/uniprotkb/{quote(uniprot)}.json"
+    payload, error = request_json(session, url)
+    if error:
+        return None, f"uniprot_{error}"
+    try:
+        length = int(payload["sequence"]["length"])
+    except (KeyError, TypeError, ValueError):
+        return None, "uniprot_missing_length"
+    if length <= 0:
+        return None, "uniprot_invalid_length"
+    return length, None
+
+
+def merge_intervals(data_sets: Iterable[Iterable]) -> tuple[tuple[int, int], ...]:
+    intervals = []
+    for data_set in data_sets:
+        for region in data_set:
+            if not isinstance(region, (list, tuple)) or len(region) < 2:
+                continue
+            try:
+                start = int(region[0])
+                end = int(region[1])
+            except (TypeError, ValueError):
+                continue
+            if start > end:
+                start, end = end, start
+            intervals.append((start, end))
+
+    if not intervals:
+        return ()
+
+    intervals.sort(key=lambda item: (item[0], item[1]))
+    merged = [list(intervals[0])]
+    for start, end in intervals[1:]:
+        if start <= merged[-1][1] + 1:
+            merged[-1][1] = max(merged[-1][1], end)
+        else:
+            merged.append([start, end])
+    return tuple((start, end) for start, end in merged)
+
+
+def count_disordered_residues(regions, length: int) -> int:
+    total = 0
+    for start, end in regions:
+        clipped_start = max(1, start)
+        clipped_end = min(length, end)
+        if clipped_end >= clipped_start:
+            total += clipped_end - clipped_start + 1
+    return total
+
+
+def format_regions(regions) -> str:
+    return ";".join(f"{start}-{end}" for start, end in regions) if regions else "-"
+
+
+def query_one(session: requests.Session, uniprot: str) -> dict[str, str]:
+    data_sets, tracks, mobidb_error = get_mobidb_regions(session, uniprot)
+    length, length_error = get_uniprot_length(session, uniprot)
+
+    record = {field: "" for field in FIELDNAMES}
+    record["uniprot"] = uniprot
+    record["annotation_tracks"] = ";".join(tracks)
+
+    errors = [error for error in (mobidb_error, length_error) if error]
+    if errors:
+        if length is not None:
+            record["length"] = str(length)
+        record["query_status"] = "|".join(errors)
+        return record
+
+    regions = merge_intervals(data_sets)
+    disorder_residues = count_disordered_residues(regions, length)
+    fraction = disorder_residues / length
+    if not 0.0 <= fraction <= 1.0:
+        record["query_status"] = "invalid_fraction"
+        return record
+
+    record.update(
+        {
+            "disorder_regions": format_regions(regions),
+            "num_disorder_residues": str(disorder_residues),
+            "length": str(length),
+            "fraction_idp_idr": f"{fraction:.8f}",
+            "query_status": "ok",
+        }
+    )
+    return record
+
+
+def read_ids(path: Path) -> list[str]:
+    seen = set()
+    ids = []
+    with path.open() as handle:
+        for line in handle:
+            accession = line.strip()
+            if accession and accession not in seen:
+                seen.add(accession)
+                ids.append(accession)
+    return ids
+
+
+def read_existing(path: Path) -> OrderedDict[str, dict[str, str]]:
+    records = OrderedDict()
+    if not path.exists() or path.stat().st_size == 0:
+        return records
+    with path.open(newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        if reader.fieldnames != FIELDNAMES:
+            raise ValueError(
+                f"Existing output has unexpected columns: {reader.fieldnames}. "
+                "Use a new output filename."
+            )
+        for row in reader:
+            accession = row.get("uniprot", "").strip()
+            if accession:
+                records[accession] = row
+    return records
+
+
+def compact_existing(path: Path, records, input_ids: list[str]) -> None:
+    if not records:
+        return
+    tmp_path = path.with_suffix(path.suffix + ".tmp")
+    with tmp_path.open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=FIELDNAMES, delimiter="\t")
+        writer.writeheader()
+        written = set()
+        for accession in input_ids:
+            if accession in records:
+                writer.writerow(records[accession])
+                written.add(accession)
+        for accession, record in records.items():
+            if accession not in written:
+                writer.writerow(record)
+    os.replace(tmp_path, path)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Query disorder annotations and calculate fraction_IDP_IDR."
+    )
+    parser.add_argument("-f", "--file", required=True, help="One UniProt ID per line.")
+    parser.add_argument("-o", "--output", required=True, help="Output TSV path.")
+    parser.add_argument(
+        "--rate-limit",
+        type=float,
+        default=0.5,
+        help="Seconds to pause after each protein (default: 0.5).",
+    )
+    parser.add_argument(
+        "--progress-every",
+        type=int,
+        default=100,
+        help="Print progress every N processed proteins (default: 100).",
+    )
+    args = parser.parse_args()
+
+    input_path = Path(args.file)
+    output_path = Path(args.output)
+    uniprots = read_ids(input_path)
+    if not uniprots:
+        parser.error("No UniProt IDs found in the input file.")
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    existing = read_existing(output_path)
+    compact_existing(output_path, existing, uniprots)
+    completed = {
+        accession
+        for accession, record in existing.items()
+        if record.get("query_status") == "ok"
+    }
+    pending = [accession for accession in uniprots if accession not in completed]
+
+    output_exists = output_path.exists() and output_path.stat().st_size > 0
+    session = build_session()
+    processed = 0
+    print(
+        f"Input IDs: {len(uniprots):,}; already successful: {len(completed):,}; "
+        f"to query: {len(pending):,}",
+        flush=True,
+    )
+
+    with output_path.open("a", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=FIELDNAMES, delimiter="\t")
+        if not output_exists:
+            writer.writeheader()
+            handle.flush()
+
+        try:
+            for accession in pending:
+                record = query_one(session, accession)
+                writer.writerow(record)
+                handle.flush()
+                processed += 1
+
+                if record["query_status"] != "ok":
+                    print(
+                        f"[WARNING] {accession}: {record['query_status']}",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                if args.progress_every > 0 and processed % args.progress_every == 0:
+                    print(
+                        f"Processed this run: {processed:,}/{len(pending):,}",
+                        flush=True,
+                    )
+                if args.rate_limit > 0:
+                    time.sleep(args.rate_limit)
+        except KeyboardInterrupt:
+            print("\nStopped safely. Rerun the same command to resume.", file=sys.stderr)
+            return 130
+
+    final_records = read_existing(output_path)
+    compact_existing(output_path, final_records, uniprots)
+    final_records = read_existing(output_path)
+    counts = Counter(record.get("query_status", "") for record in final_records.values())
+    print(f"Rows in output: {len(final_records):,}")
+    print("Status counts:")
+    for status, count in sorted(counts.items()):
+        print(f"  {status or '<blank>'}: {count:,}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+END FILE: scripts/query_mobidb_disorder_production.py
+
+===== FILE: historical_audits/get_disorder_mobidb_query.py =====
+PROVENANCE: Quyen’s recovered sample; unchanged
+BEGIN FILE
+import time
+import json
+import argparse
+
+import requests
+from bioservices import UniProt
+
+
+# MobiDB keywords in priority order
+DISORDER_KEYWORDS = [
+    'curated-disorder-priority',
+    'homology-disorder-priority',
+    'derived-missing_residues-priority',
+    'prediction-disorder-priority',
+    'derived-mobile-th_90',
+]
+
+MOBIDB_API_RATE_LIMIT_SEC = 0.5  # seconds between API calls
+
+
+def get_mobidb_disordered_data(uniprot: str) -> list:
+    """
+    Retrieve disordered regions for a protein from MobiDB.
+
+    Queries the MobiDB API for disorder annotations and returns a list of
+    interval tuples ordered by the priority defined in DISORDER_KEYWORDS.
+
+    Args:
+        uniprot: UniProt accession ID.
+
+    Returns:
+        List of interval tuples, e.g. [([1, 56],), ([57, 68],)].
+        Returns an empty list if the ID is not found or has no disorder data.
+    """
+    url = f'https://mobidb.org/api/download?format=json&acc={uniprot}'
+
+    try:
+        res = requests.get(url, timeout=30)
+        res.raise_for_status()
+    except requests.RequestException as e:
+        print(f"[WARNING] MobiDB request failed for {uniprot}: {e}")
+        return []
+
+    try:
+        result = res.json()
+    except json.JSONDecodeError:
+        print(f"[WARNING] Could not parse MobiDB JSON response for {uniprot}")
+        return []
+
+    disordered_regions = []
+    for key in DISORDER_KEYWORDS:
+        if key in result:
+            regions = result[key]['regions']
+            disordered_regions.append(tuple(regions))
+
+    return disordered_regions
+
+
+def merge_data(data_sets: list) -> tuple:
+    """
+    Merge and compact intervals from multiple disorder data sets.
+
+    Combines all intervals, sorts by start position, merges overlapping
+    intervals, and coalesces adjacent intervals.
+
+    Args:
+        data_sets: List of interval tuples as returned by get_mobidb_disordered_data.
+
+    Returns:
+        Tuple of merged [start, end] intervals, or an empty tuple if no
+        valid intervals are present.
+    """
+    if not data_sets or isinstance(data_sets, str):
+        return ()
+
+    all_intervals = []
+    for intervals in data_sets:
+        all_intervals.extend(intervals)
+
+    if not all_intervals:
+        return ()
+
+    # Sort by start position
+    all_intervals.sort(key=lambda x: x[0])
+
+    # Merge overlapping intervals
+    merged = [list(all_intervals[0])]
+    for interval in all_intervals[1:]:
+        if interval[0] <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], interval[1])
+        else:
+            merged.append(list(interval))
+
+    # Coalesce adjacent intervals (end + 1 == next start)
+    final = [merged[0]]
+    for interval in merged[1:]:
+        if final[-1][1] + 1 == interval[0]:
+            final[-1][1] = interval[1]
+        else:
+            final.append(interval)
+
+    return tuple(final)
+
+
+def count_overlap(first_range: tuple, second_ranges: tuple) -> list:
+    """
+    Count overlapping residues between a query range and a set of disorder regions.
+
+    Args:
+        first_range: (start, end) tuple for the query range (e.g. full protein length).
+        second_ranges: Tuple of [start, end] lists representing disorder regions.
+
+    Returns:
+        List of overlap counts per region. Returns an empty list if second_ranges is empty.
+    """
+    if not second_ranges:
+        return []
+
+    overlaps = []
+    for region in second_ranges:
+        start = max(first_range[0], region[0])
+        end = min(first_range[1], region[1])
+        overlaps.append(max(0, end - start + 1))
+
+    return overlaps
+
+
+def get_uniprot_length(uniprot: str, u: UniProt) -> int | None:
+    """
+    Retrieve the sequence length of a protein from UniProt.
+
+    Args:
+        uniprot: UniProt accession ID.
+        u: Initialised bioservices UniProt instance.
+
+    Returns:
+        Sequence length as an integer, or None if the lookup fails.
+    """
+    res = u.search(uniprot, frmt="tsv", columns="length", limit=1, database='uniprotkb')
+    lines = res.strip().split('\n') if res else []
+
+    if len(lines) < 2:
+        print(f"[WARNING] Could not find length for {uniprot} in UniProt")
+        return None
+
+    try:
+        return int(lines[1])
+    except ValueError:
+        print(f"[WARNING] Unexpected length value for {uniprot}: {lines[1]!r}")
+        return None
+
+
+def get_disorder_summary(uniprot: str, u: UniProt) -> dict:
+    """
+    Compute the disorder summary for a single protein.
+
+    Args:
+        uniprot: UniProt accession ID.
+        u: Initialised bioservices UniProt instance.
+
+    Returns:
+        Dict with keys:
+            'uniprot'                : accession ID
+            'length'                 : protein length (int) or None on failure
+            'disorder_regions'       : tuple of merged [start, end] disorder intervals
+            'num_disorder_residues'  : total number of disordered residues (int) or None
+    """
+    length = get_uniprot_length(uniprot, u)
+    if length is None:
+        return {
+            'uniprot': uniprot,
+            'length': None,
+            'disorder_regions': (),
+            'num_disorder_residues': None,
+        }
+
+    disorder_regions = merge_data(get_mobidb_disordered_data(uniprot))
+    overlap_counts = count_overlap((1, length), disorder_regions)
+    num_disorder_residues = sum(overlap_counts)
+
+    return {
+        'uniprot': uniprot,
+        'length': length,
+        'disorder_regions': disorder_regions,
+        'num_disorder_residues': num_disorder_residues,
+    }
+
+
+def format_regions(disorder_regions: tuple) -> str:
+    """Render merged disorder intervals as a compact string, e.g. '1-56;70-88'."""
+    if not disorder_regions:
+        return '-'
+    return ';'.join(f"{start}-{end}" for start, end in disorder_regions)
+
+
+def read_uniprot_list(path: str) -> list:
+    """Read UniProt accessions from a file, one per line, skipping blank lines."""
+    with open(path) as f:
+        return [line.strip() for line in f if line.strip()]
+
+
+def process_uniprots(uniprots: list, u: UniProt, output_file: str | None = None) -> None:
+    """
+    Fetch and report the disorder summary for each UniProt accession.
+
+    Writes a tab-separated table (header + one row per accession) to stdout,
+    and to output_file as well when provided. Columns:
+        uniprot  disorder_regions  num_disorder_residues  length
+
+    Args:
+        uniprots: List of UniProt accession IDs.
+        u: Initialised bioservices UniProt instance.
+        output_file: Optional path to also write the table to.
+    """
+    header = "uniprot\tdisorder_regions\tnum_disorder_residues\tlength"
+
+    out = open(output_file, 'w') if output_file else None
+    try:
+        print(header)
+        if out:
+            out.write(header + '\n')
+            out.flush()
+
+        for i, uniprot in enumerate(uniprots):
+            summary = get_disorder_summary(uniprot, u)
+            line = (
+                f"{summary['uniprot']}\t"
+                f"{format_regions(summary['disorder_regions'])}\t"
+                f"{summary['num_disorder_residues']}\t"
+                f"{summary['length']}"
+            )
+            print(line)
+            if out:
+                out.write(line + '\n')
+                out.flush()
+
+            # Rate-limit only between MobiDB API calls, not after the last one.
+            if i < len(uniprots) - 1:
+                time.sleep(MOBIDB_API_RATE_LIMIT_SEC)
+    finally:
+        if out:
+            out.close()
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Fetch disorder statistics (merged disorder range, number of "
+                    "disordered residues, protein length) from MobiDB/UniProt for "
+                    "one or more UniProt accessions."
+    )
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("-u", "--uniprot",
+                        help="A single UniProt accession ID.")
+    source.add_argument("-f", "--file",
+                        help="Path to a file listing UniProt accession IDs, one per line.")
+    parser.add_argument("-o", "--output", default=None,
+                        help="Optional output file path (tab-separated). "
+                             "Results are always printed to stdout.")
+    args = parser.parse_args()
+
+    if args.uniprot:
+        uniprots = [args.uniprot.strip()]
+    else:
+        uniprots = read_uniprot_list(args.file)
+
+    if not uniprots:
+        parser.error("No UniProt accessions found in the provided input.")
+
+    u = UniProt()
+    process_uniprots(uniprots, u, output_file=args.output)
+
+END FILE: historical_audits/get_disorder_mobidb_query.py
+
+===== FILE: historical_audits/audit_decay_inputs.py =====
+PROVENANCE: Recovered historical audit; not a current statistical pipeline step
+BEGIN FILE
+#!/usr/bin/env python3
+"""Read-only audit of the supplied protein-decay workbook and repository snapshot.
+
+Requires pandas and openpyxl. Does not run notebooks, simulations, or remote jobs.
+Exact leading-accession joins only; header-derived alternatives are review flags.
+The illustrative pLDDT/length/shape cutoffs reproduce the OLD repository workflow,
+not an agreed eligibility protocol for the proposed decay study.
+"""
+import argparse
+import hashlib
+import json
+import re
+from pathlib import Path
+
+import pandas as pd
+
+
+def fasta_records(path):
+    records = {}
+    uid = None
+    with path.open() as handle:
+        for line in handle:
+            line = line.strip()
+            if line.startswith('>'):
+                uid = line.split('|')[1]
+                if uid in records:
+                    raise ValueError(f'Duplicate FASTA accession: {uid}')
+                records[uid] = {'sequence': '', 'header': line}
+            elif uid is not None:
+                records[uid]['sequence'] += line
+    return records
+
+
+def sha256(path):
+    h = hashlib.sha256()
+    with path.open('rb') as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--repo', type=Path, required=True)
+    parser.add_argument('--workbook', type=Path, required=True)
+    parser.add_argument('--out', type=Path, required=True)
+    args = parser.parse_args()
+    args.out.mkdir(parents=True, exist_ok=True)
+    d = args.repo / '0_Dataset_curation_and_logistic_regression'
+    ent = pd.read_csv(d / 'Human_AF_combined_20250614.csv', sep='|', dtype={'gene': str, 'CCBond': str})
+    conf = pd.read_csv(d / 'Human_Avg_pLDDTs.csv').rename(columns={'gene': 'accession', '<pLDDT>': 'mean_plddt', 'std': 'plddt_sd'})
+    exp = pd.read_excel(args.workbook, sheet_name='FinalTable_RPE_')
+    assert exp['Protein IDs (Uniprot)'].is_unique
+    assert conf['accession'].is_unique
+    assert set(exp['Degradation profile']) <= {'ED', 'NED', 'UN'}
+    bool_map = {'True': True, 'False': False, '1.0': True, '0.0': False}
+    unknown = set(ent['CCBond'].dropna().unique()) - set(bool_map)
+    if unknown:
+        raise ValueError(f'Unexpected CCBond codes: {unknown}')
+    ent['covalent'] = ent['CCBond'].map(bool_map)
+    assert (ent['ENT-ID'].isna() == ent['CCBond'].isna()).all()
+    proteins = []
+    for uid, rows in ent.groupby('gene', sort=True):
+        calls = rows.loc[rows['ENT-ID'].notna()]
+        n_cov = int(calls['covalent'].eq(True).sum())
+        n_non = int(calls['covalent'].eq(False).sum())
+        status = 'exclude_covalent_lasso' if n_cov else ('NCLE' if n_non else 'no_detected_entanglement')
+        sizes = calls['prot_size'].dropna().unique()
+        if len(sizes) > 1:
+            raise ValueError(f'Conflicting structural lengths: {uid}')
+        proteins.append({'accession': uid, 'entanglement_status': status,
+                         'n_entanglement_rows': len(calls), 'n_noncovalent_rows': n_non,
+                         'n_covalent_rows': n_cov,
+                         'structure_length_in_ent_file': sizes[0] if len(sizes) else None,
+                         'distinct_ACO_values': int(calls['ACO'].nunique())})
+    prot = pd.DataFrame(proteins)
+    knots = pd.read_csv(d / 'AF4_knots.dat', sep='\t', dtype=str)
+    human_knots = knots.loc[knots['Organism'].eq('Human')].copy()
+    human_knots['accession'] = human_knots['Uniprot'].str.split('-').str[0]
+    knot_ids = set(human_knots['accession'])
+    prot['listed_in_human_knot_file'] = prot['accession'].isin(knot_ids)
+    seqs = fasta_records(d / 'UP000005640_9606.fasta')
+    membranes = fasta_records(d / 'uniprotkb_human_keywords_membrane_2025_03_19.fasta')
+    prot['sequence_length'] = prot['accession'].map({k: len(v['sequence']) for k, v in seqs.items()})
+    prot['sequence_length_matches_ent_file'] = pd.Series(pd.NA, index=prot.index, dtype='boolean')
+    has_both_lengths = prot['sequence_length'].notna() & prot['structure_length_in_ent_file'].notna()
+    prot.loc[has_both_lengths, 'sequence_length_matches_ent_file'] = prot.loc[has_both_lengths, 'sequence_length'].eq(prot.loc[has_both_lengths, 'structure_length_in_ent_file'])
+    prot['listed_membrane_keyword_20250319'] = prot['accession'].isin(membranes)
+    prot = prot.merge(conf[['accession', 'mean_plddt', 'plddt_sd']], on='accession', how='left', validate='one_to_one')
+    shape = pd.read_excel(d / 'AF_Human_shape.xlsx').rename(columns={'Uniprot': 'accession', 'Rg (A)': 'Rg_angstrom', 'Asphericity': 'asphericity'})
+    prot = prot.merge(shape, on='accession', how='left', validate='one_to_one')
+    exp.insert(0, 'source_excel_row', range(2, len(exp) + 2))
+    exp = exp.rename(columns={'Protein IDs (Uniprot)': 'accession'})
+    audit = exp.merge(prot, on='accession', how='left', validate='one_to_one', indicator=True)
+    audit['exact_leading_accession_match'] = audit.pop('_merge').eq('both')
+    audit['header_length'] = audit['Fasta header'].fillna('').str.len()
+    audit['header_at_256_character_limit'] = audit['header_length'].eq(256)
+    audit['multiple_gene_names'] = audit['Gene names'].fillna('').str.contains(';', regex=False)
+    known_ids = set(prot['accession'])
+    def candidates(header):
+        raw = sorted(set(re.findall(r'(?:sp|tr)\|([^|;\s]+)\|', str(header))))
+        bases = sorted({s.split('-')[0] for s in raw} & known_ids)
+        return ';'.join(raw), ';'.join(bases), len(bases)
+    candidate_data = audit['Fasta header'].map(candidates).tolist()
+    for n, name in enumerate(['accessions_in_supplied_header', 'header_base_candidates_for_review', 'n_header_base_candidates']):
+        audit[name] = [v[n] for v in candidate_data]
+    audit['binary_decay_for_review'] = audit['Degradation profile'].map({'ED': 0, 'NED': 1}).astype('Int64')
+    audit['native_entangled_for_review'] = audit['entanglement_status'].map({'NCLE': 1, 'no_detected_entanglement': 0}).astype('Int64')
+    flags = []
+    for _, row in audit.iterrows():
+        reasons = []
+        if row['Degradation profile'] == 'UN': reasons.append('undefined_decay')
+        if not row['exact_leading_accession_match']:
+            reasons.append('no_exact_leading_accession_match')
+        else:
+            if row['entanglement_status'] == 'exclude_covalent_lasso': reasons.append('covalent_lasso_old_exclusion')
+            if row['listed_in_human_knot_file']: reasons.append('knot_list_old_exclusion')
+            if row['mean_plddt'] < 85: reasons.append('mean_plddt_below_85_old_cutoff')
+            if pd.isna(row['sequence_length']): reasons.append('sequence_missing')
+            if row['listed_membrane_keyword_20250319']: reasons.append('membrane_keyword_old_exclusion')
+        flags.append(';'.join(reasons))
+    audit['illustrative_basic_filter_flags'] = flags
+    audit['passes_illustrative_basic_filters'] = audit['illustrative_basic_filter_flags'].eq('')
+    audit['additional_review_required'] = 'sequence_and_isoform;per_residue_confidence;disorder;secretory_annotation;global_contact_order;writhe;visual_structure_QC'
+
+    stages = []
+    keep = pd.Series(True, index=audit.index)
+    filters = [
+        ('All experimental entries', keep.copy()),
+        ('ED or NED label', audit['Degradation profile'].isin(['ED', 'NED'])),
+        ('Exact leading accession in entanglement dataset', audit['exact_leading_accession_match']),
+        ('Exclude proteins with any covalent-lasso row', audit['entanglement_status'].isin(['NCLE', 'no_detected_entanglement'])),
+        ('Exclude human knot-list entries', ~audit['listed_in_human_knot_file'].eq(True)),
+        ('Mean pLDDT >= 85 (old repository cutoff)', audit['mean_plddt'].ge(85)),
+        ('Sequence length available', audit['sequence_length'].notna()),
+        ('Exclude membrane-keyword list entries', ~audit['listed_membrane_keyword_20250319'].eq(True)),
+        ('Length < 800 (old repository cutoff)', audit['sequence_length'].lt(800)),
+        ('Asphericity <= 0.1 (old repository cutoff)', audit['asphericity'].le(0.1)),
+    ]
+    for name, f in filters:
+        previous = int(keep.sum())
+        keep &= f
+        sub = audit.loc[keep]
+        counts = sub['Degradation profile'].value_counts().to_dict()
+        stages.append({'stage': name, 'n': len(sub), 'removed_this_stage': previous-len(sub),
+                       **{c: int(counts.get(c, 0)) for c in ['ED', 'NED', 'UN']},
+                       **{f'{e}_{c}': int((sub['entanglement_status'].eq(e) & sub['Degradation profile'].eq(c)).sum())
+                          for e in ['NCLE', 'no_detected_entanglement'] for c in ['NED', 'ED']}})
+    unmatched = audit.loc[~audit['exact_leading_accession_match']]
+    # Missing structures/metadata stay unavailable rather than being imputed as zero.
+    length_comparable = prot.dropna(subset=['structure_length_in_ent_file', 'sequence_length'])
+    stats = {
+        'experimental_shape': [len(exp), exp.shape[1]-1], 'original_experimental_columns': exp.shape[1]-1,
+        'profile_counts': exp['Degradation profile'].value_counts().to_dict(),
+        'entanglement_rows': len(ent), 'entanglement_unique_proteins': len(prot),
+        'protein_entanglement_status_counts': prot['entanglement_status'].value_counts().to_dict(),
+        'blank_entanglement_rows': int(ent['ENT-ID'].isna().sum()),
+        'confidence_rows': len(conf), 'human_knot_records': len(human_knots), 'human_knot_unique_accessions': len(knot_ids),
+        'exact_leading_matches_all_labels': int(audit['exact_leading_accession_match'].sum()),
+        'unmatched_leading_accessions': len(unmatched),
+        'unmatched_header_candidate_counts': unmatched['n_header_base_candidates'].value_counts().sort_index().to_dict(),
+        'headers_at_256_characters': int(audit['header_at_256_character_limit'].sum()),
+        'multiple_gene_name_rows': int(audit['multiple_gene_names'].sum()),
+        'proteins_with_multiple_ACO_values': int(prot['distinct_ACO_values'].gt(1).sum()),
+        'entanglement_vs_fasta_length_disagreements': int(length_comparable['structure_length_in_ent_file'].ne(length_comparable['sequence_length']).sum()),
+        'basic_filter_count_not_final_eligibility': int(audit['passes_illustrative_basic_filters'].sum()),
+        'audit_policy': 'Only exact leading accessions joined. UN is not a control. Header alternatives are not resolved. Filters are inherited examples, not approved criteria.',
+        'source_sha256': {p.name: sha256(p) for p in [args.workbook, d/'Human_AF_combined_20250614.csv', d/'Human_Avg_pLDDTs.csv', d/'AF4_knots.dat', d/'UP000005640_9606.fasta', d/'AF_Human_shape.xlsx', d/'uniprotkb_human_keywords_membrane_2025_03_19.fasta']},
+    }
+    prot.to_csv(args.out / 'protein_level_structure_metadata.csv', index=False)
+    audit.to_csv(args.out / 'human_decay_join_audit.csv', index=False)
+    pd.DataFrame(stages).to_csv(args.out / 'illustrative_filter_counts.csv', index=False)
+    (args.out / 'audit_summary.json').write_text(json.dumps(stats, indent=2) + '\n')
+    print(json.dumps(stats, indent=2))
+    print(pd.DataFrame(stages).to_string(index=False))
+
+
+if __name__ == '__main__':
+    main()
+
+END FILE: historical_audits/audit_decay_inputs.py
+
+===== FILE: historical_audits/check_simulation_setup.py =====
+PROVENANCE: Recovered historical audit; not a current statistical pipeline step
+BEGIN FILE
+#!/usr/bin/env python3
+"""Inspect one existing temperature-quench setup without submitting or running MD.
+
+Standard-library only. Run in the same environment intended for the pilot.
+This checks prerequisites; it cannot validate an MD protocol scientifically.
+"""
+import argparse
+import importlib
+import importlib.util
+import json
+import shutil
+import sys
+from pathlib import Path
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--repo', type=Path, required=True)
+    parser.add_argument('--group', choices=['YU_E', 'NU_E', 'NU_NE'], default='YU_E')
+    parser.add_argument('--protein', default='P16152')
+    args = parser.parse_args()
+    folder = args.repo / '1_Simulations_and_analyses' / '1_Temperature_quench' / args.group / args.protein
+    path = folder / 'Tq.cntrl'
+    config = {}
+    for raw in path.read_text().splitlines():
+        line = raw.split('#', 1)[0].strip()
+        if '=' in line:
+            key, value = line.split('=', 1)
+            config[key.strip()] = value.strip()
+    files = {}
+    for key in ['psf', 'top', 'param', 'starting_strucs', 'secondary_structure_def']:
+        value = config.get(key)
+        files[key] = {'configured_path': value, 'exists': bool(value) and (folder / value).is_file()}
+    dependencies = {}
+    for name in ['numpy', 'pandas', 'mdtraj', 'parmed', 'pyemma', 'openmm', 'simtk']:
+        dependencies[name] = importlib.util.find_spec(name) is not None
+    engines = []
+    engine_error = None
+    for name in ['openmm', 'simtk.openmm']:
+        try:
+            mod = importlib.import_module(name)
+            engines = [mod.Platform.getPlatform(i).getName() for i in range(mod.Platform.getNumPlatforms())]
+            break
+        except ImportError as error:
+            engine_error = str(error)
+        except Exception as error:
+            engine_error = f'{type(error).__name__}: {error}'
+    commands = {name: shutil.which(name) for name in [
+        'sbatch', 'opt_nscal.py', 'temperature_quenching.py',
+        'calc_native_contact_fraction.pl', 'calc_entanglement_number_v2.pl',
+        'calc_chirality_number.pl', 'stride']}
+    result = {'selected_protein': args.protein, 'original_group': args.group,
+              'python': sys.version.split()[0], 'platform': sys.platform,
+              'setup_files': files, 'configuration': config,
+              'python_packages_found': dependencies, 'executables': commands,
+              'openmm_platforms': engines, 'openmm_import_error': engine_error if not engines else None,
+              'raw_trajectory_files_in_selected_folder': len(list(folder.rglob('*.dcd'))),
+              'notes': [
+                  'No notebook, simulation, analysis wrapper, or SLURM submission was run.',
+                  'Existing labels concern ubiquitination; assign ED/NED separately for the new project.',
+                  'Supplied defaults are production-scale. A fresh pilot needs a copied directory and reviewed run length, trajectory count, restart behavior, and job resources.',
+                  'Analysis wrappers/parsers also hard-code trajectory counts. Update all relevant copies together.',
+                  'Finding files and executables does not establish force-field validity or successful MD integration.']}
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == '__main__':
+    main()
+
+END FILE: historical_audits/check_simulation_setup.py
+
+===== FILE: historical_audits/reproducibility_audit.py =====
+PROVENANCE: Recovered historical audit; not a current statistical pipeline step
+BEGIN FILE
+#!/usr/bin/env python3
+"""Independent, read-only audit of the human NCLE/decay curation pipeline.
+
+The script reconstructs the pLDDT >= 70 master and the ED/NED simulation
+cohorts from supplied source files.  It does not run association tests, perform
+matching, query external services, or overwrite any source/generated workbook.
+
+Example
+-------
+python audit/reproducibility_audit.py \
+  --workspace /workspace/scratch/21898fbd418f \
+  --output audit/results
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import re
+import zipfile
+from collections import Counter
+from pathlib import Path
+from typing import Iterable
+
+import numpy as np
+import pandas as pd
+
+
+TARGET_WORKBOOKS = {
+    "broad_master": "Human_master_pLDDT_ge70_with_MobiDB_and_membrane_QC.xlsx",
+    "nonmembrane_core": "Human_ED_NED_nonmembrane_core_pLDDT_ge70.xlsx",
+    "mobidb_complete": "Human_ED_NED_nonmembrane_MobiDB_complete.xlsx",
+}
+
+EXPECTED_BENCHMARKS = {
+    "McShane rows": 3133,
+    "McShane ED": 1474,
+    "McShane NED": 296,
+    "McShane UN": 1363,
+    "ED/NED rows": 1770,
+    "pLDDT source proteins": 20588,
+    "pLDDT >= 70 master": 13690,
+    "Native entangled in master": 8416,
+    "Not entangled in master": 4782,
+    "Covalent-lasso excluded in master": 492,
+    "ED/NED in master": 1043,
+    "Eligible entanglement among ED/NED": 1034,
+    "After knot exclusion": 1023,
+    "FASTA-complete pre-membrane cohort": 1022,
+    "Non-membrane core": 725,
+    "MobiDB-complete core": 606,
+    "MobiDB ok": 12609,
+    "MobiDB no selected annotation": 1042,
+    "MobiDB no selected annotation and missing length": 31,
+    "MobiDB missing length": 8,
+    # This is the number previously printed in the notebook transcript.
+    "Knotted proteins in master (reported)": 123,
+    "FASTA available in master": 13594,
+}
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--workspace",
+        type=Path,
+        default=Path(__file__).resolve().parents[1],
+        help="Workspace root containing downloads/, upload/, and work/.",
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("audit/results"),
+        help="Output directory; relative paths are resolved under --workspace.",
+    )
+    return parser.parse_args()
+
+
+def first_existing(candidates: Iterable[Path]) -> Path:
+    for path in candidates:
+        if path.exists():
+            return path
+    raise FileNotFoundError("None of the candidate paths exist:\n" + "\n".join(map(str, candidates)))
+
+
+def clean_id(series: pd.Series) -> pd.Series:
+    return series.astype("string").str.strip()
+
+
+def parse_boolish(value: object) -> bool | None:
+    if pd.isna(value):
+        return None
+    text = str(value).strip().lower()
+    if text in {"true", "1", "1.0"}:
+        return True
+    if text in {"false", "0", "0.0"}:
+        return False
+    raise ValueError(f"Unexpected CCBond value: {value!r}")
+
+
+def aggregate_entanglement(series: pd.Series) -> float:
+    """Repository rule: any covalent crossing excludes; otherwise NCLE if present."""
+    values = [parse_boolish(value) for value in series]
+    values = [value for value in values if value is not None]
+    if any(values):
+        return np.nan
+    if values:
+        return 1.0
+    return 0.0
+
+
+def read_fasta_ids(path: Path) -> tuple[list[str], set[str]]:
+    ids: list[str] = []
+    with path.open(errors="replace") as handle:
+        for line in handle:
+            if not line.startswith(">"):
+                continue
+            header = line[1:].strip()
+            parts = header.split("|")
+            accession = parts[1] if len(parts) >= 3 else header.split()[0]
+            ids.append(accession.strip())
+    return ids, set(ids)
+
+
+def parse_regions(value: object) -> list[tuple[int, int]]:
+    if pd.isna(value) or str(value).strip() in {"", "-"}:
+        return []
+    regions: list[tuple[int, int]] = []
+    for token in str(value).split(";"):
+        match = re.fullmatch(r"(\d+)-(\d+)", token.strip())
+        if not match:
+            raise ValueError(f"Unparseable disorder interval: {token!r}")
+        start, end = map(int, match.groups())
+        if start < 1 or end < start:
+            raise ValueError(f"Invalid disorder interval: {token!r}")
+        regions.append((start, end))
+    return regions
+
+
+def compare_series(left: pd.Series, right: pd.Series) -> pd.Series:
+    if pd.api.types.is_numeric_dtype(left) and pd.api.types.is_numeric_dtype(right):
+        return pd.Series(
+            ~np.isclose(left, right, equal_nan=True, atol=1e-12, rtol=1e-12),
+            index=left.index,
+        )
+    return left.fillna("<NA>").astype(str).ne(right.fillna("<NA>").astype(str))
+
+
+def find_any(workspace: Path, filename: str) -> list[Path]:
+    return sorted(path for path in workspace.rglob(filename) if "audit/results" not in str(path))
+
+
+def write_table(frame: pd.DataFrame, path: Path) -> None:
+    frame.to_csv(path, index=False)
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def main() -> None:
+    args = parse_args()
+    workspace = args.workspace.resolve()
+    output = args.output if args.output.is_absolute() else workspace / args.output
+    output.mkdir(parents=True, exist_ok=True)
+
+    repo_dir = first_existing(
+        [
+            workspace
+            / "work/repo_recovered/Protein-entanglement-misfolding-determines-divergent-fates-main/0_Dataset_curation_and_logistic_regression",
+            workspace
+            / "Protein-entanglement-misfolding-determines-divergent-fates-main/0_Dataset_curation_and_logistic_regression",
+        ]
+    )
+    mcshane_path = first_existing(
+        [
+            workspace / "downloads/1-s2.0-S009286741631248X-mmc4 (1).xlsx",
+            repo_dir / "Human_degradation_mmc4.xlsx",
+        ]
+    )
+    pasted_master_path = first_existing(
+        [
+            workspace / "upload/Pasted text(20260921-021255).txt",
+            workspace / "Pasted text(20260921-021255).txt",
+        ]
+    )
+    disorder_package = workspace / "work/disorder_query_original/disorder_query"
+
+    paths = {
+        "McShane workbook": mcshane_path,
+        "pLDDT source": repo_dir / "Human_Avg_pLDDTs.csv",
+        "entanglement source": repo_dir / "Human_AF_combined_20250614.csv",
+        "knot source": repo_dir / "AF4_knots.dat",
+        "human FASTA": repo_dir / "UP000005640_9606.fasta",
+        "membrane-keyword FASTA": repo_dir / "uniprotkb_human_keywords_membrane_2025_03_19.fasta",
+        "processed broad master export": pasted_master_path,
+        "Quyen README": disorder_package / "README.md",
+        "Quyen original query script": disorder_package / "get_disorder_mobidb_query.py",
+        "Quyen five-protein sample": disorder_package / "disorder.tsv",
+    }
+
+    zip_candidates = [
+        workspace / "downloads/Protein-entanglement-misfolding-determines-divergent-fates-main.zip",
+        workspace
+        / "downloads/Protein-entanglement-misfolding-determines-divergent-fates-main.zip.openai-download-d117007e73c347ee9d48076781654dfb",
+    ]
+
+    inventory_rows: list[dict[str, object]] = []
+    for label, path in paths.items():
+        inventory_rows.append(
+            {
+                "item": label,
+                "path": str(path),
+                "present": path.exists(),
+                "size_bytes": path.stat().st_size if path.exists() else np.nan,
+                "sha256": sha256_file(path) if path.exists() else "",
+                "container_valid": "not applicable",
+                "role": "source" if "processed" not in label else "processed output",
+            }
+        )
+    for index, path in enumerate(zip_candidates, start=1):
+        inventory_rows.append(
+            {
+                "item": f"repository ZIP copy {index}",
+                "path": str(path),
+                "present": path.exists(),
+                "size_bytes": path.stat().st_size if path.exists() else np.nan,
+                "sha256": sha256_file(path) if path.exists() else "",
+                "container_valid": zipfile.is_zipfile(path) if path.exists() else False,
+                "role": "supplied container; relevant payloads were recovered because central directory is absent",
+            }
+        )
+    for label, filename in TARGET_WORKBOOKS.items():
+        matches = find_any(workspace, filename)
+        inventory_rows.append(
+            {
+                "item": f"target workbook: {label}",
+                "path": "; ".join(map(str, matches)),
+                "present": bool(matches),
+                "size_bytes": matches[0].stat().st_size if matches else np.nan,
+                "sha256": sha256_file(matches[0]) if matches else "",
+                "container_valid": "not checked" if matches else "not available",
+                "role": "generated workbook requested for comparison",
+            }
+        )
+    inventory_rows.extend(
+        [
+            {
+                "item": "full production MobiDB TSV",
+                "path": "",
+                "present": False,
+                "size_bytes": np.nan,
+                "sha256": "",
+                "container_valid": "not available",
+                "role": "missing raw/processed query source (only embedded columns were supplied)",
+            },
+            {
+                "item": "production MobiDB query script",
+                "path": "",
+                "present": False,
+                "size_bytes": np.nan,
+                "sha256": "",
+                "container_valid": "not available",
+                "role": "missing generator for query_status and annotation_tracks columns",
+            },
+            {
+                "item": "raw MobiDB JSON responses",
+                "path": "",
+                "present": False,
+                "size_bytes": np.nan,
+                "sha256": "",
+                "container_valid": "not available",
+                "role": "missing API provenance snapshot",
+            },
+        ]
+    )
+    inventory = pd.DataFrame(inventory_rows)
+
+    # McShane degradation source.
+    mcshane = pd.read_excel(mcshane_path, sheet_name="FinalTable_RPE_")
+    mcshane = mcshane.copy()
+    mcshane["UniProt_ID"] = clean_id(mcshane["Protein IDs (Uniprot)"])
+    mcshane["Degradation_profile_raw"] = mcshane["Degradation profile"].astype("string").str.strip()
+    degradation = mcshane[["UniProt_ID", "Degradation_profile_raw"]].copy()
+
+    # pLDDT source and retained broad master backbone.
+    plddt = pd.read_csv(paths["pLDDT source"])
+    plddt["UniProt_ID"] = clean_id(plddt["gene"])
+    plddt = plddt.rename(columns={"<pLDDT>": "Average_pLDDT", "std": "pLDDT_SD"})
+    plddt_master = plddt.loc[
+        pd.to_numeric(plddt["Average_pLDDT"], errors="coerce").ge(70),
+        ["UniProt_ID", "Average_pLDDT", "pLDDT_SD"],
+    ].copy()
+
+    # Entanglement source. Preserve source diagnostics at protein level.
+    ent_raw = pd.read_csv(paths["entanglement source"], sep="|", low_memory=False)
+    ent_raw["UniProt_ID"] = clean_id(ent_raw["gene"])
+    ent_raw["CCBond_parsed"] = ent_raw["CCBond"].map(parse_boolish)
+    ent_diag = (
+        ent_raw.groupby("UniProt_ID", as_index=False)
+        .agg(
+            Entanglement_source_rows=("UniProt_ID", "size"),
+            ENT_ID_nonmissing=("ENT-ID", "count"),
+            CCBond_true=("CCBond_parsed", lambda s: sum(value is True for value in s)),
+            CCBond_false=("CCBond_parsed", lambda s: sum(value is False for value in s)),
+            CCBond_missing=("CCBond_parsed", lambda s: int(s.isna().sum())),
+            Entanglement=("CCBond", aggregate_entanglement),
+        )
+    )
+    ent_diag["Entanglement_status"] = np.select(
+        [ent_diag["Entanglement"].eq(1), ent_diag["Entanglement"].eq(0)],
+        ["Native_entangled", "Not_entangled"],
+        default="Excluded_covalent_lasso",
+    )
+
+    reconstructed = plddt_master.merge(
+        ent_diag[["UniProt_ID", "Entanglement", "Entanglement_status"]],
+        on="UniProt_ID",
+        how="left",
+        validate="one_to_one",
+    )
+    reconstructed = reconstructed.merge(
+        degradation,
+        on="UniProt_ID",
+        how="left",
+        validate="one_to_one",
+    )
+    reconstructed["Degradation_profile"] = reconstructed["Degradation_profile_raw"].where(
+        reconstructed["Degradation_profile_raw"].isin(["ED", "NED"])
+    )
+    reconstructed["Bi_exponential_decay"] = reconstructed["Degradation_profile"].map(
+        {"ED": 0.0, "NED": 1.0}
+    )
+
+    # Supplied processed export contains all 13,690 MobiDB results and the broad table.
+    provided = pd.read_csv(pasted_master_path)
+    provided["UniProt_ID"] = clean_id(provided["UniProt_ID"])
+    source_comparison = reconstructed.merge(
+        provided,
+        on="UniProt_ID",
+        how="outer",
+        suffixes=("_reconstructed", "_provided"),
+        indicator=True,
+    )
+    comparison_rows: list[dict[str, object]] = [
+        {
+            "comparison": "ID set",
+            "reconstructed_rows": len(reconstructed),
+            "provided_rows": len(provided),
+            "mismatches": int(source_comparison["_merge"].ne("both").sum()),
+        }
+    ]
+    for column in [
+        "Average_pLDDT",
+        "pLDDT_SD",
+        "Entanglement",
+        "Entanglement_status",
+        "Degradation_profile",
+        "Bi_exponential_decay",
+    ]:
+        mismatch = compare_series(
+            source_comparison[f"{column}_reconstructed"],
+            source_comparison[f"{column}_provided"],
+        )
+        comparison_rows.append(
+            {
+                "comparison": column,
+                "reconstructed_rows": len(reconstructed),
+                "provided_rows": len(provided),
+                "mismatches": int(mismatch.sum()),
+            }
+        )
+    source_field_comparison = pd.DataFrame(comparison_rows)
+
+    # Independent flags from attached source files.
+    fasta_list, fasta_ids = read_fasta_ids(paths["human FASTA"])
+    membrane_list, membrane_ids = read_fasta_ids(paths["membrane-keyword FASTA"])
+    knots = pd.read_csv(
+        paths["knot source"],
+        sep="\t",
+        comment="#",
+        header=None,
+        names=["Knot_type", "Category", "Uniprot", "Organism", "pLDDT_knotcore", "Protein_name"],
+        dtype=str,
+    )
+    knots["Uniprot"] = clean_id(knots["Uniprot"])
+    knots["Organism"] = clean_id(knots["Organism"])
+    human_knots = knots.loc[knots["Organism"].eq("Human")].copy()
+    human_knots["UniProt_ID"] = human_knots["Uniprot"].str.replace(r"-F\d+$", "", regex=True)
+    knot_ids = set(human_knots["UniProt_ID"].dropna())
+
+    master = provided.copy()
+    master["Knotted"] = master["UniProt_ID"].isin(knot_ids)
+    master["FASTA_available"] = master["UniProt_ID"].isin(fasta_ids)
+    master["Membrane"] = master["UniProt_ID"].isin(membrane_ids)
+
+    # Sequential cohort reconstruction. Secretory status is intentionally not used.
+    edned = master.loc[master["Degradation_profile"].isin(["ED", "NED"])].copy()
+    ent_eligible = edned.loc[edned["Entanglement"].notna()].copy()
+    knot_free = ent_eligible.loc[~ent_eligible["Knotted"]].copy()
+    fasta_complete = knot_free.loc[knot_free["FASTA_available"]].copy()
+    core = fasta_complete.loc[~fasta_complete["Membrane"]].copy()
+    core["Analysis_group"] = core["Degradation_profile"] + "_" + core["Entanglement"].map(
+        {1.0: "Entangled", 0.0: "NotEntangled"}
+    )
+    complete = core.loc[core["Fraction_IDP_IDR"].notna()].copy()
+
+    cohort_flow = pd.DataFrame(
+        [
+            ("pLDDT >= 70 broad master", len(master), 0),
+            ("retain ED/NED", len(edned), len(master) - len(edned)),
+            ("exclude covalent-lasso entanglements", len(ent_eligible), len(edned) - len(ent_eligible)),
+            ("exclude knotted proteins", len(knot_free), len(ent_eligible) - len(knot_free)),
+            ("require proteome FASTA accession", len(fasta_complete), len(knot_free) - len(fasta_complete)),
+            ("exclude UniProt membrane-keyword proteins", len(core), len(fasta_complete) - len(core)),
+            ("require nonmissing MobiDB disorder fraction", len(complete), len(core) - len(complete)),
+        ],
+        columns=["stage", "proteins_remaining", "removed_at_step"],
+    )
+
+    group_order = ["ED_Entangled", "ED_NotEntangled", "NED_Entangled", "NED_NotEntangled"]
+    group_counts = []
+    for group in group_order:
+        total = int(core["Analysis_group"].eq(group).sum())
+        available = int(complete["Analysis_group"].eq(group).sum())
+        group_counts.append(
+            {
+                "Analysis_group": group,
+                "nonmembrane_core": total,
+                "MobiDB_complete": available,
+                "MobiDB_missing": total - available,
+                "MobiDB_missing_percent": 100 * (total - available) / total,
+            }
+        )
+    group_counts = pd.DataFrame(group_counts)
+
+    # MobiDB arithmetic, coordinate, and status checks.
+    interval_rows: list[dict[str, object]] = []
+    for row in master.itertuples(index=False):
+        regions = parse_regions(row.Disorder_regions)
+        if not regions:
+            continue
+        displayed_count = sum(end - start + 1 for start, end in regions)
+        if pd.isna(row.MobiDB_length):
+            clipped_count = np.nan
+            out_of_range = np.nan
+        else:
+            length = int(row.MobiDB_length)
+            clipped_count = sum(
+                max(0, min(end, length) - max(start, 1) + 1) for start, end in regions
+            )
+            out_of_range = any(end > length or start < 1 for start, end in regions)
+        interval_rows.append(
+            {
+                "UniProt_ID": row.UniProt_ID,
+                "MobiDB_length": row.MobiDB_length,
+                "Disorder_regions": row.Disorder_regions,
+                "displayed_interval_residues": displayed_count,
+                "clipped_interval_residues": clipped_count,
+                "stored_Disorder_residues": row.Disorder_residues,
+                "displayed_minus_stored": displayed_count - row.Disorder_residues,
+                "clipped_matches_stored": bool(
+                    np.isclose(clipped_count, row.Disorder_residues, equal_nan=True)
+                ),
+                "interval_extends_outside_length": out_of_range,
+                "in_nonmembrane_core": row.UniProt_ID in set(core["UniProt_ID"]),
+                "in_606_complete": row.UniProt_ID in set(complete["UniProt_ID"]),
+            }
+        )
+    interval_audit = pd.DataFrame(interval_rows)
+    interval_discrepancies = interval_audit.loc[
+        ~np.isclose(
+            interval_audit["displayed_interval_residues"],
+            interval_audit["stored_Disorder_residues"],
+            equal_nan=True,
+        )
+    ].copy()
+
+    formula = master["Disorder_residues"] / master["MobiDB_length"]
+    # Stored values have eight decimal places; allow half-unit rounding plus FP noise.
+    formula_mismatch = (
+        master["Fraction_IDP_IDR"].notna()
+        & (master["Fraction_IDP_IDR"] - formula).abs().gt(5.1e-9)
+    )
+
+    # Experimental protein-group headers that contain alternate accessions.
+    plddt_ids = set(plddt["UniProt_ID"])
+
+    def extract_header_accessions(value: object) -> list[str]:
+        return re.findall(r"(?:sp|tr)\|([A-Z0-9]+(?:-[0-9]+)?)\|", str(value))
+
+    experimental_edned = mcshane.loc[mcshane["Degradation_profile_raw"].isin(["ED", "NED"])].copy()
+    experimental_edned["Exact_Jiang_match"] = experimental_edned["UniProt_ID"].isin(plddt_ids)
+    experimental_edned["Header_Jiang_candidates"] = experimental_edned["Fasta header"].map(
+        lambda value: sorted(
+            set(accession for accession in extract_header_accessions(value) if accession in plddt_ids)
+        )
+    )
+    candidate_mappings = experimental_edned.loc[
+        ~experimental_edned["Exact_Jiang_match"]
+        & experimental_edned["Header_Jiang_candidates"].map(bool),
+        ["UniProt_ID", "Degradation_profile_raw", "Header_Jiang_candidates", "Fasta header"],
+    ].copy()
+    plddt_ge70_ids = set(plddt_master["UniProt_ID"])
+    candidate_mappings["Header_candidates_pLDDT_ge70"] = candidate_mappings[
+        "Header_Jiang_candidates"
+    ].map(lambda values: sorted(set(values).intersection(plddt_ge70_ids)))
+    candidate_mappings["n_candidates_all_pLDDT"] = candidate_mappings[
+        "Header_Jiang_candidates"
+    ].map(len)
+    candidate_mappings["n_candidates_pLDDT_ge70"] = candidate_mappings[
+        "Header_candidates_pLDDT_ge70"
+    ].map(len)
+    candidate_mappings["Header_Jiang_candidates"] = candidate_mappings[
+        "Header_Jiang_candidates"
+    ].map(";".join)
+    candidate_mappings["Header_candidates_pLDDT_ge70"] = candidate_mappings[
+        "Header_candidates_pLDDT_ge70"
+    ].map(";".join)
+
+    # Manual source-to-output traces: four final rows per quadrant plus exclusions.
+    traced_ids: list[str] = []
+    for group in group_order:
+        traced_ids.extend(
+            complete.loc[complete["Analysis_group"].eq(group), "UniProt_ID"].sort_values().head(4)
+        )
+
+    def first_id(frame: pd.DataFrame) -> str | None:
+        values = frame["UniProt_ID"].sort_values()
+        return values.iloc[0] if len(values) else None
+
+    extras = [
+        first_id(edned.loc[edned["Entanglement"].isna()]),
+        first_id(ent_eligible.loc[ent_eligible["Knotted"]]),
+        first_id(knot_free.loc[~knot_free["FASTA_available"]]),
+        first_id(fasta_complete.loc[fasta_complete["Membrane"]]),
+    ]
+    for group in group_order:
+        extras.append(
+            first_id(core.loc[core["Analysis_group"].eq(group) & core["Fraction_IDP_IDR"].isna()])
+        )
+    extras.append("Q8NI36" if "Q8NI36" in set(master["UniProt_ID"]) else None)
+    traced_ids.extend(value for value in extras if value is not None)
+    traced_ids = list(dict.fromkeys(traced_ids))
+
+    trace = master.loc[master["UniProt_ID"].isin(traced_ids)].copy()
+    trace = trace.merge(ent_diag, on="UniProt_ID", how="left", suffixes=("", "_source"))
+    trace["In_ED_NED"] = trace["Degradation_profile"].isin(["ED", "NED"])
+    trace["Entanglement_eligible"] = trace["Entanglement"].notna()
+    trace["Knot_free"] = ~trace["Knotted"]
+    trace["Non_membrane"] = ~trace["Membrane"]
+    trace["MobiDB_complete"] = trace["Fraction_IDP_IDR"].notna()
+    trace["Analysis_group"] = np.where(
+        trace["Degradation_profile"].isin(["ED", "NED"]) & trace["Entanglement"].notna(),
+        trace["Degradation_profile"]
+        + "_"
+        + trace["Entanglement"].map({1.0: "Entangled", 0.0: "NotEntangled"}),
+        pd.NA,
+    )
+
+    def exclusion_reason(row: pd.Series) -> str:
+        if not row["In_ED_NED"]:
+            return "not ED/NED"
+        if not row["Entanglement_eligible"]:
+            return "covalent-lasso entanglement"
+        if not row["Knot_free"]:
+            return "knotted"
+        if not row["FASTA_available"]:
+            return "FASTA accession unavailable"
+        if not row["Non_membrane"]:
+            return "membrane keyword"
+        if not row["MobiDB_complete"]:
+            return "missing MobiDB fraction"
+        return "included in 606"
+
+    trace["Final_result"] = trace.apply(exclusion_reason, axis=1)
+    trace["Trace_order"] = trace["UniProt_ID"].map({value: i + 1 for i, value in enumerate(traced_ids)})
+    trace = trace.sort_values("Trace_order")
+    trace_columns = [
+        "Trace_order",
+        "UniProt_ID",
+        "Average_pLDDT",
+        "pLDDT_SD",
+        "Degradation_profile",
+        "Bi_exponential_decay",
+        "ENT_ID_nonmissing",
+        "CCBond_true",
+        "CCBond_false",
+        "CCBond_missing",
+        "Entanglement",
+        "Entanglement_status",
+        "Knotted",
+        "FASTA_available",
+        "Membrane",
+        "Disorder_query_status",
+        "Disorder_residues",
+        "MobiDB_length",
+        "Fraction_IDP_IDR",
+        "Analysis_group",
+        "Final_result",
+    ]
+    trace = trace.reindex(columns=trace_columns)
+
+    # Merge/source diagnostics.
+    raw_ccbond_values = Counter(str(value).strip() for value in ent_raw["CCBond"].dropna())
+    invalid_ccbond = sum(
+        count
+        for value, count in raw_ccbond_values.items()
+        if value.lower() not in {"true", "false", "1", "0", "1.0", "0.0"}
+    )
+    exact_edned_matches = int(experimental_edned["Exact_Jiang_match"].sum())
+    no_exact = len(experimental_edned) - exact_edned_matches
+    has_header_candidate = int(
+        experimental_edned.loc[~experimental_edned["Exact_Jiang_match"], "Header_Jiang_candidates"]
+        .map(bool)
+        .sum()
+    )
+    merge_audit = pd.DataFrame(
+        [
+            {
+                "source": "McShane",
+                "rows": len(mcshane),
+                "unique_IDs": mcshane["UniProt_ID"].nunique(),
+                "missing_IDs": mcshane["UniProt_ID"].isna().sum(),
+                "duplicate_IDs": mcshane["UniProt_ID"].duplicated().sum(),
+                "coverage_or_note": "All rows have one exact Protein IDs (Uniprot) value",
+            },
+            {
+                "source": "Jiang pLDDT",
+                "rows": len(plddt),
+                "unique_IDs": plddt["UniProt_ID"].nunique(),
+                "missing_IDs": plddt["UniProt_ID"].isna().sum(),
+                "duplicate_IDs": plddt["UniProt_ID"].duplicated().sum(),
+                "coverage_or_note": f"{len(plddt_master)} pass mean pLDDT >= 70",
+            },
+            {
+                "source": "Jiang entanglement",
+                "rows": len(ent_raw),
+                "unique_IDs": ent_raw["UniProt_ID"].nunique(),
+                "missing_IDs": ent_raw["UniProt_ID"].isna().sum(),
+                "duplicate_IDs": len(ent_raw) - ent_raw["UniProt_ID"].nunique(),
+                "coverage_or_note": f"{invalid_ccbond} invalid nonmissing CCBond values",
+            },
+            {
+                "source": "processed MobiDB/master export",
+                "rows": len(provided),
+                "unique_IDs": provided["UniProt_ID"].nunique(),
+                "missing_IDs": provided["UniProt_ID"].isna().sum(),
+                "duplicate_IDs": provided["UniProt_ID"].duplicated().sum(),
+                "coverage_or_note": f"{provided['Fraction_IDP_IDR'].notna().sum()} nonmissing fractions",
+            },
+            {
+                "source": "human proteome FASTA",
+                "rows": len(fasta_list),
+                "unique_IDs": len(fasta_ids),
+                "missing_IDs": 0,
+                "duplicate_IDs": len(fasta_list) - len(fasta_ids),
+                "coverage_or_note": f"{master['FASTA_available'].sum()} of master IDs matched",
+            },
+            {
+                "source": "membrane-keyword FASTA",
+                "rows": len(membrane_list),
+                "unique_IDs": len(membrane_ids),
+                "missing_IDs": 0,
+                "duplicate_IDs": len(membrane_list) - len(membrane_ids),
+                "coverage_or_note": f"{master['Membrane'].sum()} of master IDs matched",
+            },
+            {
+                "source": "AlphaKnot human records",
+                "rows": len(human_knots),
+                "unique_IDs": human_knots["UniProt_ID"].nunique(),
+                "missing_IDs": human_knots["UniProt_ID"].isna().sum(),
+                "duplicate_IDs": human_knots["UniProt_ID"].duplicated().sum(),
+                "coverage_or_note": f"{master['Knotted'].sum()} of master IDs matched after -F# removal",
+            },
+            {
+                "source": "McShane ED/NED -> Jiang exact accession",
+                "rows": len(experimental_edned),
+                "unique_IDs": experimental_edned["UniProt_ID"].nunique(),
+                "missing_IDs": 0,
+                "duplicate_IDs": 0,
+                "coverage_or_note": (
+                    f"{exact_edned_matches} exact; {no_exact} unmatched; "
+                    f"{has_header_candidate} unmatched records contain >=1 possible Jiang accession in grouped FASTA header"
+                ),
+            },
+        ]
+    )
+
+    status = master["Disorder_query_status"].value_counts(dropna=False)
+    observed_benchmarks = {
+        "McShane rows": len(mcshane),
+        "McShane ED": int(mcshane["Degradation_profile_raw"].eq("ED").sum()),
+        "McShane NED": int(mcshane["Degradation_profile_raw"].eq("NED").sum()),
+        "McShane UN": int(mcshane["Degradation_profile_raw"].eq("UN").sum()),
+        "ED/NED rows": int(mcshane["Degradation_profile_raw"].isin(["ED", "NED"]).sum()),
+        "pLDDT source proteins": len(plddt),
+        "pLDDT >= 70 master": len(master),
+        "Native entangled in master": int(master["Entanglement"].eq(1).sum()),
+        "Not entangled in master": int(master["Entanglement"].eq(0).sum()),
+        "Covalent-lasso excluded in master": int(master["Entanglement"].isna().sum()),
+        "ED/NED in master": len(edned),
+        "Eligible entanglement among ED/NED": len(ent_eligible),
+        "After knot exclusion": len(knot_free),
+        "FASTA-complete pre-membrane cohort": len(fasta_complete),
+        "Non-membrane core": len(core),
+        "MobiDB-complete core": len(complete),
+        "MobiDB ok": int(status.get("ok", 0)),
+        "MobiDB no selected annotation": int(status.get("mobidb_no_selected_annotation", 0)),
+        "MobiDB no selected annotation and missing length": int(
+            status.get("mobidb_no_selected_annotation|uniprot_missing_length", 0)
+        ),
+        "MobiDB missing length": int(status.get("uniprot_missing_length", 0)),
+        "Knotted proteins in master (reported)": int(master["Knotted"].sum()),
+        "FASTA available in master": int(master["FASTA_available"].sum()),
+    }
+    benchmark_comparison = pd.DataFrame(
+        [
+            {
+                "benchmark": name,
+                "expected_or_reported": expected,
+                "independently_observed": observed_benchmarks[name],
+                "difference": observed_benchmarks[name] - expected,
+                "matches": observed_benchmarks[name] == expected,
+            }
+            for name, expected in EXPECTED_BENCHMARKS.items()
+        ]
+    )
+
+    quality_checks = pd.DataFrame(
+        [
+            ("provided master duplicate IDs", int(master["UniProt_ID"].duplicated().sum()), 0),
+            ("provided master missing IDs", int(master["UniProt_ID"].isna().sum()), 0),
+            ("provided master Index sequential 1..N", int(master["Index"].tolist() == list(range(1, len(master) + 1))), 1),
+            ("retained pLDDT below 70", int(master["Average_pLDDT"].lt(70).sum()), 0),
+            ("fraction outside [0,1]", int(((master["Fraction_IDP_IDR"] < 0) | (master["Fraction_IDP_IDR"] > 1)).sum()), 0),
+            ("fraction formula mismatches beyond 8-decimal rounding", int(formula_mismatch.sum()), 0),
+            ("disorder residues greater than MobiDB length", int((master["Disorder_residues"] > master["MobiDB_length"]).sum()), 0),
+            ("displayed interval count differs from stored count", len(interval_discrepancies), 0),
+            ("clipped interval count differs from stored count", int((~interval_audit["clipped_matches_stored"]).sum()), 0),
+            ("MobiDB complete rows with non-ok status", int((master["Fraction_IDP_IDR"].notna() & master["Disorder_query_status"].ne("ok")).sum()), 0),
+            ("MobiDB ok rows with missing fraction", int((master["Disorder_query_status"].eq("ok") & master["Fraction_IDP_IDR"].isna()).sum()), 0),
+            ("multi-track MobiDB rows", int(master["MobiDB_annotation_tracks"].astype(str).str.contains(";", regex=False).sum()), np.nan),
+            ("manual trace rows", len(trace), 20),
+        ],
+        columns=["check", "observed", "expected_or_minimum"],
+    )
+
+    # Workbook-level comparisons can only run when exact files are supplied.
+    workbook_rows: list[dict[str, object]] = []
+    expected_frames = {
+        "broad_master": master,
+        "nonmembrane_core": core,
+        "mobidb_complete": complete,
+    }
+    id_candidates = ["UniProt_ID", "Uniprot", "UniProt", "gene"]
+    for label, filename in TARGET_WORKBOOKS.items():
+        matches = find_any(workspace, filename)
+        if not matches:
+            workbook_rows.append(
+                {
+                    "workbook": filename,
+                    "status": "MISSING",
+                    "rows": np.nan,
+                    "unique_IDs": np.nan,
+                    "expected_rows": len(expected_frames[label]),
+                    "ID_set_differences": np.nan,
+                    "note": "Exact generated workbook was not supplied; workbook-level verification not possible.",
+                }
+            )
+            continue
+        book = pd.read_excel(matches[0])
+        id_column = next((column for column in id_candidates if column in book.columns), None)
+        if id_column is None:
+            workbook_rows.append(
+                {
+                    "workbook": filename,
+                    "status": "ID COLUMN NOT FOUND",
+                    "rows": len(book),
+                    "unique_IDs": np.nan,
+                    "expected_rows": len(expected_frames[label]),
+                    "ID_set_differences": np.nan,
+                    "note": f"Columns: {list(book.columns)}",
+                }
+            )
+            continue
+        book_ids = set(clean_id(book[id_column]).dropna())
+        expected_ids = set(expected_frames[label]["UniProt_ID"])
+        workbook_rows.append(
+            {
+                "workbook": filename,
+                "status": "FOUND",
+                "rows": len(book),
+                "unique_IDs": len(book_ids),
+                "expected_rows": len(expected_frames[label]),
+                "ID_set_differences": len(book_ids.symmetric_difference(expected_ids)),
+                "note": str(matches[0]),
+            }
+        )
+    workbook_comparison = pd.DataFrame(workbook_rows)
+
+    # Write only new audit artifacts.
+    write_table(inventory, output / "file_inventory.csv")
+    write_table(merge_audit, output / "source_and_merge_audit.csv")
+    write_table(cohort_flow, output / "cohort_flow.csv")
+    write_table(group_counts, output / "group_counts_and_mobidb_missingness.csv")
+    write_table(benchmark_comparison, output / "benchmark_comparison.csv")
+    write_table(source_field_comparison, output / "broad_master_source_field_comparison.csv")
+    write_table(workbook_comparison, output / "target_workbook_comparison.csv")
+    write_table(quality_checks, output / "quality_checks.csv")
+    write_table(interval_discrepancies, output / "mobidb_interval_discrepancies.csv")
+    write_table(candidate_mappings, output / "mcshane_grouped_header_candidate_mappings.csv")
+    write_table(trace, output / "manual_source_to_output_traces.csv")
+
+    # ID lists make all sequential exclusions reviewable without regenerating workbooks.
+    for filename, frame in {
+        "reconstructed_nonmembrane_core_ids.csv": core,
+        "reconstructed_mobidb_complete_606_ids.csv": complete,
+        "missing_mobidb_from_core.csv": core.loc[core["Fraction_IDP_IDR"].isna()],
+    }.items():
+        write_table(frame, output / filename)
+
+    summary = {
+        "workspace": str(workspace),
+        "output": str(output),
+        "verdict": "PASS WITH WARNINGS",
+        "broad_master_rows": len(master),
+        "nonmembrane_core_rows": len(core),
+        "mobidb_complete_rows": len(complete),
+        "all_source_derived_master_fields_match_processed_export": bool(
+            source_field_comparison["mismatches"].eq(0).all()
+        ),
+        "reported_knot_count": 123,
+        "independent_knot_count": int(master["Knotted"].sum()),
+        "mobidb_displayed_interval_discrepancies": len(interval_discrepancies),
+        "mobidb_discrepancies_in_606": int(interval_discrepancies["in_606_complete"].sum()),
+        "multi_track_mobidb_rows": int(
+            master["MobiDB_annotation_tracks"].astype(str).str.contains(";", regex=False).sum()
+        ),
+        "target_workbooks_missing": int(workbook_comparison["status"].eq("MISSING").sum()),
+        "manual_trace_rows": len(trace),
+        "secretory_filter_applied": False,
+        "association_testing_performed": False,
+    }
+    (output / "audit_summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+    print(json.dumps(summary, indent=2))
+
+
+if __name__ == "__main__":
+    main()
+
+END FILE: historical_audits/reproducibility_audit.py

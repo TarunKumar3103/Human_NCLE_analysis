@@ -1,0 +1,27 @@
+{
+  "primary_n": 705,
+  "sensitivity_n": 1191,
+  "primary_group_counts": {
+    "ED_Entangled": 403,
+    "ED_NotEntangled": 165,
+    "NED_Entangled": 96,
+    "NED_NotEntangled": 41
+  },
+  "sensitivity_profile_ncle_counts": {
+    "ED|NCLE=0": 165,
+    "ED|NCLE=1": 403,
+    "NED|NCLE=0": 41,
+    "NED|NCLE=1": 96,
+    "UN|NCLE=0": 135,
+    "UN|NCLE=1": 351
+  },
+  "secreted_source_ids": 22783,
+  "known_monomer_ids": 0,
+  "complex_model_status": "Run using the supplied Complex_member annotation.",
+  "notes": [
+    "MobiDB disorder was not used to select either statistical cohort.",
+    "NCLE=1 denotes native non-covalent entanglement; NCLE=0 denotes no detected entanglement.",
+    "Proteins with covalent lasso records are excluded from binary NCLE analyses.",
+    "Known_monomer_annotation=Unclassified must not be interpreted as complex membership."
+  ]
+}

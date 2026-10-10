@@ -1,0 +1,73 @@
+Analysis,Method,Term,Comparison,Metric,Actual,Reference,Absolute_difference,Pass
+Primary: NED vs ED,Crude Fisher exact,NCLE,Reported workbook results,N,705.0,705.0,0.0,True
+Primary: NED vs ED,Crude Fisher exact,NCLE,Reported workbook results,Coefficient,-0.04221496328257391,-0.0422149632825739,6.938893903907228e-18,True
+Primary: NED vs ED,Crude Fisher exact,NCLE,Reported workbook results,Odds_ratio,0.9586636809296133,0.9586636809296132,1.1102230246251565e-16,True
+Primary: NED vs ED,Crude Fisher exact,NCLE,Reported workbook results,CI_lower,0.6374402026788435,0.6374402026788435,0.0,True
+Primary: NED vs ED,Crude Fisher exact,NCLE,Reported workbook results,CI_upper,1.4417604181086554,1.4417604181086554,0.0,True
+Primary: NED vs ED,Crude Fisher exact,NCLE,Reported workbook results,P_value,0.8348421910331945,0.8348421910331945,0.0,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,N,705.0,705.0,0.0,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,Coefficient,-0.04850848612865693,-0.0485084861286569,2.7755575615628914e-17,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,Odds_ratio,0.95264925496739,0.95264925496739,0.0,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,CI_lower,0.6303840852960196,0.6303840852960196,0.0,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,CI_upper,1.4396629359127218,1.4396629359127218,0.0,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,P_value,0.8178930353755625,0.8178930353755625,0.0,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,N,705.0,705.0,0.0,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,Coefficient,0.018495152098278084,0.018495152098278,8.326672684688674e-17,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,Odds_ratio,1.018667246758905,1.018667246758905,0.0,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,CI_lower,0.8472850794461425,0.8472850794461425,0.0,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,CI_upper,1.2247152520349887,1.2247152520349889,2.220446049250313e-16,True
+Primary: NED vs ED,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,P_value,0.843995364635498,0.843995364635498,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,N,528.0,528.0,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,Coefficient,2.2144169469701755,2.2144169469701755,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,Odds_ratio,9.15606908118056,9.15606908118056,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,CI_lower,1.228557645839194,1.228557645839194,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,CI_upper,68.23741751416655,68.23741751416655,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,P_value,0.030705946299409495,0.0307059462994094,9.367506770274758e-17,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,N,528.0,528.0,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,Coefficient,-0.07413238557855148,-0.0741323855785514,8.326672684688674e-17,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,Odds_ratio,0.9285487592393774,0.9285487592393774,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,CI_lower,0.598541572371108,0.598541572371108,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,CI_upper,1.4405061203508245,1.4405061203508245,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,P_value,0.740733127608531,0.740733127608531,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,N,528.0,528.0,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,Coefficient,0.0010146832945058485,0.0010146832945058,4.85722573273506e-17,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,Odds_ratio,1.0010151982597608,1.0010151982597608,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,CI_lower,0.8292069972036397,0.8292069972036397,0.0,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,CI_upper,1.2084213357173899,1.20842133571739,2.220446049250313e-16,True
+Primary: NED vs ED,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,P_value,0.991573098482185,0.991573098482185,0.0,True
+Sensitivity: NED vs ED + UN,Crude Fisher exact,NCLE,Reported workbook results,N,1191.0,1191.0,0.0,True
+Sensitivity: NED vs ED + UN,Crude Fisher exact,NCLE,Reported workbook results,Coefficient,-0.07083376858822658,-0.0708337685882265,8.326672684688674e-17,True
+Sensitivity: NED vs ED + UN,Crude Fisher exact,NCLE,Reported workbook results,Odds_ratio,0.9316167432231351,0.9316167432231351,0.0,True
+Sensitivity: NED vs ED + UN,Crude Fisher exact,NCLE,Reported workbook results,CI_lower,0.6311505455537011,0.6311505455537011,0.0,True
+Sensitivity: NED vs ED + UN,Crude Fisher exact,NCLE,Reported workbook results,CI_upper,1.3751231974176203,1.3751231974176203,0.0,True
+Sensitivity: NED vs ED + UN,Crude Fisher exact,NCLE,Reported workbook results,P_value,0.76318627455305,0.76318627455305,0.0,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,N,1191.0,1191.0,0.0,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,Coefficient,-0.051171860118829696,-0.0511718601188301,4.0245584642661925e-16,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,Odds_ratio,0.950115369560052,0.9501153695600516,4.440892098500626e-16,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,CI_lower,0.6397195799826612,0.639719579982661,1.1102230246251565e-16,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,CI_upper,1.4111170639777846,1.4111170639777837,8.881784197001252e-16,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),NCLE,Reported workbook results,P_value,0.7998349129118683,0.7998349129118665,1.7763568394002505e-15,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,N,1191.0,1191.0,0.0,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,Coefficient,-0.05570718631826731,-0.0557071863182672,1.0408340855860843e-16,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,Odds_ratio,0.9458160432251482,0.9458160432251485,2.220446049250313e-16,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,CI_lower,0.7764890112488253,0.7764890112488253,0.0,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,CI_upper,1.152067800912397,1.152067800912397,0.0,True
+Sensitivity: NED vs ED + UN,Model 1: NED ~ NCLE + z(length),z_Protein_length,Reported workbook results,P_value,0.5799225569202018,0.579922556920202,2.220446049250313e-16,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,N,901.0,901.0,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,Coefficient,1.907200222609184,1.9072002226091824,1.5543122344752192e-15,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,Odds_ratio,6.734208096409876,6.734208096409866,1.0658141036401503e-14,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,CI_lower,0.9146094280733162,0.9146094280733282,1.199040866595169e-14,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,CI_upper,49.583524173027705,49.58352417302691,7.958078640513122e-13,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),Complex_member,Reported workbook results,P_value,0.06115517934844921,0.0611551793484475,1.7139067942650854e-15,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,N,901.0,901.0,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,Coefficient,-0.10341094902621231,-0.103410949026212,3.0531133177191805e-16,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,Odds_ratio,0.9017563214450074,0.9017563214450076,2.220446049250313e-16,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,CI_lower,0.5972767912425131,0.5972767912425132,1.1102230246251565e-16,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,CI_upper,1.3614533080624278,1.361453308062428,2.220446049250313e-16,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),NCLE,Reported workbook results,P_value,0.6227205000506616,0.6227205000506625,8.881784197001252e-16,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,N,901.0,901.0,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,Coefficient,-0.0709252962811685,-0.0709252962811685,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,Odds_ratio,0.931531478394028,0.931531478394028,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,CI_lower,0.7596823808319532,0.7596823808319532,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,CI_upper,1.1422548648405677,1.1422548648405677,0.0,True
+Sensitivity: NED vs ED + UN,Model 2: NED ~ NCLE + complex + z(length),z_Protein_length,Reported workbook results,P_value,0.49544478868364916,0.4954447886836491,5.551115123125783e-17,True

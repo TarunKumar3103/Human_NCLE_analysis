@@ -1,0 +1,44 @@
+Independently verify the supplied HUMAN NCLE-NED analysis reproduction package.
+Use local source files; do not refresh UniProt or MobiDB before the frozen-data
+verification, and do not use the stored odds ratios as calculated results.
+
+1. Read README.txt, the reproduction manual, SOURCE_MANIFEST.json, all seven
+   current scripts, and data/reference_human_analysis.xlsx. Distinguish the
+   unchanged recovered statistical_analysis.py from newly reconstructed code.
+2. Recompute contingency counts and crude ORs from protein rows. Use a two-sided
+   Fisher exact test for the crude P and the stated log-OR Wald 95% CI. Refit
+   unpenalized logistic regression with an intercept: Model 1, NED ~ NCLE +
+   z(length); Model 2, NED ~ NCLE + Complex_member + z(length). Check sample-SD
+   standardization within each full cohort before Model 2 missing-data exclusion.
+3. Expected primary: 705 rows, 403 ED/96 NED entangled, 165 ED/41 NED not
+   entangled. Sensitivity: 1191 rows, 754 non-NED/96 NED entangled, 300 non-NED/
+   41 NED not entangled. Model 2 uses 528/901 rows. Compare all 12 result rows,
+   not only the six NCLE odds ratios. Prefer a genuinely independent solver.
+4. Audit archived McShane, Jiang NCLE/pLDDT, knot, sequence, and membrane inputs.
+   Expected primary flow: 1043 -> 1034 -> 1023 -> 1022 -> 725 -> 705.
+   Expected sensitivity flow: 1836 -> 1810 -> 1793 -> 1792 -> 1230 -> 1191.
+   The last step requires the approved historical secreted-positive source,
+   which is not included. Report that limitation; do not reconstruct secreted
+   labels from final eligible IDs or claim independent final-filter validation.
+5. Inspect the frozen UniProt evidence and review decisions: 205 initially
+   ambiguous, 28 provisionally positive, 177 unresolved. Unknown is missing,
+   never monomer. Check exact recorded-decision reconstruction, then separate
+   semantic evidence review from numerical reproduction. The initial automatic
+   text-classification implementation was not recovered.
+6. Refit Model 2 excluding the provisional positive calls, and Model 1 restricted
+   to Model 2's complete cases. Inspect monomer/event counts and the association
+   between annotation availability and outcome. Assess selection bias without
+   assuming that currently similar estimates prove missingness harmless.
+7. Verify the processed MobiDB export and fractions, missingness, interval unions,
+   and clipping. Expected 13690 broad rows; 12609 fractions; 18 coordinate
+   warnings. Q8NI36 uses length 895, full union 82, clipped count 79. Distinguish
+   that explanation from proving a matched sequence version. The primary 705
+   statistical cohort must not be filtered to 592 by disorder availability.
+8. Review the archived disorder scripts: every available selected track is
+   unioned, not one priority-selected track. Missing/no annotation must remain
+   missing. Raw API responses are not supplied; the processed export alone
+   cannot independently verify annotation selection against the server snapshot.
+9. Report verified calculations, discrepancies, unrecovered provenance, and
+   methodological limits separately. No simulations or mouse/yeast estimates
+   should be inferred. The defensible conclusion is failure to detect positive
+   NCLE-NED association in the analyzed human cohorts, not proof of no effect.

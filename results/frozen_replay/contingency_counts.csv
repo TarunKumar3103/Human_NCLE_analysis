@@ -1,0 +1,5 @@
+Analysis,NCLE_status,NED,Non_NED,Total,NED_frequency
+Primary: NED vs ED,Entangled,96,403,499,0.19238476953907815
+Primary: NED vs ED,Not_entangled,41,165,206,0.19902912621359223
+Sensitivity: NED vs ED + UN,Entangled,96,754,850,0.11294117647058824
+Sensitivity: NED vs ED + UN,Not_entangled,41,300,341,0.12023460410557185

@@ -1,0 +1,5 @@
+Analysis,Comparison,Exposed_NED,Exposed_non_NED,Reference_NED,Reference_non_NED,Odds_ratio,P_value
+Primary: NED vs ED,Complex member versus explicit monomer,128,372,1,27,9.290322580645162,0.005611792544907194
+Primary: NED vs ED,Usable versus missing complex annotation,129,399,8,169,6.829887218045113,2.753633899888562e-10
+Sensitivity: NED vs ED + UN,Complex member versus explicit monomer,128,733,1,39,6.810368349249659,0.03368187802569315
+Sensitivity: NED vs ED + UN,Usable versus missing complex annotation,129,772,8,282,5.890220207253886,2.6548336672761505e-09

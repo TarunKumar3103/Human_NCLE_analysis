@@ -1,0 +1,13 @@
+Analysis,Step,Total,ED,NED,UN
+Primary: NED vs ED,pLDDT >=70 and selected degradation categories,1043,843,200,0
+Primary: NED vs ED,Usable binary NCLE status,1034,837,197,0
+Primary: NED vs ED,Exclude knotted proteins,1023,828,195,0
+Primary: NED vs ED,Require FASTA sequence,1022,828,194,0
+Primary: NED vs ED,Exclude membrane proteins,725,584,141,0
+Primary: NED vs ED,Exclude secreted proteins,705,568,137,0
+Sensitivity: NED vs ED + UN,pLDDT >=70 and selected degradation categories,1836,843,200,793
+Sensitivity: NED vs ED + UN,Usable binary NCLE status,1810,837,197,776
+Sensitivity: NED vs ED + UN,Exclude knotted proteins,1793,828,195,770
+Sensitivity: NED vs ED + UN,Require FASTA sequence,1792,828,194,770
+Sensitivity: NED vs ED + UN,Exclude membrane proteins,1230,584,141,505
+Sensitivity: NED vs ED + UN,Exclude secreted proteins,1191,568,137,486

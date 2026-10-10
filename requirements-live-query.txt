@@ -1,0 +1,3 @@
+# Optional only: the archived MobiDB downloader uses requests, not bioservices.
+# These are compatibility ranges, not a recovered historical environment lock.
+requests>=2.31,<3

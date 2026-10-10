@@ -1,0 +1,69 @@
+{
+  "files": [
+    {
+      "path": "raw_sources/AF4_knots.dat",
+      "bytes": 73495599,
+      "sha256": "4eabf512173e2965fe41bf53f92ebcc2974be40429d5bd209692713c6ff8607c"
+    },
+    {
+      "path": "raw_sources/Human_AF_combined_20250614.csv",
+      "bytes": 32482165,
+      "sha256": "95c1eec8439e1aa283a4452736e8320c3beb47d53db1b619bfcae54f91c672dd"
+    },
+    {
+      "path": "raw_sources/Human_Avg_pLDDTs.csv",
+      "bytes": 1020288,
+      "sha256": "b25b0eed1ab5ed596cb732b1b38521ddd11f17f8436f9bde1b2480e39470aed6"
+    },
+    {
+      "path": "raw_sources/McShane_human_mmc4.xlsx",
+      "bytes": 1359689,
+      "sha256": "ff3cf9ba3f686adaa83c4a7948e72965864578ce40a53b897ca1ed498328375a"
+    },
+    {
+      "path": "raw_sources/UP000005640_9606.fasta",
+      "bytes": 13722737,
+      "sha256": "0633529214befb5103a10fb7777ae93c27e614b77407467c20a9a7458dac1163"
+    },
+    {
+      "path": "raw_sources/uniprotkb_human_keyword_secreted_2026_09_21.fasta",
+      "bytes": 8922577,
+      "sha256": "562e34e544bd63bd33c752c63306b9a5188650c37a02911bcbd716f06650a6ff"
+    },
+    {
+      "path": "raw_sources/uniprotkb_human_keyword_secreted_2026_09_21_metadata.json",
+      "bytes": 227,
+      "sha256": "d4f3dd1013b1d7e949b69066396c4bc4f7b609f1f227b13bd8bbac717bcf676b"
+    },
+    {
+      "path": "raw_sources/uniprotkb_human_keywords_membrane_2025_03_19.fasta",
+      "bytes": 10877355,
+      "sha256": "4ac97fda07809f17f126ba452dd649e1503c48ee9f824be755a96066804d85d1"
+    },
+    {
+      "path": "data/complex_annotations.csv",
+      "bytes": 12257,
+      "sha256": "60d501f697d665ac10d084466173da4fb01e9ec6b9b5e95d850fc041034776d1"
+    },
+    {
+      "path": "data/complex_review_decisions.csv",
+      "bytes": 150520,
+      "sha256": "81a4f873f292061934640c912d3730e9ac6f70b79c503a273575fce1a55d69e3"
+    },
+    {
+      "path": "data/processed_MobiDB_master.csv",
+      "bytes": 1996151,
+      "sha256": "4734cd4fa7a2c88a699602df035aad796180effa077a7e861d289c36491ccceb"
+    },
+    {
+      "path": "data/reference_human_analysis.xlsx",
+      "bytes": 664818,
+      "sha256": "4bda70ba8af366e104e30d6e897713ec44f877e245759377efca0c027ba224d0"
+    },
+    {
+      "path": "data/uniprot_evidence_snapshot.csv",
+      "bytes": 1109997,
+      "sha256": "2e19fc70b36dfc13ec8ee6366307ff2a5378bf24133a2218073f0cf5e11a15cd"
+    }
+  ]
+}

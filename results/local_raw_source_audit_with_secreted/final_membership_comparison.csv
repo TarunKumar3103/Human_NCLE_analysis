@@ -1,0 +1,1897 @@
+Analysis,UniProt_ID,Membership,Pass
+Primary: NED vs ED,A0AVT1,both,True
+Primary: NED vs ED,A5YKK6,both,True
+Primary: NED vs ED,A6NHR9,both,True
+Primary: NED vs ED,O00170,both,True
+Primary: NED vs ED,O00178,both,True
+Primary: NED vs ED,O00231,both,True
+Primary: NED vs ED,O00232,both,True
+Primary: NED vs ED,O00303,both,True
+Primary: NED vs ED,O00410,both,True
+Primary: NED vs ED,O00442,both,True
+Primary: NED vs ED,O00458,both,True
+Primary: NED vs ED,O00487,both,True
+Primary: NED vs ED,O00505,both,True
+Primary: NED vs ED,O00625,both,True
+Primary: NED vs ED,O00629,both,True
+Primary: NED vs ED,O00743,both,True
+Primary: NED vs ED,O00762,both,True
+Primary: NED vs ED,O14530,both,True
+Primary: NED vs ED,O14561,both,True
+Primary: NED vs ED,O14929,both,True
+Primary: NED vs ED,O14981,both,True
+Primary: NED vs ED,O15143,both,True
+Primary: NED vs ED,O15305,both,True
+Primary: NED vs ED,O15347,both,True
+Primary: NED vs ED,O15381,both,True
+Primary: NED vs ED,O15397,both,True
+Primary: NED vs ED,O15511,both,True
+Primary: NED vs ED,O15514,both,True
+Primary: NED vs ED,O43143,both,True
+Primary: NED vs ED,O43175,both,True
+Primary: NED vs ED,O43242,both,True
+Primary: NED vs ED,O43396,both,True
+Primary: NED vs ED,O43681,both,True
+Primary: NED vs ED,O43715,both,True
+Primary: NED vs ED,O43765,both,True
+Primary: NED vs ED,O43776,both,True
+Primary: NED vs ED,O43809,both,True
+Primary: NED vs ED,O43818,both,True
+Primary: NED vs ED,O43837,both,True
+Primary: NED vs ED,O60231,both,True
+Primary: NED vs ED,O60256,both,True
+Primary: NED vs ED,O60264,both,True
+Primary: NED vs ED,O60287,both,True
+Primary: NED vs ED,O60341,both,True
+Primary: NED vs ED,O60508,both,True
+Primary: NED vs ED,O60518,both,True
+Primary: NED vs ED,O60573,both,True
+Primary: NED vs ED,O60701,both,True
+Primary: NED vs ED,O60762,both,True
+Primary: NED vs ED,O60783,both,True
+Primary: NED vs ED,O60826,both,True
+Primary: NED vs ED,O75083,both,True
+Primary: NED vs ED,O75391,both,True
+Primary: NED vs ED,O75531,both,True
+Primary: NED vs ED,O75534,both,True
+Primary: NED vs ED,O75717,both,True
+Primary: NED vs ED,O75794,both,True
+Primary: NED vs ED,O75828,both,True
+Primary: NED vs ED,O75832,both,True
+Primary: NED vs ED,O75874,both,True
+Primary: NED vs ED,O75937,both,True
+Primary: NED vs ED,O76071,both,True
+Primary: NED vs ED,O94760,both,True
+Primary: NED vs ED,O94888,both,True
+Primary: NED vs ED,O95239,both,True
+Primary: NED vs ED,O95273,both,True
+Primary: NED vs ED,O95302,both,True
+Primary: NED vs ED,O95340,both,True
+Primary: NED vs ED,O95372,both,True
+Primary: NED vs ED,O95373,both,True
+Primary: NED vs ED,O95394,both,True
+Primary: NED vs ED,O95433,both,True
+Primary: NED vs ED,O95571,both,True
+Primary: NED vs ED,O95747,both,True
+Primary: NED vs ED,O95757,both,True
+Primary: NED vs ED,O95777,both,True
+Primary: NED vs ED,O95801,both,True
+Primary: NED vs ED,O95816,both,True
+Primary: NED vs ED,O95861,both,True
+Primary: NED vs ED,O95865,both,True
+Primary: NED vs ED,O95881,both,True
+Primary: NED vs ED,O96019,both,True
+Primary: NED vs ED,P00338,both,True
+Primary: NED vs ED,P00558,both,True
+Primary: NED vs ED,P00568,both,True
+Primary: NED vs ED,P02794,both,True
+Primary: NED vs ED,P02795,both,True
+Primary: NED vs ED,P04040,both,True
+Primary: NED vs ED,P04075,both,True
+Primary: NED vs ED,P04080,both,True
+Primary: NED vs ED,P04181,both,True
+Primary: NED vs ED,P04183,both,True
+Primary: NED vs ED,P04350,both,True
+Primary: NED vs ED,P05198,both,True
+Primary: NED vs ED,P05386,both,True
+Primary: NED vs ED,P06400,both,True
+Primary: NED vs ED,P06493,both,True
+Primary: NED vs ED,P06730,both,True
+Primary: NED vs ED,P06746,both,True
+Primary: NED vs ED,P07108,both,True
+Primary: NED vs ED,P07737,both,True
+Primary: NED vs ED,P08237,both,True
+Primary: NED vs ED,P08621,both,True
+Primary: NED vs ED,P08758,both,True
+Primary: NED vs ED,P09001,both,True
+Primary: NED vs ED,P09110,both,True
+Primary: NED vs ED,P09211,both,True
+Primary: NED vs ED,P09234,both,True
+Primary: NED vs ED,P09874,both,True
+Primary: NED vs ED,P09960,both,True
+Primary: NED vs ED,P09972,both,True
+Primary: NED vs ED,P10109,both,True
+Primary: NED vs ED,P10768,both,True
+Primary: NED vs ED,P11441,both,True
+Primary: NED vs ED,P11766,both,True
+Primary: NED vs ED,P11940,both,True
+Primary: NED vs ED,P12004,both,True
+Primary: NED vs ED,P12268,both,True
+Primary: NED vs ED,P12429,both,True
+Primary: NED vs ED,P13489,both,True
+Primary: NED vs ED,P13797,both,True
+Primary: NED vs ED,P13798,both,True
+Primary: NED vs ED,P13984,both,True
+Primary: NED vs ED,P14618,both,True
+Primary: NED vs ED,P14866,both,True
+Primary: NED vs ED,P14868,both,True
+Primary: NED vs ED,P15121,both,True
+Primary: NED vs ED,P15531,both,True
+Primary: NED vs ED,P15880,both,True
+Primary: NED vs ED,P16152,both,True
+Primary: NED vs ED,P16949,both,True
+Primary: NED vs ED,P17066,both,True
+Primary: NED vs ED,P17174,both,True
+Primary: NED vs ED,P17812,both,True
+Primary: NED vs ED,P17844,both,True
+Primary: NED vs ED,P17987,both,True
+Primary: NED vs ED,P18077,both,True
+Primary: NED vs ED,P18669,both,True
+Primary: NED vs ED,P19174,both,True
+Primary: NED vs ED,P19388,both,True
+Primary: NED vs ED,P19447,both,True
+Primary: NED vs ED,P19623,both,True
+Primary: NED vs ED,P19784,both,True
+Primary: NED vs ED,P20618,both,True
+Primary: NED vs ED,P21266,both,True
+Primary: NED vs ED,P21291,both,True
+Primary: NED vs ED,P22102,both,True
+Primary: NED vs ED,P22234,both,True
+Primary: NED vs ED,P23193,both,True
+Primary: NED vs ED,P23258,both,True
+Primary: NED vs ED,P23368,both,True
+Primary: NED vs ED,P23381,both,True
+Primary: NED vs ED,P23434,both,True
+Primary: NED vs ED,P23526,both,True
+Primary: NED vs ED,P23743,both,True
+Primary: NED vs ED,P24752,both,True
+Primary: NED vs ED,P24844,both,True
+Primary: NED vs ED,P24928,both,True
+Primary: NED vs ED,P25205,both,True
+Primary: NED vs ED,P25786,both,True
+Primary: NED vs ED,P26373,both,True
+Primary: NED vs ED,P26440,both,True
+Primary: NED vs ED,P26639,both,True
+Primary: NED vs ED,P26640,both,True
+Primary: NED vs ED,P27348,both,True
+Primary: NED vs ED,P27694,both,True
+Primary: NED vs ED,P27695,both,True
+Primary: NED vs ED,P28066,both,True
+Primary: NED vs ED,P28070,both,True
+Primary: NED vs ED,P28347,both,True
+Primary: NED vs ED,P29144,both,True
+Primary: NED vs ED,P29401,both,True
+Primary: NED vs ED,P30041,both,True
+Primary: NED vs ED,P30044,both,True
+Primary: NED vs ED,P30046,both,True
+Primary: NED vs ED,P30084,both,True
+Primary: NED vs ED,P30085,both,True
+Primary: NED vs ED,P30154,both,True
+Primary: NED vs ED,P30405,both,True
+Primary: NED vs ED,P30520,both,True
+Primary: NED vs ED,P30533,both,True
+Primary: NED vs ED,P30566,both,True
+Primary: NED vs ED,P31150,both,True
+Primary: NED vs ED,P31937,both,True
+Primary: NED vs ED,P31939,both,True
+Primary: NED vs ED,P31948,both,True
+Primary: NED vs ED,P31949,both,True
+Primary: NED vs ED,P32321,both,True
+Primary: NED vs ED,P32322,both,True
+Primary: NED vs ED,P32969,both,True
+Primary: NED vs ED,P33316,both,True
+Primary: NED vs ED,P33552,both,True
+Primary: NED vs ED,P33991,both,True
+Primary: NED vs ED,P33992,both,True
+Primary: NED vs ED,P33993,both,True
+Primary: NED vs ED,P34932,both,True
+Primary: NED vs ED,P35237,both,True
+Primary: NED vs ED,P35244,both,True
+Primary: NED vs ED,P36404,both,True
+Primary: NED vs ED,P36578,both,True
+Primary: NED vs ED,P36871,both,True
+Primary: NED vs ED,P36959,both,True
+Primary: NED vs ED,P39019,both,True
+Primary: NED vs ED,P39023,both,True
+Primary: NED vs ED,P40222,both,True
+Primary: NED vs ED,P40227,both,True
+Primary: NED vs ED,P40429,both,True
+Primary: NED vs ED,P40925,both,True
+Primary: NED vs ED,P40926,both,True
+Primary: NED vs ED,P41091,both,True
+Primary: NED vs ED,P41214,both,True
+Primary: NED vs ED,P41252,both,True
+Primary: NED vs ED,P41567,both,True
+Primary: NED vs ED,P42224,both,True
+Primary: NED vs ED,P42226,both,True
+Primary: NED vs ED,P42574,both,True
+Primary: NED vs ED,P42575,both,True
+Primary: NED vs ED,P42765,both,True
+Primary: NED vs ED,P42766,both,True
+Primary: NED vs ED,P42785,both,True
+Primary: NED vs ED,P42858,both,True
+Primary: NED vs ED,P43378,both,True
+Primary: NED vs ED,P45877,both,True
+Primary: NED vs ED,P45985,both,True
+Primary: NED vs ED,P46063,both,True
+Primary: NED vs ED,P46776,both,True
+Primary: NED vs ED,P46777,both,True
+Primary: NED vs ED,P46778,both,True
+Primary: NED vs ED,P46779,both,True
+Primary: NED vs ED,P46781,both,True
+Primary: NED vs ED,P46783,both,True
+Primary: NED vs ED,P46926,both,True
+Primary: NED vs ED,P47755,both,True
+Primary: NED vs ED,P47813,both,True
+Primary: NED vs ED,P47897,both,True
+Primary: NED vs ED,P47914,both,True
+Primary: NED vs ED,P48147,both,True
+Primary: NED vs ED,P48163,both,True
+Primary: NED vs ED,P48507,both,True
+Primary: NED vs ED,P48637,both,True
+Primary: NED vs ED,P48643,both,True
+Primary: NED vs ED,P48723,both,True
+Primary: NED vs ED,P49356,both,True
+Primary: NED vs ED,P49368,both,True
+Primary: NED vs ED,P49406,both,True
+Primary: NED vs ED,P49454,both,True
+Primary: NED vs ED,P49458,both,True
+Primary: NED vs ED,P49459,both,True
+Primary: NED vs ED,P49588,both,True
+Primary: NED vs ED,P49593,both,True
+Primary: NED vs ED,P49773,both,True
+Primary: NED vs ED,P49902,both,True
+Primary: NED vs ED,P49915,both,True
+Primary: NED vs ED,P49916,both,True
+Primary: NED vs ED,P50452,both,True
+Primary: NED vs ED,P50502,both,True
+Primary: NED vs ED,P50990,both,True
+Primary: NED vs ED,P51114,both,True
+Primary: NED vs ED,P51452,both,True
+Primary: NED vs ED,P51665,both,True
+Primary: NED vs ED,P51812,both,True
+Primary: NED vs ED,P52306,both,True
+Primary: NED vs ED,P52701,both,True
+Primary: NED vs ED,P52788,both,True
+Primary: NED vs ED,P52888,both,True
+Primary: NED vs ED,P52907,both,True
+Primary: NED vs ED,P53004,both,True
+Primary: NED vs ED,P53396,both,True
+Primary: NED vs ED,P53582,both,True
+Primary: NED vs ED,P54136,both,True
+Primary: NED vs ED,P54577,both,True
+Primary: NED vs ED,P55036,both,True
+Primary: NED vs ED,P55072,both,True
+Primary: NED vs ED,P55212,both,True
+Primary: NED vs ED,P55769,both,True
+Primary: NED vs ED,P56192,both,True
+Primary: NED vs ED,P56537,both,True
+Primary: NED vs ED,P56545,both,True
+Primary: NED vs ED,P57076,both,True
+Primary: NED vs ED,P58546,both,True
+Primary: NED vs ED,P60709,both,True
+Primary: NED vs ED,P60866,both,True
+Primary: NED vs ED,P60891,both,True
+Primary: NED vs ED,P60981,both,True
+Primary: NED vs ED,P60983,both,True
+Primary: NED vs ED,P61086,both,True
+Primary: NED vs ED,P61088,both,True
+Primary: NED vs ED,P61160,both,True
+Primary: NED vs ED,P61221,both,True
+Primary: NED vs ED,P61247,both,True
+Primary: NED vs ED,P61254,both,True
+Primary: NED vs ED,P61289,both,True
+Primary: NED vs ED,P61313,both,True
+Primary: NED vs ED,P61353,both,True
+Primary: NED vs ED,P61604,both,True
+Primary: NED vs ED,P61758,both,True
+Primary: NED vs ED,P61981,both,True
+Primary: NED vs ED,P62081,both,True
+Primary: NED vs ED,P62136,both,True
+Primary: NED vs ED,P62140,both,True
+Primary: NED vs ED,P62195,both,True
+Primary: NED vs ED,P62244,both,True
+Primary: NED vs ED,P62249,both,True
+Primary: NED vs ED,P62258,both,True
+Primary: NED vs ED,P62263,both,True
+Primary: NED vs ED,P62266,both,True
+Primary: NED vs ED,P62269,both,True
+Primary: NED vs ED,P62273,both,True
+Primary: NED vs ED,P62277,both,True
+Primary: NED vs ED,P62280,both,True
+Primary: NED vs ED,P62306,both,True
+Primary: NED vs ED,P62308,both,True
+Primary: NED vs ED,P62314,both,True
+Primary: NED vs ED,P62333,both,True
+Primary: NED vs ED,P62424,both,True
+Primary: NED vs ED,P62487,both,True
+Primary: NED vs ED,P62701,both,True
+Primary: NED vs ED,P62753,both,True
+Primary: NED vs ED,P62805,both,True
+Primary: NED vs ED,P62826,both,True
+Primary: NED vs ED,P62829,both,True
+Primary: NED vs ED,P62851,both,True
+Primary: NED vs ED,P62854,both,True
+Primary: NED vs ED,P62857,both,True
+Primary: NED vs ED,P62877,both,True
+Primary: NED vs ED,P62906,both,True
+Primary: NED vs ED,P62917,both,True
+Primary: NED vs ED,P62979,both,True
+Primary: NED vs ED,P62993,both,True
+Primary: NED vs ED,P63104,both,True
+Primary: NED vs ED,P63167,both,True
+Primary: NED vs ED,P63261,both,True
+Primary: NED vs ED,P63279,both,True
+Primary: NED vs ED,P67775,both,True
+Primary: NED vs ED,P67870,both,True
+Primary: NED vs ED,P67936,both,True
+Primary: NED vs ED,P68032,both,True
+Primary: NED vs ED,P68363,both,True
+Primary: NED vs ED,P68371,both,True
+Primary: NED vs ED,P68402,both,True
+Primary: NED vs ED,P68431,both,True
+Primary: NED vs ED,P78316,both,True
+Primary: NED vs ED,P78406,both,True
+Primary: NED vs ED,P78417,both,True
+Primary: NED vs ED,P78527,both,True
+Primary: NED vs ED,P82675,both,True
+Primary: NED vs ED,Q00059,both,True
+Primary: NED vs ED,Q00169,both,True
+Primary: NED vs ED,Q00403,both,True
+Primary: NED vs ED,Q00688,both,True
+Primary: NED vs ED,Q01581,both,True
+Primary: NED vs ED,Q01658,both,True
+Primary: NED vs ED,Q01850,both,True
+Primary: NED vs ED,Q02241,both,True
+Primary: NED vs ED,Q02790,both,True
+Primary: NED vs ED,Q02878,both,True
+Primary: NED vs ED,Q04446,both,True
+Primary: NED vs ED,Q04760,both,True
+Primary: NED vs ED,Q04837,both,True
+Primary: NED vs ED,Q04917,both,True
+Primary: NED vs ED,Q05048,both,True
+Primary: NED vs ED,Q06124,both,True
+Primary: NED vs ED,Q06203,both,True
+Primary: NED vs ED,Q06265,both,True
+Primary: NED vs ED,Q06323,both,True
+Primary: NED vs ED,Q06830,both,True
+Primary: NED vs ED,Q07960,both,True
+Primary: NED vs ED,Q08752,both,True
+Primary: NED vs ED,Q08945,both,True
+Primary: NED vs ED,Q08AF3,both,True
+Primary: NED vs ED,Q12765,both,True
+Primary: NED vs ED,Q12792,both,True
+Primary: NED vs ED,Q12965,both,True
+Primary: NED vs ED,Q13011,both,True
+Primary: NED vs ED,Q13085,both,True
+Primary: NED vs ED,Q13112,both,True
+Primary: NED vs ED,Q13126,both,True
+Primary: NED vs ED,Q13155,both,True
+Primary: NED vs ED,Q13162,both,True
+Primary: NED vs ED,Q13206,both,True
+Primary: NED vs ED,Q13347,both,True
+Primary: NED vs ED,Q13405,both,True
+Primary: NED vs ED,Q13526,both,True
+Primary: NED vs ED,Q13547,both,True
+Primary: NED vs ED,Q13601,both,True
+Primary: NED vs ED,Q13610,both,True
+Primary: NED vs ED,Q13616,both,True
+Primary: NED vs ED,Q13617,both,True
+Primary: NED vs ED,Q14019,both,True
+Primary: NED vs ED,Q14061,both,True
+Primary: NED vs ED,Q14137,both,True
+Primary: NED vs ED,Q14139,both,True
+Primary: NED vs ED,Q14149,both,True
+Primary: NED vs ED,Q14166,both,True
+Primary: NED vs ED,Q14181,both,True
+Primary: NED vs ED,Q14192,both,True
+Primary: NED vs ED,Q14204,both,True
+Primary: NED vs ED,Q14232,both,True
+Primary: NED vs ED,Q14651,both,True
+Primary: NED vs ED,Q14657,both,True
+Primary: NED vs ED,Q14683,both,True
+Primary: NED vs ED,Q14691,both,True
+Primary: NED vs ED,Q14692,both,True
+Primary: NED vs ED,Q14764,both,True
+Primary: NED vs ED,Q14919,both,True
+Primary: NED vs ED,Q14974,both,True
+Primary: NED vs ED,Q14999,both,True
+Primary: NED vs ED,Q14CX7,both,True
+Primary: NED vs ED,Q15008,both,True
+Primary: NED vs ED,Q15021,both,True
+Primary: NED vs ED,Q15102,both,True
+Primary: NED vs ED,Q15121,both,True
+Primary: NED vs ED,Q15181,both,True
+Primary: NED vs ED,Q15208,both,True
+Primary: NED vs ED,Q15291,both,True
+Primary: NED vs ED,Q15370,both,True
+Primary: NED vs ED,Q15393,both,True
+Primary: NED vs ED,Q15435,both,True
+Primary: NED vs ED,Q15645,both,True
+Primary: NED vs ED,Q15691,both,True
+Primary: NED vs ED,Q15843,both,True
+Primary: NED vs ED,Q16204,both,True
+Primary: NED vs ED,Q16401,both,True
+Primary: NED vs ED,Q16527,both,True
+Primary: NED vs ED,Q16531,both,True
+Primary: NED vs ED,Q16539,both,True
+Primary: NED vs ED,Q16543,both,True
+Primary: NED vs ED,Q16576,both,True
+Primary: NED vs ED,Q16658,both,True
+Primary: NED vs ED,Q16836,both,True
+Primary: NED vs ED,Q16851,both,True
+Primary: NED vs ED,Q2M389,both,True
+Primary: NED vs ED,Q3ZCM7,both,True
+Primary: NED vs ED,Q53FA7,both,True
+Primary: NED vs ED,Q58FF6,both,True
+Primary: NED vs ED,Q58FF8,both,True
+Primary: NED vs ED,Q59GN2,both,True
+Primary: NED vs ED,Q5JVF3,both,True
+Primary: NED vs ED,Q5SY16,both,True
+Primary: NED vs ED,Q5TFE4,both,True
+Primary: NED vs ED,Q5VYK3,both,True
+Primary: NED vs ED,Q63HN8,both,True
+Primary: NED vs ED,Q6AI08,both,True
+Primary: NED vs ED,Q6DKI1,both,True
+Primary: NED vs ED,Q6GMV3,both,True
+Primary: NED vs ED,Q6IBS0,both,True
+Primary: NED vs ED,Q6NVY1,both,True
+Primary: NED vs ED,Q6P158,both,True
+Primary: NED vs ED,Q6P1J9,both,True
+Primary: NED vs ED,Q6P1K8,both,True
+Primary: NED vs ED,Q6P1L8,both,True
+Primary: NED vs ED,Q6P1N0,both,True
+Primary: NED vs ED,Q6P587,both,True
+Primary: NED vs ED,Q6PGP7,both,True
+Primary: NED vs ED,Q6UWE0,both,True
+Primary: NED vs ED,Q6UXN9,both,True
+Primary: NED vs ED,Q6YHU6,both,True
+Primary: NED vs ED,Q6YN16,both,True
+Primary: NED vs ED,Q6ZVM7,both,True
+Primary: NED vs ED,Q712K3,both,True
+Primary: NED vs ED,Q71U36,both,True
+Primary: NED vs ED,Q71UM5,both,True
+Primary: NED vs ED,Q7L273,both,True
+Primary: NED vs ED,Q7Z406,both,True
+Primary: NED vs ED,Q7Z4Q2,both,True
+Primary: NED vs ED,Q7Z7F7,both,True
+Primary: NED vs ED,Q86TI2,both,True
+Primary: NED vs ED,Q86UY8,both,True
+Primary: NED vs ED,Q86VI3,both,True
+Primary: NED vs ED,Q86VP6,both,True
+Primary: NED vs ED,Q86VS8,both,True
+Primary: NED vs ED,Q86WA8,both,True
+Primary: NED vs ED,Q86WJ1,both,True
+Primary: NED vs ED,Q86XA9,both,True
+Primary: NED vs ED,Q86XI2,both,True
+Primary: NED vs ED,Q86Y56,both,True
+Primary: NED vs ED,Q8IVB5,both,True
+Primary: NED vs ED,Q8IVM0,both,True
+Primary: NED vs ED,Q8IWA0,both,True
+Primary: NED vs ED,Q8IY81,both,True
+Primary: NED vs ED,Q8IYS1,both,True
+Primary: NED vs ED,Q8N392,both,True
+Primary: NED vs ED,Q8N6M0,both,True
+Primary: NED vs ED,Q8N806,both,True
+Primary: NED vs ED,Q8NBX0,both,True
+Primary: NED vs ED,Q8ND04,both,True
+Primary: NED vs ED,Q8NE71,both,True
+Primary: NED vs ED,Q8NFH3,both,True
+Primary: NED vs ED,Q8NFW8,both,True
+Primary: NED vs ED,Q8NI27,both,True
+Primary: NED vs ED,Q8NI36,both,True
+Primary: NED vs ED,Q8TAE8,both,True
+Primary: NED vs ED,Q8TAT6,both,True
+Primary: NED vs ED,Q8TCF1,both,True
+Primary: NED vs ED,Q8TCG1,both,True
+Primary: NED vs ED,Q8TD16,both,True
+Primary: NED vs ED,Q8TD19,both,True
+Primary: NED vs ED,Q8TDD1,both,True
+Primary: NED vs ED,Q8TDX7,both,True
+Primary: NED vs ED,Q8TEQ6,both,True
+Primary: NED vs ED,Q8TF65,both,True
+Primary: NED vs ED,Q8WTS6,both,True
+Primary: NED vs ED,Q8WUM0,both,True
+Primary: NED vs ED,Q8WVY7,both,True
+Primary: NED vs ED,Q8WWH5,both,True
+Primary: NED vs ED,Q8WYA6,both,True
+Primary: NED vs ED,Q8WZA0,both,True
+Primary: NED vs ED,Q92600,both,True
+Primary: NED vs ED,Q92841,both,True
+Primary: NED vs ED,Q92878,both,True
+Primary: NED vs ED,Q92882,both,True
+Primary: NED vs ED,Q92905,both,True
+Primary: NED vs ED,Q93034,both,True
+Primary: NED vs ED,Q969G6,both,True
+Primary: NED vs ED,Q96A35,both,True
+Primary: NED vs ED,Q96A72,both,True
+Primary: NED vs ED,Q96D46,both,True
+Primary: NED vs ED,Q96DE0,both,True
+Primary: NED vs ED,Q96EA4,both,True
+Primary: NED vs ED,Q96EK5,both,True
+Primary: NED vs ED,Q96FJ0,both,True
+Primary: NED vs ED,Q96FX7,both,True
+Primary: NED vs ED,Q96GD4,both,True
+Primary: NED vs ED,Q96HW7,both,True
+Primary: NED vs ED,Q96I99,both,True
+Primary: NED vs ED,Q96JH7,both,True
+Primary: NED vs ED,Q96KP1,both,True
+Primary: NED vs ED,Q96KP4,both,True
+Primary: NED vs ED,Q96NC0,both,True
+Primary: NED vs ED,Q96P16,both,True
+Primary: NED vs ED,Q96PU4,both,True
+Primary: NED vs ED,Q96PY5,both,True
+Primary: NED vs ED,Q96PZ2,both,True
+Primary: NED vs ED,Q99436,both,True
+Primary: NED vs ED,Q99459,both,True
+Primary: NED vs ED,Q99471,both,True
+Primary: NED vs ED,Q99543,both,True
+Primary: NED vs ED,Q99613,both,True
+Primary: NED vs ED,Q99614,both,True
+Primary: NED vs ED,Q99615,both,True
+Primary: NED vs ED,Q99661,both,True
+Primary: NED vs ED,Q99717,both,True
+Primary: NED vs ED,Q99733,both,True
+Primary: NED vs ED,Q99832,both,True
+Primary: NED vs ED,Q99986,both,True
+Primary: NED vs ED,Q9BPW8,both,True
+Primary: NED vs ED,Q9BPX3,both,True
+Primary: NED vs ED,Q9BQ52,both,True
+Primary: NED vs ED,Q9BQ67,both,True
+Primary: NED vs ED,Q9BQA1,both,True
+Primary: NED vs ED,Q9BQE3,both,True
+Primary: NED vs ED,Q9BRA2,both,True
+Primary: NED vs ED,Q9BRT6,both,True
+Primary: NED vs ED,Q9BRX5,both,True
+Primary: NED vs ED,Q9BS40,both,True
+Primary: NED vs ED,Q9BSJ2,both,True
+Primary: NED vs ED,Q9BSV6,both,True
+Primary: NED vs ED,Q9BT78,both,True
+Primary: NED vs ED,Q9BTY7,both,True
+Primary: NED vs ED,Q9BU89,both,True
+Primary: NED vs ED,Q9BUF5,both,True
+Primary: NED vs ED,Q9BUQ8,both,True
+Primary: NED vs ED,Q9BV86,both,True
+Primary: NED vs ED,Q9BVG4,both,True
+Primary: NED vs ED,Q9BW19,both,True
+Primary: NED vs ED,Q9BW62,both,True
+Primary: NED vs ED,Q9BXJ9,both,True
+Primary: NED vs ED,Q9BXY0,both,True
+Primary: NED vs ED,Q9BYD1,both,True
+Primary: NED vs ED,Q9BYD3,both,True
+Primary: NED vs ED,Q9BYT8,both,True
+Primary: NED vs ED,Q9BZF9,both,True
+Primary: NED vs ED,Q9BZH6,both,True
+Primary: NED vs ED,Q9BZX2,both,True
+Primary: NED vs ED,Q9C005,both,True
+Primary: NED vs ED,Q9GZL7,both,True
+Primary: NED vs ED,Q9GZS3,both,True
+Primary: NED vs ED,Q9GZT4,both,True
+Primary: NED vs ED,Q9H0A0,both,True
+Primary: NED vs ED,Q9H0C8,both,True
+Primary: NED vs ED,Q9H0E2,both,True
+Primary: NED vs ED,Q9H173,both,True
+Primary: NED vs ED,Q9H1I8,both,True
+Primary: NED vs ED,Q9H2H8,both,True
+Primary: NED vs ED,Q9H2J4,both,True
+Primary: NED vs ED,Q9H2U1,both,True
+Primary: NED vs ED,Q9H3F6,both,True
+Primary: NED vs ED,Q9H6S3,both,True
+Primary: NED vs ED,Q9H6T3,both,True
+Primary: NED vs ED,Q9H6V9,both,True
+Primary: NED vs ED,Q9H788,both,True
+Primary: NED vs ED,Q9H7D7,both,True
+Primary: NED vs ED,Q9H7E9,both,True
+Primary: NED vs ED,Q9H8S9,both,True
+Primary: NED vs ED,Q9H967,both,True
+Primary: NED vs ED,Q9H9A6,both,True
+Primary: NED vs ED,Q9H9T3,both,True
+Primary: NED vs ED,Q9H9Y2,both,True
+Primary: NED vs ED,Q9HA64,both,True
+Primary: NED vs ED,Q9HAU5,both,True
+Primary: NED vs ED,Q9HAV0,both,True
+Primary: NED vs ED,Q9HAV7,both,True
+Primary: NED vs ED,Q9HB07,both,True
+Primary: NED vs ED,Q9HC38,both,True
+Primary: NED vs ED,Q9HCN8,both,True
+Primary: NED vs ED,Q9HCS7,both,True
+Primary: NED vs ED,Q9HD15,both,True
+Primary: NED vs ED,Q9NPD3,both,True
+Primary: NED vs ED,Q9NPQ8,both,True
+Primary: NED vs ED,Q9NQ88,both,True
+Primary: NED vs ED,Q9NQP4,both,True
+Primary: NED vs ED,Q9NQR4,both,True
+Primary: NED vs ED,Q9NRF9,both,True
+Primary: NED vs ED,Q9NRV9,both,True
+Primary: NED vs ED,Q9NRX1,both,True
+Primary: NED vs ED,Q9NRX2,both,True
+Primary: NED vs ED,Q9NSD9,both,True
+Primary: NED vs ED,Q9NSE4,both,True
+Primary: NED vs ED,Q9NTJ3,both,True
+Primary: NED vs ED,Q9NTK5,both,True
+Primary: NED vs ED,Q9NU22,both,True
+Primary: NED vs ED,Q9NUG6,both,True
+Primary: NED vs ED,Q9NUQ8,both,True
+Primary: NED vs ED,Q9NVE7,both,True
+Primary: NED vs ED,Q9NVI1,both,True
+Primary: NED vs ED,Q9NVM6,both,True
+Primary: NED vs ED,Q9NVM9,both,True
+Primary: NED vs ED,Q9NVP2,both,True
+Primary: NED vs ED,Q9NVS9,both,True
+Primary: NED vs ED,Q9NVU7,both,True
+Primary: NED vs ED,Q9NVX2,both,True
+Primary: NED vs ED,Q9NW64,both,True
+Primary: NED vs ED,Q9NWM8,both,True
+Primary: NED vs ED,Q9NWY4,both,True
+Primary: NED vs ED,Q9NX24,both,True
+Primary: NED vs ED,Q9NXG2,both,True
+Primary: NED vs ED,Q9NYB0,both,True
+Primary: NED vs ED,Q9NYJ1,both,True
+Primary: NED vs ED,Q9NZD2,both,True
+Primary: NED vs ED,Q9NZL9,both,True
+Primary: NED vs ED,Q9P000,both,True
+Primary: NED vs ED,Q9P0M6,both,True
+Primary: NED vs ED,Q9P265,both,True
+Primary: NED vs ED,Q9P287,both,True
+Primary: NED vs ED,Q9P2J3,both,True
+Primary: NED vs ED,Q9UBB9,both,True
+Primary: NED vs ED,Q9UBQ7,both,True
+Primary: NED vs ED,Q9UBS4,both,True
+Primary: NED vs ED,Q9UBT2,both,True
+Primary: NED vs ED,Q9UFC0,both,True
+Primary: NED vs ED,Q9UHB9,both,True
+Primary: NED vs ED,Q9UHG3,both,True
+Primary: NED vs ED,Q9UHY7,both,True
+Primary: NED vs ED,Q9UI26,both,True
+Primary: NED vs ED,Q9UI30,both,True
+Primary: NED vs ED,Q9UIA9,both,True
+Primary: NED vs ED,Q9UIJ7,both,True
+Primary: NED vs ED,Q9UJ70,both,True
+Primary: NED vs ED,Q9UJA5,both,True
+Primary: NED vs ED,Q9UK45,both,True
+Primary: NED vs ED,Q9UKK9,both,True
+Primary: NED vs ED,Q9UL46,both,True
+Primary: NED vs ED,Q9ULX3,both,True
+Primary: NED vs ED,Q9ULX9,both,True
+Primary: NED vs ED,Q9UMS4,both,True
+Primary: NED vs ED,Q9UMY1,both,True
+Primary: NED vs ED,Q9UNE7,both,True
+Primary: NED vs ED,Q9UNM6,both,True
+Primary: NED vs ED,Q9UNQ2,both,True
+Primary: NED vs ED,Q9UNX4,both,True
+Primary: NED vs ED,Q9UNZ2,both,True
+Primary: NED vs ED,Q9UPU5,both,True
+Primary: NED vs ED,Q9Y221,both,True
+Primary: NED vs ED,Q9Y224,both,True
+Primary: NED vs ED,Q9Y237,both,True
+Primary: NED vs ED,Q9Y248,both,True
+Primary: NED vs ED,Q9Y263,both,True
+Primary: NED vs ED,Q9Y285,both,True
+Primary: NED vs ED,Q9Y294,both,True
+Primary: NED vs ED,Q9Y2D4,both,True
+Primary: NED vs ED,Q9Y2L1,both,True
+Primary: NED vs ED,Q9Y2P8,both,True
+Primary: NED vs ED,Q9Y2R9,both,True
+Primary: NED vs ED,Q9Y2X3,both,True
+Primary: NED vs ED,Q9Y2X7,both,True
+Primary: NED vs ED,Q9Y2Z0,both,True
+Primary: NED vs ED,Q9Y312,both,True
+Primary: NED vs ED,Q9Y315,both,True
+Primary: NED vs ED,Q9Y333,both,True
+Primary: NED vs ED,Q9Y399,both,True
+Primary: NED vs ED,Q9Y3A4,both,True
+Primary: NED vs ED,Q9Y3A5,both,True
+Primary: NED vs ED,Q9Y3F4,both,True
+Primary: NED vs ED,Q9Y3U8,both,True
+Primary: NED vs ED,Q9Y496,both,True
+Primary: NED vs ED,Q9Y4E8,both,True
+Primary: NED vs ED,Q9Y4K4,both,True
+Primary: NED vs ED,Q9Y4X5,both,True
+Primary: NED vs ED,Q9Y546,both,True
+Primary: NED vs ED,Q9Y570,both,True
+Primary: NED vs ED,Q9Y5J1,both,True
+Primary: NED vs ED,Q9Y5P6,both,True
+Primary: NED vs ED,Q9Y5S9,both,True
+Primary: NED vs ED,Q9Y617,both,True
+Primary: NED vs ED,Q9Y676,both,True
+Sensitivity: NED vs ED + UN,A0AVT1,both,True
+Sensitivity: NED vs ED + UN,A4D1E9,both,True
+Sensitivity: NED vs ED + UN,A5YKK6,both,True
+Sensitivity: NED vs ED + UN,A6NHR9,both,True
+Sensitivity: NED vs ED + UN,O00148,both,True
+Sensitivity: NED vs ED + UN,O00170,both,True
+Sensitivity: NED vs ED + UN,O00178,both,True
+Sensitivity: NED vs ED + UN,O00231,both,True
+Sensitivity: NED vs ED + UN,O00232,both,True
+Sensitivity: NED vs ED + UN,O00244,both,True
+Sensitivity: NED vs ED + UN,O00303,both,True
+Sensitivity: NED vs ED + UN,O00410,both,True
+Sensitivity: NED vs ED + UN,O00411,both,True
+Sensitivity: NED vs ED + UN,O00425,both,True
+Sensitivity: NED vs ED + UN,O00442,both,True
+Sensitivity: NED vs ED + UN,O00458,both,True
+Sensitivity: NED vs ED + UN,O00487,both,True
+Sensitivity: NED vs ED + UN,O00505,both,True
+Sensitivity: NED vs ED + UN,O00567,both,True
+Sensitivity: NED vs ED + UN,O00625,both,True
+Sensitivity: NED vs ED + UN,O00629,both,True
+Sensitivity: NED vs ED + UN,O00743,both,True
+Sensitivity: NED vs ED + UN,O00762,both,True
+Sensitivity: NED vs ED + UN,O14530,both,True
+Sensitivity: NED vs ED + UN,O14561,both,True
+Sensitivity: NED vs ED + UN,O14744,both,True
+Sensitivity: NED vs ED + UN,O14777,both,True
+Sensitivity: NED vs ED + UN,O14802,both,True
+Sensitivity: NED vs ED + UN,O14818,both,True
+Sensitivity: NED vs ED + UN,O14929,both,True
+Sensitivity: NED vs ED + UN,O14950,both,True
+Sensitivity: NED vs ED + UN,O14980,both,True
+Sensitivity: NED vs ED + UN,O14981,both,True
+Sensitivity: NED vs ED + UN,O15111,both,True
+Sensitivity: NED vs ED + UN,O15116,both,True
+Sensitivity: NED vs ED + UN,O15143,both,True
+Sensitivity: NED vs ED + UN,O15144,both,True
+Sensitivity: NED vs ED + UN,O15145,both,True
+Sensitivity: NED vs ED + UN,O15212,both,True
+Sensitivity: NED vs ED + UN,O15213,both,True
+Sensitivity: NED vs ED + UN,O15235,both,True
+Sensitivity: NED vs ED + UN,O15305,both,True
+Sensitivity: NED vs ED + UN,O15347,both,True
+Sensitivity: NED vs ED + UN,O15372,both,True
+Sensitivity: NED vs ED + UN,O15381,both,True
+Sensitivity: NED vs ED + UN,O15397,both,True
+Sensitivity: NED vs ED + UN,O15511,both,True
+Sensitivity: NED vs ED + UN,O15514,both,True
+Sensitivity: NED vs ED + UN,O43143,both,True
+Sensitivity: NED vs ED + UN,O43156,both,True
+Sensitivity: NED vs ED + UN,O43175,both,True
+Sensitivity: NED vs ED + UN,O43242,both,True
+Sensitivity: NED vs ED + UN,O43252,both,True
+Sensitivity: NED vs ED + UN,O43395,both,True
+Sensitivity: NED vs ED + UN,O43396,both,True
+Sensitivity: NED vs ED + UN,O43592,both,True
+Sensitivity: NED vs ED + UN,O43660,both,True
+Sensitivity: NED vs ED + UN,O43681,both,True
+Sensitivity: NED vs ED + UN,O43707,both,True
+Sensitivity: NED vs ED + UN,O43715,both,True
+Sensitivity: NED vs ED + UN,O43765,both,True
+Sensitivity: NED vs ED + UN,O43776,both,True
+Sensitivity: NED vs ED + UN,O43809,both,True
+Sensitivity: NED vs ED + UN,O43818,both,True
+Sensitivity: NED vs ED + UN,O43837,both,True
+Sensitivity: NED vs ED + UN,O60231,both,True
+Sensitivity: NED vs ED + UN,O60256,both,True
+Sensitivity: NED vs ED + UN,O60264,both,True
+Sensitivity: NED vs ED + UN,O60287,both,True
+Sensitivity: NED vs ED + UN,O60341,both,True
+Sensitivity: NED vs ED + UN,O60493,both,True
+Sensitivity: NED vs ED + UN,O60502,both,True
+Sensitivity: NED vs ED + UN,O60506,both,True
+Sensitivity: NED vs ED + UN,O60508,both,True
+Sensitivity: NED vs ED + UN,O60518,both,True
+Sensitivity: NED vs ED + UN,O60573,both,True
+Sensitivity: NED vs ED + UN,O60684,both,True
+Sensitivity: NED vs ED + UN,O60701,both,True
+Sensitivity: NED vs ED + UN,O60762,both,True
+Sensitivity: NED vs ED + UN,O60783,both,True
+Sensitivity: NED vs ED + UN,O60826,both,True
+Sensitivity: NED vs ED + UN,O60832,both,True
+Sensitivity: NED vs ED + UN,O60921,both,True
+Sensitivity: NED vs ED + UN,O75083,both,True
+Sensitivity: NED vs ED + UN,O75391,both,True
+Sensitivity: NED vs ED + UN,O75439,both,True
+Sensitivity: NED vs ED + UN,O75506,both,True
+Sensitivity: NED vs ED + UN,O75531,both,True
+Sensitivity: NED vs ED + UN,O75533,both,True
+Sensitivity: NED vs ED + UN,O75534,both,True
+Sensitivity: NED vs ED + UN,O75643,both,True
+Sensitivity: NED vs ED + UN,O75663,both,True
+Sensitivity: NED vs ED + UN,O75691,both,True
+Sensitivity: NED vs ED + UN,O75717,both,True
+Sensitivity: NED vs ED + UN,O75794,both,True
+Sensitivity: NED vs ED + UN,O75828,both,True
+Sensitivity: NED vs ED + UN,O75832,both,True
+Sensitivity: NED vs ED + UN,O75874,both,True
+Sensitivity: NED vs ED + UN,O75934,both,True
+Sensitivity: NED vs ED + UN,O75937,both,True
+Sensitivity: NED vs ED + UN,O75940,both,True
+Sensitivity: NED vs ED + UN,O76003,both,True
+Sensitivity: NED vs ED + UN,O76071,both,True
+Sensitivity: NED vs ED + UN,O76094,both,True
+Sensitivity: NED vs ED + UN,O94760,both,True
+Sensitivity: NED vs ED + UN,O94776,both,True
+Sensitivity: NED vs ED + UN,O94822,both,True
+Sensitivity: NED vs ED + UN,O94888,both,True
+Sensitivity: NED vs ED + UN,O94906,both,True
+Sensitivity: NED vs ED + UN,O95163,both,True
+Sensitivity: NED vs ED + UN,O95232,both,True
+Sensitivity: NED vs ED + UN,O95239,both,True
+Sensitivity: NED vs ED + UN,O95273,both,True
+Sensitivity: NED vs ED + UN,O95299,both,True
+Sensitivity: NED vs ED + UN,O95302,both,True
+Sensitivity: NED vs ED + UN,O95340,both,True
+Sensitivity: NED vs ED + UN,O95347,both,True
+Sensitivity: NED vs ED + UN,O95352,both,True
+Sensitivity: NED vs ED + UN,O95372,both,True
+Sensitivity: NED vs ED + UN,O95373,both,True
+Sensitivity: NED vs ED + UN,O95394,both,True
+Sensitivity: NED vs ED + UN,O95433,both,True
+Sensitivity: NED vs ED + UN,O95478,both,True
+Sensitivity: NED vs ED + UN,O95571,both,True
+Sensitivity: NED vs ED + UN,O95747,both,True
+Sensitivity: NED vs ED + UN,O95757,both,True
+Sensitivity: NED vs ED + UN,O95777,both,True
+Sensitivity: NED vs ED + UN,O95801,both,True
+Sensitivity: NED vs ED + UN,O95816,both,True
+Sensitivity: NED vs ED + UN,O95861,both,True
+Sensitivity: NED vs ED + UN,O95865,both,True
+Sensitivity: NED vs ED + UN,O95881,both,True
+Sensitivity: NED vs ED + UN,O96019,both,True
+Sensitivity: NED vs ED + UN,P00338,both,True
+Sensitivity: NED vs ED + UN,P00367,both,True
+Sensitivity: NED vs ED + UN,P00491,both,True
+Sensitivity: NED vs ED + UN,P00492,both,True
+Sensitivity: NED vs ED + UN,P00558,both,True
+Sensitivity: NED vs ED + UN,P00568,both,True
+Sensitivity: NED vs ED + UN,P02545,both,True
+Sensitivity: NED vs ED + UN,P02794,both,True
+Sensitivity: NED vs ED + UN,P02795,both,True
+Sensitivity: NED vs ED + UN,P04040,both,True
+Sensitivity: NED vs ED + UN,P04066,both,True
+Sensitivity: NED vs ED + UN,P04075,both,True
+Sensitivity: NED vs ED + UN,P04080,both,True
+Sensitivity: NED vs ED + UN,P04181,both,True
+Sensitivity: NED vs ED + UN,P04183,both,True
+Sensitivity: NED vs ED + UN,P04350,both,True
+Sensitivity: NED vs ED + UN,P05091,both,True
+Sensitivity: NED vs ED + UN,P05198,both,True
+Sensitivity: NED vs ED + UN,P05386,both,True
+Sensitivity: NED vs ED + UN,P05388,both,True
+Sensitivity: NED vs ED + UN,P05455,both,True
+Sensitivity: NED vs ED + UN,P05783,both,True
+Sensitivity: NED vs ED + UN,P06132,both,True
+Sensitivity: NED vs ED + UN,P06400,both,True
+Sensitivity: NED vs ED + UN,P06493,both,True
+Sensitivity: NED vs ED + UN,P06730,both,True
+Sensitivity: NED vs ED + UN,P06746,both,True
+Sensitivity: NED vs ED + UN,P07108,both,True
+Sensitivity: NED vs ED + UN,P07737,both,True
+Sensitivity: NED vs ED + UN,P08133,both,True
+Sensitivity: NED vs ED + UN,P08237,both,True
+Sensitivity: NED vs ED + UN,P08559,both,True
+Sensitivity: NED vs ED + UN,P08579,both,True
+Sensitivity: NED vs ED + UN,P08621,both,True
+Sensitivity: NED vs ED + UN,P08758,both,True
+Sensitivity: NED vs ED + UN,P09001,both,True
+Sensitivity: NED vs ED + UN,P09012,both,True
+Sensitivity: NED vs ED + UN,P09110,both,True
+Sensitivity: NED vs ED + UN,P09211,both,True
+Sensitivity: NED vs ED + UN,P09234,both,True
+Sensitivity: NED vs ED + UN,P09488,both,True
+Sensitivity: NED vs ED + UN,P09622,both,True
+Sensitivity: NED vs ED + UN,P09661,both,True
+Sensitivity: NED vs ED + UN,P09874,both,True
+Sensitivity: NED vs ED + UN,P09960,both,True
+Sensitivity: NED vs ED + UN,P09972,both,True
+Sensitivity: NED vs ED + UN,P10109,both,True
+Sensitivity: NED vs ED + UN,P10155,both,True
+Sensitivity: NED vs ED + UN,P10515,both,True
+Sensitivity: NED vs ED + UN,P10589,both,True
+Sensitivity: NED vs ED + UN,P10768,both,True
+Sensitivity: NED vs ED + UN,P10809,both,True
+Sensitivity: NED vs ED + UN,P11021,both,True
+Sensitivity: NED vs ED + UN,P11172,both,True
+Sensitivity: NED vs ED + UN,P11216,both,True
+Sensitivity: NED vs ED + UN,P11387,both,True
+Sensitivity: NED vs ED + UN,P11388,both,True
+Sensitivity: NED vs ED + UN,P11441,both,True
+Sensitivity: NED vs ED + UN,P11766,both,True
+Sensitivity: NED vs ED + UN,P11908,both,True
+Sensitivity: NED vs ED + UN,P11940,both,True
+Sensitivity: NED vs ED + UN,P12004,both,True
+Sensitivity: NED vs ED + UN,P12268,both,True
+Sensitivity: NED vs ED + UN,P12429,both,True
+Sensitivity: NED vs ED + UN,P12955,both,True
+Sensitivity: NED vs ED + UN,P12956,both,True
+Sensitivity: NED vs ED + UN,P13010,both,True
+Sensitivity: NED vs ED + UN,P13489,both,True
+Sensitivity: NED vs ED + UN,P13639,both,True
+Sensitivity: NED vs ED + UN,P13667,both,True
+Sensitivity: NED vs ED + UN,P13693,both,True
+Sensitivity: NED vs ED + UN,P13797,both,True
+Sensitivity: NED vs ED + UN,P13798,both,True
+Sensitivity: NED vs ED + UN,P13804,both,True
+Sensitivity: NED vs ED + UN,P13984,both,True
+Sensitivity: NED vs ED + UN,P13995,both,True
+Sensitivity: NED vs ED + UN,P14618,both,True
+Sensitivity: NED vs ED + UN,P14625,both,True
+Sensitivity: NED vs ED + UN,P14635,both,True
+Sensitivity: NED vs ED + UN,P14866,both,True
+Sensitivity: NED vs ED + UN,P14868,both,True
+Sensitivity: NED vs ED + UN,P15121,both,True
+Sensitivity: NED vs ED + UN,P15531,both,True
+Sensitivity: NED vs ED + UN,P15586,both,True
+Sensitivity: NED vs ED + UN,P15880,both,True
+Sensitivity: NED vs ED + UN,P15927,both,True
+Sensitivity: NED vs ED + UN,P16152,both,True
+Sensitivity: NED vs ED + UN,P16298,both,True
+Sensitivity: NED vs ED + UN,P16930,both,True
+Sensitivity: NED vs ED + UN,P16949,both,True
+Sensitivity: NED vs ED + UN,P17066,both,True
+Sensitivity: NED vs ED + UN,P17174,both,True
+Sensitivity: NED vs ED + UN,P17812,both,True
+Sensitivity: NED vs ED + UN,P17844,both,True
+Sensitivity: NED vs ED + UN,P17858,both,True
+Sensitivity: NED vs ED + UN,P17987,both,True
+Sensitivity: NED vs ED + UN,P18077,both,True
+Sensitivity: NED vs ED + UN,P18669,both,True
+Sensitivity: NED vs ED + UN,P18754,both,True
+Sensitivity: NED vs ED + UN,P19174,both,True
+Sensitivity: NED vs ED + UN,P19388,both,True
+Sensitivity: NED vs ED + UN,P19447,both,True
+Sensitivity: NED vs ED + UN,P19525,both,True
+Sensitivity: NED vs ED + UN,P19623,both,True
+Sensitivity: NED vs ED + UN,P19784,both,True
+Sensitivity: NED vs ED + UN,P19838,both,True
+Sensitivity: NED vs ED + UN,P20290,both,True
+Sensitivity: NED vs ED + UN,P20585,both,True
+Sensitivity: NED vs ED + UN,P20618,both,True
+Sensitivity: NED vs ED + UN,P20700,both,True
+Sensitivity: NED vs ED + UN,P21266,both,True
+Sensitivity: NED vs ED + UN,P21291,both,True
+Sensitivity: NED vs ED + UN,P21399,both,True
+Sensitivity: NED vs ED + UN,P22033,both,True
+Sensitivity: NED vs ED + UN,P22061,both,True
+Sensitivity: NED vs ED + UN,P22087,both,True
+Sensitivity: NED vs ED + UN,P22102,both,True
+Sensitivity: NED vs ED + UN,P22234,both,True
+Sensitivity: NED vs ED + UN,P23193,both,True
+Sensitivity: NED vs ED + UN,P23258,both,True
+Sensitivity: NED vs ED + UN,P23284,both,True
+Sensitivity: NED vs ED + UN,P23368,both,True
+Sensitivity: NED vs ED + UN,P23381,both,True
+Sensitivity: NED vs ED + UN,P23434,both,True
+Sensitivity: NED vs ED + UN,P23526,both,True
+Sensitivity: NED vs ED + UN,P23743,both,True
+Sensitivity: NED vs ED + UN,P23919,both,True
+Sensitivity: NED vs ED + UN,P23921,both,True
+Sensitivity: NED vs ED + UN,P24534,both,True
+Sensitivity: NED vs ED + UN,P24752,both,True
+Sensitivity: NED vs ED + UN,P24844,both,True
+Sensitivity: NED vs ED + UN,P24928,both,True
+Sensitivity: NED vs ED + UN,P24941,both,True
+Sensitivity: NED vs ED + UN,P25205,both,True
+Sensitivity: NED vs ED + UN,P25325,both,True
+Sensitivity: NED vs ED + UN,P25398,both,True
+Sensitivity: NED vs ED + UN,P25685,both,True
+Sensitivity: NED vs ED + UN,P25786,both,True
+Sensitivity: NED vs ED + UN,P25787,both,True
+Sensitivity: NED vs ED + UN,P25789,both,True
+Sensitivity: NED vs ED + UN,P26196,both,True
+Sensitivity: NED vs ED + UN,P26373,both,True
+Sensitivity: NED vs ED + UN,P26440,both,True
+Sensitivity: NED vs ED + UN,P26599,both,True
+Sensitivity: NED vs ED + UN,P26639,both,True
+Sensitivity: NED vs ED + UN,P26640,both,True
+Sensitivity: NED vs ED + UN,P26641,both,True
+Sensitivity: NED vs ED + UN,P27348,both,True
+Sensitivity: NED vs ED + UN,P27694,both,True
+Sensitivity: NED vs ED + UN,P27695,both,True
+Sensitivity: NED vs ED + UN,P28062,both,True
+Sensitivity: NED vs ED + UN,P28066,both,True
+Sensitivity: NED vs ED + UN,P28070,both,True
+Sensitivity: NED vs ED + UN,P28072,both,True
+Sensitivity: NED vs ED + UN,P28074,both,True
+Sensitivity: NED vs ED + UN,P28347,both,True
+Sensitivity: NED vs ED + UN,P28370,both,True
+Sensitivity: NED vs ED + UN,P29144,both,True
+Sensitivity: NED vs ED + UN,P29218,both,True
+Sensitivity: NED vs ED + UN,P29401,both,True
+Sensitivity: NED vs ED + UN,P29692,both,True
+Sensitivity: NED vs ED + UN,P30040,both,True
+Sensitivity: NED vs ED + UN,P30041,both,True
+Sensitivity: NED vs ED + UN,P30044,both,True
+Sensitivity: NED vs ED + UN,P30046,both,True
+Sensitivity: NED vs ED + UN,P30084,both,True
+Sensitivity: NED vs ED + UN,P30085,both,True
+Sensitivity: NED vs ED + UN,P30101,both,True
+Sensitivity: NED vs ED + UN,P30154,both,True
+Sensitivity: NED vs ED + UN,P30405,both,True
+Sensitivity: NED vs ED + UN,P30520,both,True
+Sensitivity: NED vs ED + UN,P30533,both,True
+Sensitivity: NED vs ED + UN,P30566,both,True
+Sensitivity: NED vs ED + UN,P30837,both,True
+Sensitivity: NED vs ED + UN,P31150,both,True
+Sensitivity: NED vs ED + UN,P31937,both,True
+Sensitivity: NED vs ED + UN,P31939,both,True
+Sensitivity: NED vs ED + UN,P31948,both,True
+Sensitivity: NED vs ED + UN,P31949,both,True
+Sensitivity: NED vs ED + UN,P32321,both,True
+Sensitivity: NED vs ED + UN,P32322,both,True
+Sensitivity: NED vs ED + UN,P32969,both,True
+Sensitivity: NED vs ED + UN,P33316,both,True
+Sensitivity: NED vs ED + UN,P33552,both,True
+Sensitivity: NED vs ED + UN,P33991,both,True
+Sensitivity: NED vs ED + UN,P33992,both,True
+Sensitivity: NED vs ED + UN,P33993,both,True
+Sensitivity: NED vs ED + UN,P34932,both,True
+Sensitivity: NED vs ED + UN,P35237,both,True
+Sensitivity: NED vs ED + UN,P35244,both,True
+Sensitivity: NED vs ED + UN,P35250,both,True
+Sensitivity: NED vs ED + UN,P35268,both,True
+Sensitivity: NED vs ED + UN,P35270,both,True
+Sensitivity: NED vs ED + UN,P35998,both,True
+Sensitivity: NED vs ED + UN,P36404,both,True
+Sensitivity: NED vs ED + UN,P36551,both,True
+Sensitivity: NED vs ED + UN,P36578,both,True
+Sensitivity: NED vs ED + UN,P36871,both,True
+Sensitivity: NED vs ED + UN,P36954,both,True
+Sensitivity: NED vs ED + UN,P36959,both,True
+Sensitivity: NED vs ED + UN,P37108,both,True
+Sensitivity: NED vs ED + UN,P37802,both,True
+Sensitivity: NED vs ED + UN,P37837,both,True
+Sensitivity: NED vs ED + UN,P38117,both,True
+Sensitivity: NED vs ED + UN,P38646,both,True
+Sensitivity: NED vs ED + UN,P38919,both,True
+Sensitivity: NED vs ED + UN,P39019,both,True
+Sensitivity: NED vs ED + UN,P39023,both,True
+Sensitivity: NED vs ED + UN,P40222,both,True
+Sensitivity: NED vs ED + UN,P40227,both,True
+Sensitivity: NED vs ED + UN,P40429,both,True
+Sensitivity: NED vs ED + UN,P40925,both,True
+Sensitivity: NED vs ED + UN,P40926,both,True
+Sensitivity: NED vs ED + UN,P40938,both,True
+Sensitivity: NED vs ED + UN,P41091,both,True
+Sensitivity: NED vs ED + UN,P41214,both,True
+Sensitivity: NED vs ED + UN,P41223,both,True
+Sensitivity: NED vs ED + UN,P41227,both,True
+Sensitivity: NED vs ED + UN,P41252,both,True
+Sensitivity: NED vs ED + UN,P41567,both,True
+Sensitivity: NED vs ED + UN,P42126,both,True
+Sensitivity: NED vs ED + UN,P42224,both,True
+Sensitivity: NED vs ED + UN,P42226,both,True
+Sensitivity: NED vs ED + UN,P42285,both,True
+Sensitivity: NED vs ED + UN,P42574,both,True
+Sensitivity: NED vs ED + UN,P42575,both,True
+Sensitivity: NED vs ED + UN,P42765,both,True
+Sensitivity: NED vs ED + UN,P42766,both,True
+Sensitivity: NED vs ED + UN,P42771,both,True
+Sensitivity: NED vs ED + UN,P42785,both,True
+Sensitivity: NED vs ED + UN,P42858,both,True
+Sensitivity: NED vs ED + UN,P43246,both,True
+Sensitivity: NED vs ED + UN,P43304,both,True
+Sensitivity: NED vs ED + UN,P43378,both,True
+Sensitivity: NED vs ED + UN,P43686,both,True
+Sensitivity: NED vs ED + UN,P43897,both,True
+Sensitivity: NED vs ED + UN,P45877,both,True
+Sensitivity: NED vs ED + UN,P45973,both,True
+Sensitivity: NED vs ED + UN,P45985,both,True
+Sensitivity: NED vs ED + UN,P46060,both,True
+Sensitivity: NED vs ED + UN,P46063,both,True
+Sensitivity: NED vs ED + UN,P46776,both,True
+Sensitivity: NED vs ED + UN,P46777,both,True
+Sensitivity: NED vs ED + UN,P46778,both,True
+Sensitivity: NED vs ED + UN,P46779,both,True
+Sensitivity: NED vs ED + UN,P46781,both,True
+Sensitivity: NED vs ED + UN,P46783,both,True
+Sensitivity: NED vs ED + UN,P46926,both,True
+Sensitivity: NED vs ED + UN,P47755,both,True
+Sensitivity: NED vs ED + UN,P47813,both,True
+Sensitivity: NED vs ED + UN,P47895,both,True
+Sensitivity: NED vs ED + UN,P47897,both,True
+Sensitivity: NED vs ED + UN,P47914,both,True
+Sensitivity: NED vs ED + UN,P48147,both,True
+Sensitivity: NED vs ED + UN,P48163,both,True
+Sensitivity: NED vs ED + UN,P48507,both,True
+Sensitivity: NED vs ED + UN,P48637,both,True
+Sensitivity: NED vs ED + UN,P48643,both,True
+Sensitivity: NED vs ED + UN,P48723,both,True
+Sensitivity: NED vs ED + UN,P48735,both,True
+Sensitivity: NED vs ED + UN,P49137,both,True
+Sensitivity: NED vs ED + UN,P49189,both,True
+Sensitivity: NED vs ED + UN,P49207,both,True
+Sensitivity: NED vs ED + UN,P49327,both,True
+Sensitivity: NED vs ED + UN,P49356,both,True
+Sensitivity: NED vs ED + UN,P49368,both,True
+Sensitivity: NED vs ED + UN,P49406,both,True
+Sensitivity: NED vs ED + UN,P49411,both,True
+Sensitivity: NED vs ED + UN,P49454,both,True
+Sensitivity: NED vs ED + UN,P49458,both,True
+Sensitivity: NED vs ED + UN,P49459,both,True
+Sensitivity: NED vs ED + UN,P49588,both,True
+Sensitivity: NED vs ED + UN,P49593,both,True
+Sensitivity: NED vs ED + UN,P49643,both,True
+Sensitivity: NED vs ED + UN,P49720,both,True
+Sensitivity: NED vs ED + UN,P49721,both,True
+Sensitivity: NED vs ED + UN,P49736,both,True
+Sensitivity: NED vs ED + UN,P49770,both,True
+Sensitivity: NED vs ED + UN,P49773,both,True
+Sensitivity: NED vs ED + UN,P49902,both,True
+Sensitivity: NED vs ED + UN,P49915,both,True
+Sensitivity: NED vs ED + UN,P49916,both,True
+Sensitivity: NED vs ED + UN,P50213,both,True
+Sensitivity: NED vs ED + UN,P50452,both,True
+Sensitivity: NED vs ED + UN,P50454,both,True
+Sensitivity: NED vs ED + UN,P50502,both,True
+Sensitivity: NED vs ED + UN,P50748,both,True
+Sensitivity: NED vs ED + UN,P50990,both,True
+Sensitivity: NED vs ED + UN,P50991,both,True
+Sensitivity: NED vs ED + UN,P51114,both,True
+Sensitivity: NED vs ED + UN,P51452,both,True
+Sensitivity: NED vs ED + UN,P51659,both,True
+Sensitivity: NED vs ED + UN,P51665,both,True
+Sensitivity: NED vs ED + UN,P51812,both,True
+Sensitivity: NED vs ED + UN,P51948,both,True
+Sensitivity: NED vs ED + UN,P52294,both,True
+Sensitivity: NED vs ED + UN,P52306,both,True
+Sensitivity: NED vs ED + UN,P52565,both,True
+Sensitivity: NED vs ED + UN,P52701,both,True
+Sensitivity: NED vs ED + UN,P52788,both,True
+Sensitivity: NED vs ED + UN,P52888,both,True
+Sensitivity: NED vs ED + UN,P52907,both,True
+Sensitivity: NED vs ED + UN,P53004,both,True
+Sensitivity: NED vs ED + UN,P53396,both,True
+Sensitivity: NED vs ED + UN,P53582,both,True
+Sensitivity: NED vs ED + UN,P53597,both,True
+Sensitivity: NED vs ED + UN,P54136,both,True
+Sensitivity: NED vs ED + UN,P54577,both,True
+Sensitivity: NED vs ED + UN,P55010,both,True
+Sensitivity: NED vs ED + UN,P55036,both,True
+Sensitivity: NED vs ED + UN,P55039,both,True
+Sensitivity: NED vs ED + UN,P55060,both,True
+Sensitivity: NED vs ED + UN,P55072,both,True
+Sensitivity: NED vs ED + UN,P55212,both,True
+Sensitivity: NED vs ED + UN,P55769,both,True
+Sensitivity: NED vs ED + UN,P55809,both,True
+Sensitivity: NED vs ED + UN,P56182,both,True
+Sensitivity: NED vs ED + UN,P56192,both,True
+Sensitivity: NED vs ED + UN,P56537,both,True
+Sensitivity: NED vs ED + UN,P56545,both,True
+Sensitivity: NED vs ED + UN,P57076,both,True
+Sensitivity: NED vs ED + UN,P58004,both,True
+Sensitivity: NED vs ED + UN,P58546,both,True
+Sensitivity: NED vs ED + UN,P59998,both,True
+Sensitivity: NED vs ED + UN,P60709,both,True
+Sensitivity: NED vs ED + UN,P60866,both,True
+Sensitivity: NED vs ED + UN,P60891,both,True
+Sensitivity: NED vs ED + UN,P60900,both,True
+Sensitivity: NED vs ED + UN,P60903,both,True
+Sensitivity: NED vs ED + UN,P60981,both,True
+Sensitivity: NED vs ED + UN,P60983,both,True
+Sensitivity: NED vs ED + UN,P61011,both,True
+Sensitivity: NED vs ED + UN,P61086,both,True
+Sensitivity: NED vs ED + UN,P61088,both,True
+Sensitivity: NED vs ED + UN,P61158,both,True
+Sensitivity: NED vs ED + UN,P61160,both,True
+Sensitivity: NED vs ED + UN,P61163,both,True
+Sensitivity: NED vs ED + UN,P61201,both,True
+Sensitivity: NED vs ED + UN,P61221,both,True
+Sensitivity: NED vs ED + UN,P61247,both,True
+Sensitivity: NED vs ED + UN,P61254,both,True
+Sensitivity: NED vs ED + UN,P61289,both,True
+Sensitivity: NED vs ED + UN,P61313,both,True
+Sensitivity: NED vs ED + UN,P61353,both,True
+Sensitivity: NED vs ED + UN,P61604,both,True
+Sensitivity: NED vs ED + UN,P61758,both,True
+Sensitivity: NED vs ED + UN,P61960,both,True
+Sensitivity: NED vs ED + UN,P61962,both,True
+Sensitivity: NED vs ED + UN,P61981,both,True
+Sensitivity: NED vs ED + UN,P62081,both,True
+Sensitivity: NED vs ED + UN,P62136,both,True
+Sensitivity: NED vs ED + UN,P62140,both,True
+Sensitivity: NED vs ED + UN,P62195,both,True
+Sensitivity: NED vs ED + UN,P62244,both,True
+Sensitivity: NED vs ED + UN,P62249,both,True
+Sensitivity: NED vs ED + UN,P62258,both,True
+Sensitivity: NED vs ED + UN,P62263,both,True
+Sensitivity: NED vs ED + UN,P62266,both,True
+Sensitivity: NED vs ED + UN,P62269,both,True
+Sensitivity: NED vs ED + UN,P62273,both,True
+Sensitivity: NED vs ED + UN,P62277,both,True
+Sensitivity: NED vs ED + UN,P62280,both,True
+Sensitivity: NED vs ED + UN,P62304,both,True
+Sensitivity: NED vs ED + UN,P62306,both,True
+Sensitivity: NED vs ED + UN,P62308,both,True
+Sensitivity: NED vs ED + UN,P62314,both,True
+Sensitivity: NED vs ED + UN,P62316,both,True
+Sensitivity: NED vs ED + UN,P62333,both,True
+Sensitivity: NED vs ED + UN,P62424,both,True
+Sensitivity: NED vs ED + UN,P62487,both,True
+Sensitivity: NED vs ED + UN,P62701,both,True
+Sensitivity: NED vs ED + UN,P62753,both,True
+Sensitivity: NED vs ED + UN,P62805,both,True
+Sensitivity: NED vs ED + UN,P62826,both,True
+Sensitivity: NED vs ED + UN,P62829,both,True
+Sensitivity: NED vs ED + UN,P62841,both,True
+Sensitivity: NED vs ED + UN,P62851,both,True
+Sensitivity: NED vs ED + UN,P62854,both,True
+Sensitivity: NED vs ED + UN,P62857,both,True
+Sensitivity: NED vs ED + UN,P62873,both,True
+Sensitivity: NED vs ED + UN,P62877,both,True
+Sensitivity: NED vs ED + UN,P62906,both,True
+Sensitivity: NED vs ED + UN,P62917,both,True
+Sensitivity: NED vs ED + UN,P62979,both,True
+Sensitivity: NED vs ED + UN,P62993,both,True
+Sensitivity: NED vs ED + UN,P63104,both,True
+Sensitivity: NED vs ED + UN,P63151,both,True
+Sensitivity: NED vs ED + UN,P63167,both,True
+Sensitivity: NED vs ED + UN,P63172,both,True
+Sensitivity: NED vs ED + UN,P63208,both,True
+Sensitivity: NED vs ED + UN,P63261,both,True
+Sensitivity: NED vs ED + UN,P63272,both,True
+Sensitivity: NED vs ED + UN,P63279,both,True
+Sensitivity: NED vs ED + UN,P67775,both,True
+Sensitivity: NED vs ED + UN,P67870,both,True
+Sensitivity: NED vs ED + UN,P67936,both,True
+Sensitivity: NED vs ED + UN,P68032,both,True
+Sensitivity: NED vs ED + UN,P68363,both,True
+Sensitivity: NED vs ED + UN,P68371,both,True
+Sensitivity: NED vs ED + UN,P68402,both,True
+Sensitivity: NED vs ED + UN,P68431,both,True
+Sensitivity: NED vs ED + UN,P78316,both,True
+Sensitivity: NED vs ED + UN,P78344,both,True
+Sensitivity: NED vs ED + UN,P78346,both,True
+Sensitivity: NED vs ED + UN,P78371,both,True
+Sensitivity: NED vs ED + UN,P78406,both,True
+Sensitivity: NED vs ED + UN,P78417,both,True
+Sensitivity: NED vs ED + UN,P78527,both,True
+Sensitivity: NED vs ED + UN,P82663,both,True
+Sensitivity: NED vs ED + UN,P82673,both,True
+Sensitivity: NED vs ED + UN,P82675,both,True
+Sensitivity: NED vs ED + UN,P82930,both,True
+Sensitivity: NED vs ED + UN,P82932,both,True
+Sensitivity: NED vs ED + UN,P82933,both,True
+Sensitivity: NED vs ED + UN,P83876,both,True
+Sensitivity: NED vs ED + UN,P84090,both,True
+Sensitivity: NED vs ED + UN,Q00059,both,True
+Sensitivity: NED vs ED + UN,Q00169,both,True
+Sensitivity: NED vs ED + UN,Q00341,both,True
+Sensitivity: NED vs ED + UN,Q00403,both,True
+Sensitivity: NED vs ED + UN,Q00688,both,True
+Sensitivity: NED vs ED + UN,Q01081,both,True
+Sensitivity: NED vs ED + UN,Q01105,both,True
+Sensitivity: NED vs ED + UN,Q01581,both,True
+Sensitivity: NED vs ED + UN,Q01658,both,True
+Sensitivity: NED vs ED + UN,Q01664,both,True
+Sensitivity: NED vs ED + UN,Q01813,both,True
+Sensitivity: NED vs ED + UN,Q01850,both,True
+Sensitivity: NED vs ED + UN,Q01995,both,True
+Sensitivity: NED vs ED + UN,Q02218,both,True
+Sensitivity: NED vs ED + UN,Q02241,both,True
+Sensitivity: NED vs ED + UN,Q02790,both,True
+Sensitivity: NED vs ED + UN,Q02878,both,True
+Sensitivity: NED vs ED + UN,Q03252,both,True
+Sensitivity: NED vs ED + UN,Q04446,both,True
+Sensitivity: NED vs ED + UN,Q04760,both,True
+Sensitivity: NED vs ED + UN,Q04837,both,True
+Sensitivity: NED vs ED + UN,Q04917,both,True
+Sensitivity: NED vs ED + UN,Q05048,both,True
+Sensitivity: NED vs ED + UN,Q06124,both,True
+Sensitivity: NED vs ED + UN,Q06203,both,True
+Sensitivity: NED vs ED + UN,Q06265,both,True
+Sensitivity: NED vs ED + UN,Q06323,both,True
+Sensitivity: NED vs ED + UN,Q06830,both,True
+Sensitivity: NED vs ED + UN,Q07955,both,True
+Sensitivity: NED vs ED + UN,Q07960,both,True
+Sensitivity: NED vs ED + UN,Q08211,both,True
+Sensitivity: NED vs ED + UN,Q08752,both,True
+Sensitivity: NED vs ED + UN,Q08945,both,True
+Sensitivity: NED vs ED + UN,Q08AF3,both,True
+Sensitivity: NED vs ED + UN,Q09161,both,True
+Sensitivity: NED vs ED + UN,Q10570,both,True
+Sensitivity: NED vs ED + UN,Q12765,both,True
+Sensitivity: NED vs ED + UN,Q12768,both,True
+Sensitivity: NED vs ED + UN,Q12788,both,True
+Sensitivity: NED vs ED + UN,Q12792,both,True
+Sensitivity: NED vs ED + UN,Q12834,both,True
+Sensitivity: NED vs ED + UN,Q12874,both,True
+Sensitivity: NED vs ED + UN,Q12894,both,True
+Sensitivity: NED vs ED + UN,Q12905,both,True
+Sensitivity: NED vs ED + UN,Q12965,both,True
+Sensitivity: NED vs ED + UN,Q12996,both,True
+Sensitivity: NED vs ED + UN,Q13011,both,True
+Sensitivity: NED vs ED + UN,Q13043,both,True
+Sensitivity: NED vs ED + UN,Q13045,both,True
+Sensitivity: NED vs ED + UN,Q13085,both,True
+Sensitivity: NED vs ED + UN,Q13112,both,True
+Sensitivity: NED vs ED + UN,Q13126,both,True
+Sensitivity: NED vs ED + UN,Q13131,both,True
+Sensitivity: NED vs ED + UN,Q13151,both,True
+Sensitivity: NED vs ED + UN,Q13155,both,True
+Sensitivity: NED vs ED + UN,Q13162,both,True
+Sensitivity: NED vs ED + UN,Q13185,both,True
+Sensitivity: NED vs ED + UN,Q13206,both,True
+Sensitivity: NED vs ED + UN,Q13217,both,True
+Sensitivity: NED vs ED + UN,Q13315,both,True
+Sensitivity: NED vs ED + UN,Q13347,both,True
+Sensitivity: NED vs ED + UN,Q13405,both,True
+Sensitivity: NED vs ED + UN,Q13442,both,True
+Sensitivity: NED vs ED + UN,Q13451,both,True
+Sensitivity: NED vs ED + UN,Q13509,both,True
+Sensitivity: NED vs ED + UN,Q13526,both,True
+Sensitivity: NED vs ED + UN,Q13547,both,True
+Sensitivity: NED vs ED + UN,Q13573,both,True
+Sensitivity: NED vs ED + UN,Q13601,both,True
+Sensitivity: NED vs ED + UN,Q13610,both,True
+Sensitivity: NED vs ED + UN,Q13616,both,True
+Sensitivity: NED vs ED + UN,Q13617,both,True
+Sensitivity: NED vs ED + UN,Q13619,both,True
+Sensitivity: NED vs ED + UN,Q13630,both,True
+Sensitivity: NED vs ED + UN,Q13769,both,True
+Sensitivity: NED vs ED + UN,Q13813,both,True
+Sensitivity: NED vs ED + UN,Q13823,both,True
+Sensitivity: NED vs ED + UN,Q13838,both,True
+Sensitivity: NED vs ED + UN,Q13868,both,True
+Sensitivity: NED vs ED + UN,Q13895,both,True
+Sensitivity: NED vs ED + UN,Q13907,both,True
+Sensitivity: NED vs ED + UN,Q14008,both,True
+Sensitivity: NED vs ED + UN,Q14019,both,True
+Sensitivity: NED vs ED + UN,Q14061,both,True
+Sensitivity: NED vs ED + UN,Q14123,both,True
+Sensitivity: NED vs ED + UN,Q14137,both,True
+Sensitivity: NED vs ED + UN,Q14139,both,True
+Sensitivity: NED vs ED + UN,Q14149,both,True
+Sensitivity: NED vs ED + UN,Q14166,both,True
+Sensitivity: NED vs ED + UN,Q14181,both,True
+Sensitivity: NED vs ED + UN,Q14192,both,True
+Sensitivity: NED vs ED + UN,Q14204,both,True
+Sensitivity: NED vs ED + UN,Q14232,both,True
+Sensitivity: NED vs ED + UN,Q14257,both,True
+Sensitivity: NED vs ED + UN,Q14320,both,True
+Sensitivity: NED vs ED + UN,Q14562,both,True
+Sensitivity: NED vs ED + UN,Q14566,both,True
+Sensitivity: NED vs ED + UN,Q14651,both,True
+Sensitivity: NED vs ED + UN,Q14657,both,True
+Sensitivity: NED vs ED + UN,Q14683,both,True
+Sensitivity: NED vs ED + UN,Q14690,both,True
+Sensitivity: NED vs ED + UN,Q14691,both,True
+Sensitivity: NED vs ED + UN,Q14692,both,True
+Sensitivity: NED vs ED + UN,Q14697,both,True
+Sensitivity: NED vs ED + UN,Q14764,both,True
+Sensitivity: NED vs ED + UN,Q14807,both,True
+Sensitivity: NED vs ED + UN,Q14919,both,True
+Sensitivity: NED vs ED + UN,Q14974,both,True
+Sensitivity: NED vs ED + UN,Q14997,both,True
+Sensitivity: NED vs ED + UN,Q14999,both,True
+Sensitivity: NED vs ED + UN,Q14CX7,both,True
+Sensitivity: NED vs ED + UN,Q15007,both,True
+Sensitivity: NED vs ED + UN,Q15008,both,True
+Sensitivity: NED vs ED + UN,Q15020,both,True
+Sensitivity: NED vs ED + UN,Q15021,both,True
+Sensitivity: NED vs ED + UN,Q15042,both,True
+Sensitivity: NED vs ED + UN,Q15050,both,True
+Sensitivity: NED vs ED + UN,Q15102,both,True
+Sensitivity: NED vs ED + UN,Q15121,both,True
+Sensitivity: NED vs ED + UN,Q15149,both,True
+Sensitivity: NED vs ED + UN,Q15181,both,True
+Sensitivity: NED vs ED + UN,Q15208,both,True
+Sensitivity: NED vs ED + UN,Q15233,both,True
+Sensitivity: NED vs ED + UN,Q15269,both,True
+Sensitivity: NED vs ED + UN,Q15291,both,True
+Sensitivity: NED vs ED + UN,Q15293,both,True
+Sensitivity: NED vs ED + UN,Q15345,both,True
+Sensitivity: NED vs ED + UN,Q15370,both,True
+Sensitivity: NED vs ED + UN,Q15386,both,True
+Sensitivity: NED vs ED + UN,Q15393,both,True
+Sensitivity: NED vs ED + UN,Q15397,both,True
+Sensitivity: NED vs ED + UN,Q15404,both,True
+Sensitivity: NED vs ED + UN,Q15427,both,True
+Sensitivity: NED vs ED + UN,Q15435,both,True
+Sensitivity: NED vs ED + UN,Q15477,both,True
+Sensitivity: NED vs ED + UN,Q15645,both,True
+Sensitivity: NED vs ED + UN,Q15691,both,True
+Sensitivity: NED vs ED + UN,Q15717,both,True
+Sensitivity: NED vs ED + UN,Q15819,both,True
+Sensitivity: NED vs ED + UN,Q15843,both,True
+Sensitivity: NED vs ED + UN,Q16204,both,True
+Sensitivity: NED vs ED + UN,Q16401,both,True
+Sensitivity: NED vs ED + UN,Q16527,both,True
+Sensitivity: NED vs ED + UN,Q16531,both,True
+Sensitivity: NED vs ED + UN,Q16539,both,True
+Sensitivity: NED vs ED + UN,Q16543,both,True
+Sensitivity: NED vs ED + UN,Q16576,both,True
+Sensitivity: NED vs ED + UN,Q16658,both,True
+Sensitivity: NED vs ED + UN,Q16763,both,True
+Sensitivity: NED vs ED + UN,Q16778,both,True
+Sensitivity: NED vs ED + UN,Q16795,both,True
+Sensitivity: NED vs ED + UN,Q16798,both,True
+Sensitivity: NED vs ED + UN,Q16836,both,True
+Sensitivity: NED vs ED + UN,Q16851,both,True
+Sensitivity: NED vs ED + UN,Q29RF7,both,True
+Sensitivity: NED vs ED + UN,Q2M389,both,True
+Sensitivity: NED vs ED + UN,Q2NL82,both,True
+Sensitivity: NED vs ED + UN,Q2TAY7,both,True
+Sensitivity: NED vs ED + UN,Q3ZCM7,both,True
+Sensitivity: NED vs ED + UN,Q49A26,both,True
+Sensitivity: NED vs ED + UN,Q53FA7,both,True
+Sensitivity: NED vs ED + UN,Q58FF6,both,True
+Sensitivity: NED vs ED + UN,Q58FF8,both,True
+Sensitivity: NED vs ED + UN,Q59GN2,both,True
+Sensitivity: NED vs ED + UN,Q5JRX3,both,True
+Sensitivity: NED vs ED + UN,Q5JTZ9,both,True
+Sensitivity: NED vs ED + UN,Q5JVF3,both,True
+Sensitivity: NED vs ED + UN,Q5SRE5,both,True
+Sensitivity: NED vs ED + UN,Q5SY16,both,True
+Sensitivity: NED vs ED + UN,Q5TFE4,both,True
+Sensitivity: NED vs ED + UN,Q5VTR2,both,True
+Sensitivity: NED vs ED + UN,Q5VW36,both,True
+Sensitivity: NED vs ED + UN,Q5VYK3,both,True
+Sensitivity: NED vs ED + UN,Q63HN8,both,True
+Sensitivity: NED vs ED + UN,Q658Y4,both,True
+Sensitivity: NED vs ED + UN,Q6AI08,both,True
+Sensitivity: NED vs ED + UN,Q6DKI1,both,True
+Sensitivity: NED vs ED + UN,Q6GMV3,both,True
+Sensitivity: NED vs ED + UN,Q6IBS0,both,True
+Sensitivity: NED vs ED + UN,Q6NVY1,both,True
+Sensitivity: NED vs ED + UN,Q6P158,both,True
+Sensitivity: NED vs ED + UN,Q6P1J9,both,True
+Sensitivity: NED vs ED + UN,Q6P1K8,both,True
+Sensitivity: NED vs ED + UN,Q6P1L8,both,True
+Sensitivity: NED vs ED + UN,Q6P1N0,both,True
+Sensitivity: NED vs ED + UN,Q6P2Q9,both,True
+Sensitivity: NED vs ED + UN,Q6P587,both,True
+Sensitivity: NED vs ED + UN,Q6PGP7,both,True
+Sensitivity: NED vs ED + UN,Q6RFH5,both,True
+Sensitivity: NED vs ED + UN,Q6UWE0,both,True
+Sensitivity: NED vs ED + UN,Q6UXN9,both,True
+Sensitivity: NED vs ED + UN,Q6YHU6,both,True
+Sensitivity: NED vs ED + UN,Q6YN16,both,True
+Sensitivity: NED vs ED + UN,Q6ZVM7,both,True
+Sensitivity: NED vs ED + UN,Q712K3,both,True
+Sensitivity: NED vs ED + UN,Q71DI3,both,True
+Sensitivity: NED vs ED + UN,Q71U36,both,True
+Sensitivity: NED vs ED + UN,Q71UI9,both,True
+Sensitivity: NED vs ED + UN,Q71UM5,both,True
+Sensitivity: NED vs ED + UN,Q7KZ85,both,True
+Sensitivity: NED vs ED + UN,Q7KZF4,both,True
+Sensitivity: NED vs ED + UN,Q7L1Q6,both,True
+Sensitivity: NED vs ED + UN,Q7L273,both,True
+Sensitivity: NED vs ED + UN,Q7L576,both,True
+Sensitivity: NED vs ED + UN,Q7L7X3,both,True
+Sensitivity: NED vs ED + UN,Q7L8L6,both,True
+Sensitivity: NED vs ED + UN,Q7Z406,both,True
+Sensitivity: NED vs ED + UN,Q7Z478,both,True
+Sensitivity: NED vs ED + UN,Q7Z4H8,both,True
+Sensitivity: NED vs ED + UN,Q7Z4Q2,both,True
+Sensitivity: NED vs ED + UN,Q7Z7F7,both,True
+Sensitivity: NED vs ED + UN,Q86TI2,both,True
+Sensitivity: NED vs ED + UN,Q86U38,both,True
+Sensitivity: NED vs ED + UN,Q86UY8,both,True
+Sensitivity: NED vs ED + UN,Q86VI3,both,True
+Sensitivity: NED vs ED + UN,Q86VP6,both,True
+Sensitivity: NED vs ED + UN,Q86VS8,both,True
+Sensitivity: NED vs ED + UN,Q86WA8,both,True
+Sensitivity: NED vs ED + UN,Q86WJ1,both,True
+Sensitivity: NED vs ED + UN,Q86XA9,both,True
+Sensitivity: NED vs ED + UN,Q86XI2,both,True
+Sensitivity: NED vs ED + UN,Q86Y56,both,True
+Sensitivity: NED vs ED + UN,Q8IVB5,both,True
+Sensitivity: NED vs ED + UN,Q8IVD9,both,True
+Sensitivity: NED vs ED + UN,Q8IVM0,both,True
+Sensitivity: NED vs ED + UN,Q8IWA0,both,True
+Sensitivity: NED vs ED + UN,Q8IWB7,both,True
+Sensitivity: NED vs ED + UN,Q8IXB1,both,True
+Sensitivity: NED vs ED + UN,Q8IXM3,both,True
+Sensitivity: NED vs ED + UN,Q8IY81,both,True
+Sensitivity: NED vs ED + UN,Q8IYB8,both,True
+Sensitivity: NED vs ED + UN,Q8IYS1,both,True
+Sensitivity: NED vs ED + UN,Q8IZ83,both,True
+Sensitivity: NED vs ED + UN,Q8N1G2,both,True
+Sensitivity: NED vs ED + UN,Q8N1G4,both,True
+Sensitivity: NED vs ED + UN,Q8N392,both,True
+Sensitivity: NED vs ED + UN,Q8N3C0,both,True
+Sensitivity: NED vs ED + UN,Q8N3U4,both,True
+Sensitivity: NED vs ED + UN,Q8N543,both,True
+Sensitivity: NED vs ED + UN,Q8N5N7,both,True
+Sensitivity: NED vs ED + UN,Q8N6M0,both,True
+Sensitivity: NED vs ED + UN,Q8N806,both,True
+Sensitivity: NED vs ED + UN,Q8NBJ5,both,True
+Sensitivity: NED vs ED + UN,Q8NBJ7,both,True
+Sensitivity: NED vs ED + UN,Q8NBX0,both,True
+Sensitivity: NED vs ED + UN,Q8NCN5,both,True
+Sensitivity: NED vs ED + UN,Q8ND04,both,True
+Sensitivity: NED vs ED + UN,Q8NE71,both,True
+Sensitivity: NED vs ED + UN,Q8NEM2,both,True
+Sensitivity: NED vs ED + UN,Q8NFH3,both,True
+Sensitivity: NED vs ED + UN,Q8NFH4,both,True
+Sensitivity: NED vs ED + UN,Q8NFW8,both,True
+Sensitivity: NED vs ED + UN,Q8NI22,both,True
+Sensitivity: NED vs ED + UN,Q8NI27,both,True
+Sensitivity: NED vs ED + UN,Q8NI36,both,True
+Sensitivity: NED vs ED + UN,Q8TAE8,both,True
+Sensitivity: NED vs ED + UN,Q8TAT6,both,True
+Sensitivity: NED vs ED + UN,Q8TCF1,both,True
+Sensitivity: NED vs ED + UN,Q8TCG1,both,True
+Sensitivity: NED vs ED + UN,Q8TD16,both,True
+Sensitivity: NED vs ED + UN,Q8TD19,both,True
+Sensitivity: NED vs ED + UN,Q8TDD1,both,True
+Sensitivity: NED vs ED + UN,Q8TDN6,both,True
+Sensitivity: NED vs ED + UN,Q8TDX7,both,True
+Sensitivity: NED vs ED + UN,Q8TEA8,both,True
+Sensitivity: NED vs ED + UN,Q8TEQ6,both,True
+Sensitivity: NED vs ED + UN,Q8TEX9,both,True
+Sensitivity: NED vs ED + UN,Q8TF42,both,True
+Sensitivity: NED vs ED + UN,Q8TF65,both,True
+Sensitivity: NED vs ED + UN,Q8WTS6,both,True
+Sensitivity: NED vs ED + UN,Q8WTT2,both,True
+Sensitivity: NED vs ED + UN,Q8WUA4,both,True
+Sensitivity: NED vs ED + UN,Q8WUM0,both,True
+Sensitivity: NED vs ED + UN,Q8WUX9,both,True
+Sensitivity: NED vs ED + UN,Q8WVY7,both,True
+Sensitivity: NED vs ED + UN,Q8WWH5,both,True
+Sensitivity: NED vs ED + UN,Q8WX92,both,True
+Sensitivity: NED vs ED + UN,Q8WXF1,both,True
+Sensitivity: NED vs ED + UN,Q8WYA6,both,True
+Sensitivity: NED vs ED + UN,Q8WZA0,both,True
+Sensitivity: NED vs ED + UN,Q92499,both,True
+Sensitivity: NED vs ED + UN,Q92552,both,True
+Sensitivity: NED vs ED + UN,Q92600,both,True
+Sensitivity: NED vs ED + UN,Q92616,both,True
+Sensitivity: NED vs ED + UN,Q92747,both,True
+Sensitivity: NED vs ED + UN,Q92791,both,True
+Sensitivity: NED vs ED + UN,Q92841,both,True
+Sensitivity: NED vs ED + UN,Q92878,both,True
+Sensitivity: NED vs ED + UN,Q92882,both,True
+Sensitivity: NED vs ED + UN,Q92889,both,True
+Sensitivity: NED vs ED + UN,Q92890,both,True
+Sensitivity: NED vs ED + UN,Q92905,both,True
+Sensitivity: NED vs ED + UN,Q92990,both,True
+Sensitivity: NED vs ED + UN,Q93034,both,True
+Sensitivity: NED vs ED + UN,Q969G6,both,True
+Sensitivity: NED vs ED + UN,Q969Q0,both,True
+Sensitivity: NED vs ED + UN,Q969X6,both,True
+Sensitivity: NED vs ED + UN,Q969Z0,both,True
+Sensitivity: NED vs ED + UN,Q96A35,both,True
+Sensitivity: NED vs ED + UN,Q96A65,both,True
+Sensitivity: NED vs ED + UN,Q96A72,both,True
+Sensitivity: NED vs ED + UN,Q96AY3,both,True
+Sensitivity: NED vs ED + UN,Q96BR5,both,True
+Sensitivity: NED vs ED + UN,Q96C01,both,True
+Sensitivity: NED vs ED + UN,Q96C36,both,True
+Sensitivity: NED vs ED + UN,Q96CS3,both,True
+Sensitivity: NED vs ED + UN,Q96CT7,both,True
+Sensitivity: NED vs ED + UN,Q96D46,both,True
+Sensitivity: NED vs ED + UN,Q96DB5,both,True
+Sensitivity: NED vs ED + UN,Q96DE0,both,True
+Sensitivity: NED vs ED + UN,Q96DI7,both,True
+Sensitivity: NED vs ED + UN,Q96DV4,both,True
+Sensitivity: NED vs ED + UN,Q96EA4,both,True
+Sensitivity: NED vs ED + UN,Q96EB1,both,True
+Sensitivity: NED vs ED + UN,Q96EK5,both,True
+Sensitivity: NED vs ED + UN,Q96EK7,both,True
+Sensitivity: NED vs ED + UN,Q96EY4,both,True
+Sensitivity: NED vs ED + UN,Q96EY7,both,True
+Sensitivity: NED vs ED + UN,Q96FJ0,both,True
+Sensitivity: NED vs ED + UN,Q96FQ6,both,True
+Sensitivity: NED vs ED + UN,Q96FV9,both,True
+Sensitivity: NED vs ED + UN,Q96FX7,both,True
+Sensitivity: NED vs ED + UN,Q96FZ2,both,True
+Sensitivity: NED vs ED + UN,Q96GD4,both,True
+Sensitivity: NED vs ED + UN,Q96HA7,both,True
+Sensitivity: NED vs ED + UN,Q96HW7,both,True
+Sensitivity: NED vs ED + UN,Q96I99,both,True
+Sensitivity: NED vs ED + UN,Q96IJ6,both,True
+Sensitivity: NED vs ED + UN,Q96J01,both,True
+Sensitivity: NED vs ED + UN,Q96JH7,both,True
+Sensitivity: NED vs ED + UN,Q96K76,both,True
+Sensitivity: NED vs ED + UN,Q96KP1,both,True
+Sensitivity: NED vs ED + UN,Q96KP4,both,True
+Sensitivity: NED vs ED + UN,Q96MG7,both,True
+Sensitivity: NED vs ED + UN,Q96NC0,both,True
+Sensitivity: NED vs ED + UN,Q96P11,both,True
+Sensitivity: NED vs ED + UN,Q96P16,both,True
+Sensitivity: NED vs ED + UN,Q96P70,both,True
+Sensitivity: NED vs ED + UN,Q96PU4,both,True
+Sensitivity: NED vs ED + UN,Q96PY5,both,True
+Sensitivity: NED vs ED + UN,Q96PZ2,both,True
+Sensitivity: NED vs ED + UN,Q96RP9,both,True
+Sensitivity: NED vs ED + UN,Q96RS6,both,True
+Sensitivity: NED vs ED + UN,Q96T76,both,True
+Sensitivity: NED vs ED + UN,Q99436,both,True
+Sensitivity: NED vs ED + UN,Q99459,both,True
+Sensitivity: NED vs ED + UN,Q99460,both,True
+Sensitivity: NED vs ED + UN,Q99471,both,True
+Sensitivity: NED vs ED + UN,Q99538,both,True
+Sensitivity: NED vs ED + UN,Q99543,both,True
+Sensitivity: NED vs ED + UN,Q99567,both,True
+Sensitivity: NED vs ED + UN,Q99575,both,True
+Sensitivity: NED vs ED + UN,Q99598,both,True
+Sensitivity: NED vs ED + UN,Q99613,both,True
+Sensitivity: NED vs ED + UN,Q99614,both,True
+Sensitivity: NED vs ED + UN,Q99615,both,True
+Sensitivity: NED vs ED + UN,Q99622,both,True
+Sensitivity: NED vs ED + UN,Q99661,both,True
+Sensitivity: NED vs ED + UN,Q99714,both,True
+Sensitivity: NED vs ED + UN,Q99717,both,True
+Sensitivity: NED vs ED + UN,Q99733,both,True
+Sensitivity: NED vs ED + UN,Q99797,both,True
+Sensitivity: NED vs ED + UN,Q99798,both,True
+Sensitivity: NED vs ED + UN,Q99832,both,True
+Sensitivity: NED vs ED + UN,Q99848,both,True
+Sensitivity: NED vs ED + UN,Q99879,both,True
+Sensitivity: NED vs ED + UN,Q99986,both,True
+Sensitivity: NED vs ED + UN,Q9BPW8,both,True
+Sensitivity: NED vs ED + UN,Q9BPX3,both,True
+Sensitivity: NED vs ED + UN,Q9BQ39,both,True
+Sensitivity: NED vs ED + UN,Q9BQ52,both,True
+Sensitivity: NED vs ED + UN,Q9BQ67,both,True
+Sensitivity: NED vs ED + UN,Q9BQ70,both,True
+Sensitivity: NED vs ED + UN,Q9BQA1,both,True
+Sensitivity: NED vs ED + UN,Q9BQE3,both,True
+Sensitivity: NED vs ED + UN,Q9BQG0,both,True
+Sensitivity: NED vs ED + UN,Q9BR76,both,True
+Sensitivity: NED vs ED + UN,Q9BRA2,both,True
+Sensitivity: NED vs ED + UN,Q9BRJ2,both,True
+Sensitivity: NED vs ED + UN,Q9BRT6,both,True
+Sensitivity: NED vs ED + UN,Q9BRX5,both,True
+Sensitivity: NED vs ED + UN,Q9BS26,both,True
+Sensitivity: NED vs ED + UN,Q9BS40,both,True
+Sensitivity: NED vs ED + UN,Q9BSJ2,both,True
+Sensitivity: NED vs ED + UN,Q9BSV6,both,True
+Sensitivity: NED vs ED + UN,Q9BT78,both,True
+Sensitivity: NED vs ED + UN,Q9BTY7,both,True
+Sensitivity: NED vs ED + UN,Q9BU89,both,True
+Sensitivity: NED vs ED + UN,Q9BUF5,both,True
+Sensitivity: NED vs ED + UN,Q9BUI4,both,True
+Sensitivity: NED vs ED + UN,Q9BUQ8,both,True
+Sensitivity: NED vs ED + UN,Q9BV86,both,True
+Sensitivity: NED vs ED + UN,Q9BVA1,both,True
+Sensitivity: NED vs ED + UN,Q9BVG4,both,True
+Sensitivity: NED vs ED + UN,Q9BVM2,both,True
+Sensitivity: NED vs ED + UN,Q9BW19,both,True
+Sensitivity: NED vs ED + UN,Q9BW62,both,True
+Sensitivity: NED vs ED + UN,Q9BWD1,both,True
+Sensitivity: NED vs ED + UN,Q9BWJ5,both,True
+Sensitivity: NED vs ED + UN,Q9BXJ9,both,True
+Sensitivity: NED vs ED + UN,Q9BXY0,both,True
+Sensitivity: NED vs ED + UN,Q9BY42,both,True
+Sensitivity: NED vs ED + UN,Q9BY44,both,True
+Sensitivity: NED vs ED + UN,Q9BYD1,both,True
+Sensitivity: NED vs ED + UN,Q9BYD2,both,True
+Sensitivity: NED vs ED + UN,Q9BYD3,both,True
+Sensitivity: NED vs ED + UN,Q9BYG3,both,True
+Sensitivity: NED vs ED + UN,Q9BYT8,both,True
+Sensitivity: NED vs ED + UN,Q9BYX2,both,True
+Sensitivity: NED vs ED + UN,Q9BZE4,both,True
+Sensitivity: NED vs ED + UN,Q9BZF9,both,True
+Sensitivity: NED vs ED + UN,Q9BZH6,both,True
+Sensitivity: NED vs ED + UN,Q9BZK7,both,True
+Sensitivity: NED vs ED + UN,Q9BZL1,both,True
+Sensitivity: NED vs ED + UN,Q9BZX2,both,True
+Sensitivity: NED vs ED + UN,Q9C005,both,True
+Sensitivity: NED vs ED + UN,Q9C0B1,both,True
+Sensitivity: NED vs ED + UN,Q9GZL7,both,True
+Sensitivity: NED vs ED + UN,Q9GZS3,both,True
+Sensitivity: NED vs ED + UN,Q9GZT4,both,True
+Sensitivity: NED vs ED + UN,Q9H0A0,both,True
+Sensitivity: NED vs ED + UN,Q9H0A8,both,True
+Sensitivity: NED vs ED + UN,Q9H0C8,both,True
+Sensitivity: NED vs ED + UN,Q9H0D6,both,True
+Sensitivity: NED vs ED + UN,Q9H0E2,both,True
+Sensitivity: NED vs ED + UN,Q9H173,both,True
+Sensitivity: NED vs ED + UN,Q9H1A4,both,True
+Sensitivity: NED vs ED + UN,Q9H1I8,both,True
+Sensitivity: NED vs ED + UN,Q9H2H8,both,True
+Sensitivity: NED vs ED + UN,Q9H2J4,both,True
+Sensitivity: NED vs ED + UN,Q9H2M9,both,True
+Sensitivity: NED vs ED + UN,Q9H2U1,both,True
+Sensitivity: NED vs ED + UN,Q9H2U2,both,True
+Sensitivity: NED vs ED + UN,Q9H2W6,both,True
+Sensitivity: NED vs ED + UN,Q9H3F6,both,True
+Sensitivity: NED vs ED + UN,Q9H583,both,True
+Sensitivity: NED vs ED + UN,Q9H5Q4,both,True
+Sensitivity: NED vs ED + UN,Q9H6S3,both,True
+Sensitivity: NED vs ED + UN,Q9H6T3,both,True
+Sensitivity: NED vs ED + UN,Q9H6V9,both,True
+Sensitivity: NED vs ED + UN,Q9H788,both,True
+Sensitivity: NED vs ED + UN,Q9H7B2,both,True
+Sensitivity: NED vs ED + UN,Q9H7D7,both,True
+Sensitivity: NED vs ED + UN,Q9H7E9,both,True
+Sensitivity: NED vs ED + UN,Q9H8H0,both,True
+Sensitivity: NED vs ED + UN,Q9H8S9,both,True
+Sensitivity: NED vs ED + UN,Q9H900,both,True
+Sensitivity: NED vs ED + UN,Q9H967,both,True
+Sensitivity: NED vs ED + UN,Q9H9A6,both,True
+Sensitivity: NED vs ED + UN,Q9H9J2,both,True
+Sensitivity: NED vs ED + UN,Q9H9T3,both,True
+Sensitivity: NED vs ED + UN,Q9H9Y2,both,True
+Sensitivity: NED vs ED + UN,Q9HA64,both,True
+Sensitivity: NED vs ED + UN,Q9HA77,both,True
+Sensitivity: NED vs ED + UN,Q9HAU5,both,True
+Sensitivity: NED vs ED + UN,Q9HAV0,both,True
+Sensitivity: NED vs ED + UN,Q9HAV4,both,True
+Sensitivity: NED vs ED + UN,Q9HAV7,both,True
+Sensitivity: NED vs ED + UN,Q9HB07,both,True
+Sensitivity: NED vs ED + UN,Q9HBM1,both,True
+Sensitivity: NED vs ED + UN,Q9HC38,both,True
+Sensitivity: NED vs ED + UN,Q9HCE1,both,True
+Sensitivity: NED vs ED + UN,Q9HCN8,both,True
+Sensitivity: NED vs ED + UN,Q9HCS7,both,True
+Sensitivity: NED vs ED + UN,Q9HD15,both,True
+Sensitivity: NED vs ED + UN,Q9NNW5,both,True
+Sensitivity: NED vs ED + UN,Q9NP77,both,True
+Sensitivity: NED vs ED + UN,Q9NP81,both,True
+Sensitivity: NED vs ED + UN,Q9NP97,both,True
+Sensitivity: NED vs ED + UN,Q9NPD3,both,True
+Sensitivity: NED vs ED + UN,Q9NPD8,both,True
+Sensitivity: NED vs ED + UN,Q9NPQ8,both,True
+Sensitivity: NED vs ED + UN,Q9NQ88,both,True
+Sensitivity: NED vs ED + UN,Q9NQP4,both,True
+Sensitivity: NED vs ED + UN,Q9NQR4,both,True
+Sensitivity: NED vs ED + UN,Q9NR12,both,True
+Sensitivity: NED vs ED + UN,Q9NR30,both,True
+Sensitivity: NED vs ED + UN,Q9NR46,both,True
+Sensitivity: NED vs ED + UN,Q9NRF9,both,True
+Sensitivity: NED vs ED + UN,Q9NRG9,both,True
+Sensitivity: NED vs ED + UN,Q9NRV9,both,True
+Sensitivity: NED vs ED + UN,Q9NRX1,both,True
+Sensitivity: NED vs ED + UN,Q9NRX2,both,True
+Sensitivity: NED vs ED + UN,Q9NSD9,both,True
+Sensitivity: NED vs ED + UN,Q9NSE4,both,True
+Sensitivity: NED vs ED + UN,Q9NT62,both,True
+Sensitivity: NED vs ED + UN,Q9NTJ3,both,True
+Sensitivity: NED vs ED + UN,Q9NTK5,both,True
+Sensitivity: NED vs ED + UN,Q9NU22,both,True
+Sensitivity: NED vs ED + UN,Q9NUG6,both,True
+Sensitivity: NED vs ED + UN,Q9NUJ1,both,True
+Sensitivity: NED vs ED + UN,Q9NUQ8,both,True
+Sensitivity: NED vs ED + UN,Q9NV06,both,True
+Sensitivity: NED vs ED + UN,Q9NVE7,both,True
+Sensitivity: NED vs ED + UN,Q9NVI1,both,True
+Sensitivity: NED vs ED + UN,Q9NVM6,both,True
+Sensitivity: NED vs ED + UN,Q9NVM9,both,True
+Sensitivity: NED vs ED + UN,Q9NVN8,both,True
+Sensitivity: NED vs ED + UN,Q9NVP1,both,True
+Sensitivity: NED vs ED + UN,Q9NVP2,both,True
+Sensitivity: NED vs ED + UN,Q9NVS2,both,True
+Sensitivity: NED vs ED + UN,Q9NVS9,both,True
+Sensitivity: NED vs ED + UN,Q9NVU7,both,True
+Sensitivity: NED vs ED + UN,Q9NVX0,both,True
+Sensitivity: NED vs ED + UN,Q9NVX2,both,True
+Sensitivity: NED vs ED + UN,Q9NW13,both,True
+Sensitivity: NED vs ED + UN,Q9NW64,both,True
+Sensitivity: NED vs ED + UN,Q9NWM8,both,True
+Sensitivity: NED vs ED + UN,Q9NWV4,both,True
+Sensitivity: NED vs ED + UN,Q9NWY4,both,True
+Sensitivity: NED vs ED + UN,Q9NX24,both,True
+Sensitivity: NED vs ED + UN,Q9NXG2,both,True
+Sensitivity: NED vs ED + UN,Q9NYB0,both,True
+Sensitivity: NED vs ED + UN,Q9NYH9,both,True
+Sensitivity: NED vs ED + UN,Q9NYJ1,both,True
+Sensitivity: NED vs ED + UN,Q9NYL9,both,True
+Sensitivity: NED vs ED + UN,Q9NYY8,both,True
+Sensitivity: NED vs ED + UN,Q9NZD2,both,True
+Sensitivity: NED vs ED + UN,Q9NZJ4,both,True
+Sensitivity: NED vs ED + UN,Q9NZL4,both,True
+Sensitivity: NED vs ED + UN,Q9NZL9,both,True
+Sensitivity: NED vs ED + UN,Q9P000,both,True
+Sensitivity: NED vs ED + UN,Q9P015,both,True
+Sensitivity: NED vs ED + UN,Q9P016,both,True
+Sensitivity: NED vs ED + UN,Q9P0J1,both,True
+Sensitivity: NED vs ED + UN,Q9P0M6,both,True
+Sensitivity: NED vs ED + UN,Q9P265,both,True
+Sensitivity: NED vs ED + UN,Q9P287,both,True
+Sensitivity: NED vs ED + UN,Q9P2I0,both,True
+Sensitivity: NED vs ED + UN,Q9P2J3,both,True
+Sensitivity: NED vs ED + UN,Q9P2J5,both,True
+Sensitivity: NED vs ED + UN,Q9UBB4,both,True
+Sensitivity: NED vs ED + UN,Q9UBB9,both,True
+Sensitivity: NED vs ED + UN,Q9UBD5,both,True
+Sensitivity: NED vs ED + UN,Q9UBE0,both,True
+Sensitivity: NED vs ED + UN,Q9UBP6,both,True
+Sensitivity: NED vs ED + UN,Q9UBQ5,both,True
+Sensitivity: NED vs ED + UN,Q9UBQ7,both,True
+Sensitivity: NED vs ED + UN,Q9UBS4,both,True
+Sensitivity: NED vs ED + UN,Q9UBT2,both,True
+Sensitivity: NED vs ED + UN,Q9UBW8,both,True
+Sensitivity: NED vs ED + UN,Q9UFC0,both,True
+Sensitivity: NED vs ED + UN,Q9UFW8,both,True
+Sensitivity: NED vs ED + UN,Q9UG63,both,True
+Sensitivity: NED vs ED + UN,Q9UH17,both,True
+Sensitivity: NED vs ED + UN,Q9UHB9,both,True
+Sensitivity: NED vs ED + UN,Q9UHD1,both,True
+Sensitivity: NED vs ED + UN,Q9UHD2,both,True
+Sensitivity: NED vs ED + UN,Q9UHG3,both,True
+Sensitivity: NED vs ED + UN,Q9UHV9,both,True
+Sensitivity: NED vs ED + UN,Q9UHY7,both,True
+Sensitivity: NED vs ED + UN,Q9UI26,both,True
+Sensitivity: NED vs ED + UN,Q9UI30,both,True
+Sensitivity: NED vs ED + UN,Q9UIA9,both,True
+Sensitivity: NED vs ED + UN,Q9UID3,both,True
+Sensitivity: NED vs ED + UN,Q9UIJ7,both,True
+Sensitivity: NED vs ED + UN,Q9UJ70,both,True
+Sensitivity: NED vs ED + UN,Q9UJA5,both,True
+Sensitivity: NED vs ED + UN,Q9UJW0,both,True
+Sensitivity: NED vs ED + UN,Q9UK45,both,True
+Sensitivity: NED vs ED + UN,Q9UKF6,both,True
+Sensitivity: NED vs ED + UN,Q9UKK9,both,True
+Sensitivity: NED vs ED + UN,Q9UKN8,both,True
+Sensitivity: NED vs ED + UN,Q9UL15,both,True
+Sensitivity: NED vs ED + UN,Q9UL46,both,True
+Sensitivity: NED vs ED + UN,Q9ULC4,both,True
+Sensitivity: NED vs ED + UN,Q9ULX3,both,True
+Sensitivity: NED vs ED + UN,Q9ULX9,both,True
+Sensitivity: NED vs ED + UN,Q9UMS4,both,True
+Sensitivity: NED vs ED + UN,Q9UMY1,both,True
+Sensitivity: NED vs ED + UN,Q9UNE7,both,True
+Sensitivity: NED vs ED + UN,Q9UNI6,both,True
+Sensitivity: NED vs ED + UN,Q9UNM6,both,True
+Sensitivity: NED vs ED + UN,Q9UNQ2,both,True
+Sensitivity: NED vs ED + UN,Q9UNS2,both,True
+Sensitivity: NED vs ED + UN,Q9UNX4,both,True
+Sensitivity: NED vs ED + UN,Q9UNZ2,both,True
+Sensitivity: NED vs ED + UN,Q9UPU5,both,True
+Sensitivity: NED vs ED + UN,Q9UQ80,both,True
+Sensitivity: NED vs ED + UN,Q9UQE7,both,True
+Sensitivity: NED vs ED + UN,Q9Y221,both,True
+Sensitivity: NED vs ED + UN,Q9Y224,both,True
+Sensitivity: NED vs ED + UN,Q9Y237,both,True
+Sensitivity: NED vs ED + UN,Q9Y248,both,True
+Sensitivity: NED vs ED + UN,Q9Y263,both,True
+Sensitivity: NED vs ED + UN,Q9Y266,both,True
+Sensitivity: NED vs ED + UN,Q9Y281,both,True
+Sensitivity: NED vs ED + UN,Q9Y285,both,True
+Sensitivity: NED vs ED + UN,Q9Y291,both,True
+Sensitivity: NED vs ED + UN,Q9Y294,both,True
+Sensitivity: NED vs ED + UN,Q9Y295,both,True
+Sensitivity: NED vs ED + UN,Q9Y2D4,both,True
+Sensitivity: NED vs ED + UN,Q9Y2L1,both,True
+Sensitivity: NED vs ED + UN,Q9Y2P8,both,True
+Sensitivity: NED vs ED + UN,Q9Y2Q3,both,True
+Sensitivity: NED vs ED + UN,Q9Y2R4,both,True
+Sensitivity: NED vs ED + UN,Q9Y2R9,both,True
+Sensitivity: NED vs ED + UN,Q9Y2S7,both,True
+Sensitivity: NED vs ED + UN,Q9Y2X3,both,True
+Sensitivity: NED vs ED + UN,Q9Y2X7,both,True
+Sensitivity: NED vs ED + UN,Q9Y2Z0,both,True
+Sensitivity: NED vs ED + UN,Q9Y2Z4,both,True
+Sensitivity: NED vs ED + UN,Q9Y312,both,True
+Sensitivity: NED vs ED + UN,Q9Y314,both,True
+Sensitivity: NED vs ED + UN,Q9Y315,both,True
+Sensitivity: NED vs ED + UN,Q9Y333,both,True
+Sensitivity: NED vs ED + UN,Q9Y376,both,True
+Sensitivity: NED vs ED + UN,Q9Y399,both,True
+Sensitivity: NED vs ED + UN,Q9Y3A2,both,True
+Sensitivity: NED vs ED + UN,Q9Y3A4,both,True
+Sensitivity: NED vs ED + UN,Q9Y3A5,both,True
+Sensitivity: NED vs ED + UN,Q9Y3B4,both,True
+Sensitivity: NED vs ED + UN,Q9Y3B7,both,True
+Sensitivity: NED vs ED + UN,Q9Y3C1,both,True
+Sensitivity: NED vs ED + UN,Q9Y3C4,both,True
+Sensitivity: NED vs ED + UN,Q9Y3F4,both,True
+Sensitivity: NED vs ED + UN,Q9Y3I0,both,True
+Sensitivity: NED vs ED + UN,Q9Y3T9,both,True
+Sensitivity: NED vs ED + UN,Q9Y3U8,both,True
+Sensitivity: NED vs ED + UN,Q9Y450,both,True
+Sensitivity: NED vs ED + UN,Q9Y496,both,True
+Sensitivity: NED vs ED + UN,Q9Y4C8,both,True
+Sensitivity: NED vs ED + UN,Q9Y4E8,both,True
+Sensitivity: NED vs ED + UN,Q9Y4K4,both,True
+Sensitivity: NED vs ED + UN,Q9Y4L1,both,True
+Sensitivity: NED vs ED + UN,Q9Y4X5,both,True
+Sensitivity: NED vs ED + UN,Q9Y4Z0,both,True
+Sensitivity: NED vs ED + UN,Q9Y546,both,True
+Sensitivity: NED vs ED + UN,Q9Y547,both,True
+Sensitivity: NED vs ED + UN,Q9Y570,both,True
+Sensitivity: NED vs ED + UN,Q9Y5B9,both,True
+Sensitivity: NED vs ED + UN,Q9Y5J1,both,True
+Sensitivity: NED vs ED + UN,Q9Y5P6,both,True
+Sensitivity: NED vs ED + UN,Q9Y5Q9,both,True
+Sensitivity: NED vs ED + UN,Q9Y5S9,both,True
+Sensitivity: NED vs ED + UN,Q9Y5Z4,both,True
+Sensitivity: NED vs ED + UN,Q9Y617,both,True
+Sensitivity: NED vs ED + UN,Q9Y657,both,True
+Sensitivity: NED vs ED + UN,Q9Y676,both,True
+Sensitivity: NED vs ED + UN,Q9Y6K5,both,True
+Sensitivity: NED vs ED + UN,Q9Y6N5,both,True
+Sensitivity: NED vs ED + UN,Q9Y6V7,both,True
